@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     domains: ['a1.espncdn.com'],
   },
   eslint: {
-    ignoreDuringBuilds: true, // Ignorar ESLint durante las compilaciones
+    ignoreDuringBuilds: true, 
   },
 
 
