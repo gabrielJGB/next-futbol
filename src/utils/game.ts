@@ -104,9 +104,9 @@ export const leagueHasState = (objeto: any, state: string) => {
         return true;
     }
 
-    for (let propiedad in objeto) {
+    for (const propiedad in objeto) {
         if (objeto[propiedad] !== null && typeof objeto[propiedad] === "object") {
-            let resultado = leagueHasState(objeto[propiedad], state);
+            const resultado = leagueHasState(objeto[propiedad], state);
             if (resultado) {
                 return true;
             }

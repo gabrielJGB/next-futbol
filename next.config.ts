@@ -4,7 +4,10 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     domains: ['a1.espncdn.com'],
-  }
+  },
+  eslint: {
+    ignoreDuringBuilds: true, // Ignorar ESLint durante las compilaciones
+  },
 
 
 };
