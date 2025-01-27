@@ -31,9 +31,9 @@ const League = ({ games,flagUrl,leagueName,leagueHasState,selectedState }: Leagu
 
 
     return (
-        <div className={`${leagueHasState || selectedState === ""?"flex":"hidden"}  flex-col w-full bg-green-900  shadow shadow-gray-950 rounded`}>
+        <div className={`${leagueHasState || selectedState === ""?"flex":"hidden"}  flex-col w-full bg-[--tw-color-800]  shadow shadow-gray-950 rounded transition ease-in-out`}>
 
-             <div className='w-full flex flex-row justify-between items-center pt-1 md:pt-2 px-1 md:px-2'>
+             <div className='w-full flex flex-row justify-between items-center pt-1  md:pt-2 px-1 md:px-2'>
                 
                 {
                     flagUrl &&

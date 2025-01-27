@@ -6,11 +6,11 @@ import '../../app/calendar.css'
 import { usePathname, useRouter } from 'next/navigation'
 
 
+
 const CalendarContainer = () => {
 
     const { push } = useRouter()
-
-
+    
     const [pathname] = useState<string | null>(usePathname())
     const [date, setDate] = useState<any>()
 
@@ -33,22 +33,25 @@ const CalendarContainer = () => {
 
     return (
 
-        <div >
+        
 
             <Calendar
 
                 className="calendar"
                 locale='es-AR'
+                tileClassName="text-white"
+                value={date}
+                next2Label={null}
+                prev2Label={null}
                 onClickDay={(e) => {
                     const date = `${e.getFullYear()}${String(e.getMonth() + 1).padStart(2, "0")}${String(e.getDate()).padStart(2, "0")}`
                     push(`/${date}`)
+                    
                 }}
-                tileClassName="text-white"
-                value={date}
 
             />
 
-        </div>
+        
     )
 }
 

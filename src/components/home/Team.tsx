@@ -17,7 +17,8 @@ const Team = ({ logoURL, name, redCards }: Props) => {
 
     return (
         <div className='bg-gray-300 py-[3px] px-1 col-span-3  w-full flex flex-col justify-center items-center '>
-            <img className='drop-shadow w-[23px] h-[23px]' src={getLogoURL(logoURL, 33)} alt="" width={IMG_SIZE} height={IMG_SIZE} />
+
+            <img className='w-[23px] h-[23px]' src={getLogoURL(logoURL, 33)} alt="" width={IMG_SIZE} height={IMG_SIZE} />
             
             <div className='flex flex-row flex-wrap justify-center items-center gap-[3px] cursor-pointer hover:underline'>
 

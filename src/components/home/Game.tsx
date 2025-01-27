@@ -1,5 +1,6 @@
 import React from 'react'
 import Team from './Team'
+import Link from 'next/link'
 
 interface Game {
     id: string,
@@ -30,15 +31,19 @@ interface Game {
 
 }
 
-const GameCard = ({ gameState, selectedState, status, statusColor, home, away }: Game) => {
+const GameCard = ({ gameState, selectedState, status, statusColor, home, away,id }: Game) => {
 
 
 
     return (
-        <div className={`${gameState === selectedState || selectedState === "" ? "flex" : "hidden"} flex-col gap-[1px] shadow shadow-slate-900`}>
+        <div className={`text-black ${gameState === selectedState || selectedState === "" ? "flex" : "hidden"} flex-col gap-[1px] shadow shadow-slate-900`}>
             <div className='grid grid-cols-10 gap-[1px]'>
 
-                <div style={{ backgroundColor: statusColor }} className={`bg-red-700 text-white col-span-1 flex justify-center items-center text-[10px] md:text-[11px] font-bold text-center`}>{status}</div>
+                <div
+                    style={{ backgroundColor: statusColor }}
+                    className={`${statusColor === "rgb(185, 28, 28)" ? "animate-pulse" : ""}  text-white col-span-1 flex justify-center items-center text-[10px] md:text-[11px] font-bold text-center`}>
+                    {status}
+                </div>
 
 
                 <Team
@@ -50,7 +55,7 @@ const GameCard = ({ gameState, selectedState, status, statusColor, home, away }:
 
 
 
-                <div className={`${home.winner && "border-black"} border-b-[2px] bg-white col-span-1 flex flex-col justify-center items-center text-2xl font-bold`}>
+                <div className={`${home.winner && "border-black"}  border-b-[2px] bg-white col-span-1 flex flex-col justify-center items-center text-2xl font-bold`}>
                     {home.score}
                 </div>
 
@@ -65,8 +70,9 @@ const GameCard = ({ gameState, selectedState, status, statusColor, home, away }:
                     name={away.name}
                     redCards={away.redCards}
                 />
-
-                <div className='bg-green-700  text-white flex justify-center items-center col-span-1 text-2xl font-bold cursor-pointer hover:bg-green-600  '> + </div>
+                <Link href={`/game/${id}`} className='bg-[--tw-color-600]  text-white flex justify-center items-center col-span-1 text-2xl font-bold cursor-pointer active:bg-[--tw-color-700] md:active:bg-[--tw-color-500] md:hover:bg-[--tw-color-500] '>
+                    +
+                </Link>
             </div>
             <div className='grid grid-cols-2 gap-[1px] ' >
 

@@ -1,4 +1,6 @@
+import React from "react"
 import { convertTimestamp } from "./dates"
+
 
 export const getFlag = (slug: string, SIZE: number) => {
 
@@ -18,10 +20,51 @@ export const getFlag = (slug: string, SIZE: number) => {
 
 export const getLogoURL = (logoFull: string, size: number) => {
 
-    const logo = `${logoFull.replace("https://a.espncdn.com/", "https://a1.espncdn.com/combiner/i?img=")}?h=${size}&w=${size}`
 
+
+    const logo = `${logoFull.replace("https://a.espncdn.com/", "https://a1.espncdn.com/combiner/i?img=")}?h=${size}&w=${size}`
     return logo
 
+}
+
+
+export const getLogo = (team_p:any, SIZE:number) => {
+    let logo = ""
+    const p = 7
+
+    if (team_p) {
+
+
+        let team = "team" in team_p ? team_p.team : team_p
+
+        if (typeof (team) === "object" && "logo" in team && Array.isArray(team.logo)) {
+            
+            logo = team.logo[0].href
+            logo = logo.replace("https://a.espncdn.com/i", `https://a1.espncdn.com/combiner/i?img=/i`)
+            logo += `&h=${SIZE + p}&w=${SIZE + p}`
+            return logo
+        }
+
+
+        if (typeof (team) === "object" && "logo" in team && team.logo != "") {
+            logo = team.logo
+            logo = logo.replace("https://a.espncdn.com/i", `https://a1.espncdn.com/combiner/i?img=/i`)
+            logo += `&h=${SIZE + p}&w=${SIZE + p}`
+            return logo
+        }
+
+        if (typeof (team) === "object" && "logos" in team && team.logos.length > 0) {
+            
+            logo = team.logos.length > 1 ? team.logos[1].href : team.logos[0].href
+            logo = logo.replace("https://a.espncdn.com/i", `https://a1.espncdn.com/combiner/i?img=/i`)
+            logo += `&h=${SIZE + p}&w=${SIZE + p}`
+            return logo
+
+        }
+
+        return "-"
+    }
+    return "-"
 }
 
 export const getStatus = (status: string, detail: string, date: string) => {
@@ -92,7 +135,7 @@ export const getStatusColor = (status: string) => {
         case "in":
             return `rgb(185, 28, 28)`
         case "post":
-            return `rgb(30, 41, 59)`
+            return `rgb(30,30,30)`
         default:
             return ``
     }
@@ -114,4 +157,29 @@ export const leagueHasState = (objeto: any, state: string) => {
     }
 
     return false;
+}
+
+export const formatTitle = (title:string) => {
+
+    if(title === undefined)
+        return ""
+
+    title = title.replace("Argentine", "").replace(",", " -")
+    title = title.replace("Round of 64", "32avos de final")
+    title = title.replace("Round of 32", "16avos de final")
+    title = title.replace("Round of 16", "Octavos de final")
+    title = title.replace("Round of 8", "Cuartos de final")
+    title = title.replace("Ronda de 64", "32avos de final")
+    title = title.replace("Ronda de 32", "16avos de final")
+    title = title.replace("Ronda de 16", "Octavos de final")
+    title = title.replace("Ronda de 8", "Cuartos de final")
+    title = title.replace("First Round", "Primera Ronda")
+    title = title.replace("Second Round", "Segunda Ronda")
+    title = title.replace("Third Round", "Tercera Ronda")
+    title = title.replace("Fourth Round", "Cuarta Ronda")
+    title = title.replace("Fifth Round", "Quinta Ronda")
+    title = title.replace("Club Friendly", "Amistoso")
+    title = title.replace("Finals", "Final")
+    return title
+
 }

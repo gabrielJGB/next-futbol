@@ -13,14 +13,15 @@ const HomePage = async ({ params }: Params) => {
 
     const { date } = await params
     const leagues = await fetchLaegues(date)
-    
+
 
     return (
-        <div className='flex flex-col gap-0'>
+        <div className='flex flex-col gap-0 pb-10'>
 
             <DateSelector date={date} />
+            
             <LeaguesContainer leagues={leagues} />
-
+            
         </div>
     )
 }

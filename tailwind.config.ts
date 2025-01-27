@@ -22,11 +22,22 @@ export default {
       },
       keyframes: {
         pulse: {
-          '0%': { backgroundColor: 'rgb(20, 83, 45)' },
-          '50%': { backgroundColor: 'rgb(22, 163, 74)' },
-          '100%': { backgroundColor: 'rgb(20, 83, 45)' }
+          '0%': { opacity:"1" },
+          '50%': {opacity:"0.8"},
+          '100%': {opacity:"1"}
         }
+        // pulse: {
+        //   '0%': { backgroundColor: 'rgb(20, 83, 45)' },
+        //   '50%': { backgroundColor: 'rgb(22, 163, 74)' },
+        //   '100%': { backgroundColor: 'rgb(20, 83, 45)' }
+        // }
+        // playpulse: {
+        //   '0%': { backgroundColor: 'rgb(185, 28, 28)' },
+        //   '50%': { backgroundColor: 'rgb(129 23 23)' },
+        //   '100%': { backgroundColor: 'rgb(185, 28, 28)' }
+        // }
       }
+
     },
   },
   plugins: [],

@@ -2,9 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
-  --background: rgb(5, 46, 22);
-  --foreground: #e7e7e7;
+
+
+  --primary:theme('colors.green.500'); 
+  --foreground:theme('colors.white');
+  --tw-black:theme('colors.black');
+  --tw-white:theme('colors.white');
+  --tw-color-100: theme('colors.slate.100');
+  --tw-color-200: theme('colors.slate.200');
+  --tw-color-300: theme('colors.slate.300');
+  --tw-color-400: theme('colors.slate.400');
+  --tw-color-500: theme('colors.slate.500');
+  --tw-color-600: theme('colors.slate.600');
+  --tw-color-700: theme('colors.slate.700');
+  --tw-color-800: theme('colors.slate.800');
+  --tw-color-900: theme('colors.slate.900');
+  --tw-color-950: theme('colors.slate.950');
+
 }
 
 @media (prefers-color-scheme: dark) {
