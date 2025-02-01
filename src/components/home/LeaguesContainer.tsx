@@ -15,13 +15,13 @@ type Props = {
 
 const LeaguesContainer = ({ leagues }: Props) => {
 
-    const [_leagues, setLeagues] = useState(leagues)
+    const [_leagues, setLeagues] = useState(leagues.leagues)
     const [sortedEvents, setSortedEvents] = useState<any>(false)
     const [selectedState, setSelectedState] = useState("")
     const { setStoredDate } = useDateStore()
 
 
-    useEffect(() => {
+    useEffect( () => {
 
         const events = _leagues.flatMap((item: any) => item.events);
         const sortedEvents = events.sort((a: any, b: any) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
@@ -40,7 +40,7 @@ const LeaguesContainer = ({ leagues }: Props) => {
             
             
         setSortedEvents(groupedByDate)
-        
+        console.log(sortedEvents)
 
 
     }, [])
@@ -125,7 +125,7 @@ const LeaguesContainer = ({ leagues }: Props) => {
                 {
                     selectedState === "sort" ?
                       <Sorted
-                            sortedEvents={sortedEvents}
+                            sortedEvents={_leagues?.sorted}
                             selectedState={selectedState}
                        />
 
