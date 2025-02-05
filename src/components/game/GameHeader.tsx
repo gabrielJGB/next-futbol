@@ -1,5 +1,5 @@
 import React from 'react'
-import Info from './tabs/Info'
+import Info from './tabs/Overview'
 import Link from 'next/link'
 import { formatTitle, getLogo, getStatus, getStatusColor } from '@/utils/game'
 import Team from './Team'
@@ -11,11 +11,12 @@ type Props = {
     leagueName: string,
     leagueId: string,
     stage?: string,
-    details: any
+    details: any,
+    gameData:any,
 
 }
 
-const GameHeader = ({ game, leagueName, leagueId, details, stage = "" }: Props) => {
+const GameHeader = ({ game, leagueName, gameData,leagueId, details, stage = "" }: Props) => {
 
 
     const home = game.competitors[0]
@@ -24,7 +25,7 @@ const GameHeader = ({ game, leagueName, leagueId, details, stage = "" }: Props) 
 
     return (
         <div className='z-20 relative w-full md:w-[40%] flex flex-col gap-4 '>
-            <div className="flex flex-col gap-1 bg-[--tw-color-800]  rounded-none md:rounded-lg shadow shadow-slate-900 py-1">
+            <div className="flex flex-col gap-1 bg-[--tw-color-800]   rounded-none md:rounded-lg shadow shadow-slate-900 py-1">
 
                 <div className="hover:underline font-bold text-center   ">
                     <Link href={`/league/${leagueId} `}>
@@ -57,7 +58,7 @@ const GameHeader = ({ game, leagueName, leagueId, details, stage = "" }: Props) 
 
             </div>
             <div className='hidden md:block'>
-                <Info />
+                <Info game={gameData}/>
             </div>
 
         </div>

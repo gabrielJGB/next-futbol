@@ -135,7 +135,7 @@ export const getStatusColor = (status: string) => {
         case "in":
             return `rgb(185, 28, 28)`
         case "post":
-            return `rgb(30,30,30)`
+            return `rgb(10,10,10)`
         default:
             return ``
     }
@@ -181,5 +181,34 @@ export const formatTitle = (title:string) => {
     title = title.replace("Club Friendly", "Amistoso")
     title = title.replace("Finals", "Final")
     return title
+
+}
+
+
+export const sortRoster = (roster:any) => {
+
+    // const order = ["G", "LI", "DCI", "DC", "DCD", "LD", "MI", "MCI", "MCD", "MD", "MO", "MI", "MCI", "MC", "MO", "MCD", "MD", "ACI", "ACD", "AI", "ACI", "A", "ACD", "AD"];
+
+    const order = ["G", "LI", "DCI", "D", "DC", "DCD", "LD", "L", "MI", "MCI", "MC", "MO", "MCD", "MD", "M", "AI", "ACI", "A", "ACD", "AD"];
+
+
+    // const order = ["G", "LI", "DCI", "DC", "DCD", "LD", "MI","MD","MI","MO","MD","A"]
+
+    const sortedJson = roster.sort((a:any, b:any) => {
+        const indexA = a.position?.abbreviation ? order.indexOf(a.position?.abbreviation) : -1;
+        const indexB = b.position?.abbreviation ? order.indexOf(b.position?.abbreviation) : -1;
+
+
+        if (indexA === -1 && indexB === -1) return 0;
+        if (indexA === -1) return 1;
+        if (indexB === -1) return -1;
+
+        return indexA - indexB;
+    });
+
+
+
+
+    return sortedJson
 
 }

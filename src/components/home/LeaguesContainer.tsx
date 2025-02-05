@@ -16,52 +16,52 @@ type Props = {
 const LeaguesContainer = ({ leagues }: Props) => {
 
     const [_leagues, setLeagues] = useState(leagues.leagues)
-    const [sortedEvents, setSortedEvents] = useState<any>(false)
+    // const [sortedEvents, setSortedEvents] = useState<any>(false)
     const [selectedState, setSelectedState] = useState("")
     const { setStoredDate } = useDateStore()
 
 
-    useEffect( () => {
+    // useEffect( () => {
 
-        const events = _leagues.flatMap((item: any) => item.events);
-        const sortedEvents = events.sort((a: any, b: any) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
+    //     const events = _leagues.flatMap((item: any) => item.events);
+    //     const sortedEvents = events.sort((a: any, b: any) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
 
 
-        const groupedByDate = Object.entries(
-            sortedEvents.reduce((acc: any, event: any) => {
-                acc[event.date] = acc[event.date] || [];
-                acc[event.date].push(event);
-                return acc;
-            }, {})
-        )
-            .map(([date, events]) => ({ date, events })) 
-            .sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()); 
+    //     const groupedByDate = Object.entries(
+    //         sortedEvents.reduce((acc: any, event: any) => {
+    //             acc[event.date] = acc[event.date] || [];
+    //             acc[event.date].push(event);
+    //             return acc;
+    //         }, {})
+    //     )
+    //         .map(([date, events]) => ({ date, events })) 
+    //         .sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()); 
 
             
             
-        setSortedEvents(groupedByDate)
-        console.log(sortedEvents)
+    //     setSortedEvents(groupedByDate)
+    //     console.log(sortedEvents)
 
 
-    }, [])
+    // }, [])
 
 
 
     useEffect(() => {
 
         const date = _leagues.length > 0 ? _leagues[0].events[0].date.split("T")[0].replaceAll("-", "") : ""
-        // setStoredDate(date)
+        setStoredDate(date)
 
-        // let interval = setInterval(() => {
+        let interval = setInterval(() => {
 
-        //     fetchLaegues(date)
-        //         .then(resp => {
-        //             setLeagues(resp)
-        //         })
+            fetchLaegues(date)
+                .then(resp => {
+                    setLeagues(resp)
+                })
 
-        // }, 60 * 1000);
+        }, 90 * 1000);
 
-        // return () => { clearInterval(interval) }
+        return () => { clearInterval(interval) }
 
     }, [])
 
@@ -110,12 +110,12 @@ const LeaguesContainer = ({ leagues }: Props) => {
                     Programados
                 </button>
 
-                <button
+                {/* <button
                     className={`w-[200px] ${selectedState === "sort" ? "bg-slate-900 text-white border-slate-700" : "bg-gray-950 border-transparent"} hover:text-white  p-2   cursor-pointer`}
                     onClick={() => { setSelectedState(prev => prev === "sort" ? "" : "sort") }}
                 >
                     Ordenar por hora
-                </button>
+                </button> */}
             </div>
 
 

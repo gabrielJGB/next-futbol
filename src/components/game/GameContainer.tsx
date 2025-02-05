@@ -4,7 +4,7 @@ import React, {  useEffect, useState  } from 'react'
 import GameHeader from '@/components/game/GameHeader'
 import TabContent from '@/components/game/TabContent'
 import Tabs from '@/components/game/Tabs'
-import Info from './tabs/Info'
+import Info from './tabs/Overview'
 
 
 type Props = {
@@ -43,11 +43,12 @@ const GameContainer = ({ gameData, tabs }: Props) => {
                 leagueName={game.header.league.name}
                 stage={game.header.season.name}
                 leagueId={game.header.league.slug}
+                gameData={gameData}
             />
 
             <div className='z-20 top-0 relative w-full md:w-[80%]'>
                 <Tabs tabs={tabs} selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-                <TabContent selectedTab={selectedTab} />
+                <TabContent game={gameData} selectedTab={selectedTab} />
             </div>
 
         </div>

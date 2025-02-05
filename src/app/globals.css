@@ -22,6 +22,8 @@
   --tw-color-900: theme('colors.slate.900');
   --tw-color-950: theme('colors.slate.950');
 
+  --plyr-color-main: #1eff00;
+
 }
 
 @media (prefers-color-scheme: dark) {
