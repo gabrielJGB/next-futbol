@@ -5,16 +5,17 @@ type Props = {
     status: any,
     statusColor: string,
     homeScore: string,
-    awayScore: string
+    awayScore: string,
+    winner:boolean | string,
 }
 
-const Status = ({ status, statusColor, homeScore, awayScore }: Props) => {
+const Status = ({ status, statusColor, homeScore, awayScore,winner }: Props) => {
     return (
         <div className='flex flex-col justify-center items-center gap-1'>
             <div className='flex flex-row justify-center items-center gap-[2px] text-3xl'>
-                <div className=''>{homeScore}</div>
+                <div className={`${winner === "home"?"text-green-400":"text-white"}`} >{homeScore}</div>
                 <div >-</div>
-                <div className=''>{awayScore}</div>
+                <div className={`${winner === "away"?"text-green-400":"text-white"}`}>{awayScore}</div>
             </div>
 
             <div

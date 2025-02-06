@@ -86,7 +86,7 @@ export const getStatus = (status: string, detail: string, date: string) => {
 
 
         case "STATUS_OVERTIME":
-            return "ET Sup.."
+            return "ET Sup."
 
         case "STATUS_HALFTIME":
         case "STATUS_HALFTIME_ET":

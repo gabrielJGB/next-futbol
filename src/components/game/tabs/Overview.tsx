@@ -17,7 +17,7 @@ const Overview = ({ game }: Props) => {
 
       {
         game.videos?.length > 0 &&
-        <VideoCard video={game.videos[0]}  muted={false} autoPlay={false}/>
+          <VideoCard hd={true} video={game.videos[0]} muted={false} autoPlay={false} />
       }
 
       <GameInfo game={game} />

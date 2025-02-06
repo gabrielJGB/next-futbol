@@ -11,7 +11,7 @@ const Card = ({ title, value, icon }: { title: string | boolean, value: string, 
 
     return (
         <div className='flex flex-row items-center justify-start gap-2 '>
-            <div className='w-[30px] h-[30px] bg-gray-900 text-sm rounded'></div>
+            <div className='w-[30px] h-[30px] bg-gray-900 text-sm rounded-[30px] flex justify-center items-center font-bold border-[1px] border-gray-400'>i</div>
             <div className='flex flex-col gap-0 p-1'>
 
                 {

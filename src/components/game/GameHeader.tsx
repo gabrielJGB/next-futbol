@@ -12,16 +12,17 @@ type Props = {
     leagueId: string,
     stage?: string,
     details: any,
-    gameData:any,
+    gameData: any,
 
 }
 
-const GameHeader = ({ game, leagueName, gameData,leagueId, details, stage = "" }: Props) => {
+const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "" }: Props) => {
 
 
     const home = game.competitors[0]
     const away = game.competitors[1]
     const stageName = stage?.split(",")[1]
+    
 
     return (
         <div className='z-20 relative w-full md:w-[40%] flex flex-col gap-4 '>
@@ -43,6 +44,7 @@ const GameHeader = ({ game, leagueName, gameData,leagueId, details, stage = "" }
                         statusColor={getStatusColor(game.status.type.state)}
                         homeScore={home.score}
                         awayScore={away.score}
+                        winner={home.winner ? "home" : (away.winner ? "away" : false)}
                     />
 
                     <Team team={away.team} />
@@ -58,7 +60,7 @@ const GameHeader = ({ game, leagueName, gameData,leagueId, details, stage = "" }
 
             </div>
             <div className='hidden md:block'>
-                <Info game={gameData}/>
+                <Info game={gameData} />
             </div>
 
         </div>

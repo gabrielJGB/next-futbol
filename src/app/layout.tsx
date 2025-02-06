@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body
-        className={`bg-[--tw-color-950] ${rubik.variable} antialiased pb-[200px]`}
+        className={`bg-[--tw-color-950] ${geistMono.variable} antialiased pb-[200px]`}
       >
         <Nav />
         

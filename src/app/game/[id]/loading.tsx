@@ -29,7 +29,7 @@ const Loading = (props: Props) => {
 
                 </div>
 
-                <div className='animate-pulse mt-4 w-full h-[500px] bg-green-700 rounded-lg'>
+                <div className='animate-pulse mt-4 w-full h-[500px] bg-[#097f30] rounded-lg'>
 
                 </div>
 

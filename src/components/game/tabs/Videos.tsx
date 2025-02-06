@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import VideoCard from './overview/VideoCard';
 
 type Props = {
@@ -7,17 +8,21 @@ type Props = {
 
 const Videos = ({ game }: Props) => {
 
-  console.log(game.videos);
+  // const [hd, setHd] = useState(true)
+
 
 
   return (
     <div className='flex flex-col gap-6'>
+{/* 
+      <button
+        className={`${hd ? "bg-green-800" : "bg-black"} cursor-pointer w-[120px] py-1 text-xs text-white border-[1px] border-gray-500 rounded`}
+        onClick={() => setHd(prev => !prev)}
+      >{hd ? "Calidad HD" : "Calidad SD"}</button> */}
 
       {
         game.videos.map((video: any, i: number) => (
-          <div className=''>
-            <VideoCard key={i} video={video} muted={false} autoPlay={false}/>
-          </div>
+            <VideoCard key={i} hd={true} video={video} muted={false} autoPlay={false} />
         ))
       }
 
