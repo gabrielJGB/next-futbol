@@ -19,6 +19,7 @@ const VideoPlayer = ({  videoUrl, thumbnail, muted, autoPlay }: { videoUrl: stri
         controls: [
           'play-large',
           'play',
+          'mute',
           'volume',
           'current-time',
           'progress',

@@ -11,7 +11,7 @@ type Props = {
 const Tabs = ({ tabs, selectedTab, setSelectedTab }: Props) => {
   return (
 
-    <div className='z-0 top-0 sticky md:relative flex flex-row self-start mb-2 shadow shadow-[--tw-color-900] md:shadow-gray-900 md:overflow-hidden overflow-x-scroll w-full mx-auto rounded-none md:rounded bg-[--tw-color-800] md:bg-[--tw-color-800] text-xs font-bold '>
+    <div className='z-20 top-0 sticky md:relative flex flex-row self-start mb-2 shadow shadow-[--tw-color-900] md:shadow-gray-900 md:overflow-hidden overflow-x-scroll w-full mx-auto rounded-none md:rounded bg-[--tw-color-800] md:bg-[--tw-color-800] text-xs font-bold '>
 
       {/* <div className='sticky top-0 z-20 mx-auto flex md:justify-center w-full bg-black shadow-sm shadow-black overflow-x-auto text-gray-400 '> */}
             <button

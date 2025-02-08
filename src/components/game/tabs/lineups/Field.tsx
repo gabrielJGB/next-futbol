@@ -89,7 +89,7 @@ const Field = ({ game }: Props) => {
 
     return (
 
-        <div className='overflow-x-auto'>
+        <div className=''>
             <div
                 style={{
                     backgroundImage: `url("/field2.png")`,
@@ -98,7 +98,7 @@ const Field = ({ game }: Props) => {
                     backgroundRepeat: "space",
                     
                 }}
-                className='z-30 top-0 relative flex  flex-row md:w-full bg-field bg-contain bg-no-repeat w-[850px] rounded-lg shadow shadow-gray-900 bg-center px-[3px]'
+                className='z-10 top-0 relative flex  flex-row md:w-full bg-field bg-contain bg-no-repeat w-[850px] rounded-lg shadow shadow-gray-900 bg-center px-[3px]'
 
             >
                 {

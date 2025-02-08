@@ -35,7 +35,7 @@ const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "" 
                 </div>
 
                 <div className='text-center text-[12px] text-gray-400  font-bold'>{formatTitle(stageName).toUpperCase()}</div>
-                <div className="grid grid-cols-3 justify-center items-center w-full ">
+                <div className="grid grid-cols-3 justify-center items-center w-full  ">
 
                     <Team team={home.team} />
 

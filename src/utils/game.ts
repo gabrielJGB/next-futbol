@@ -1,6 +1,50 @@
 import React from "react"
 import { convertTimestamp } from "./dates"
+import penalty from '@/assets/penalty.png'
+import penaltyMissed from '@/assets/no-score.png'
+import arrowIn from '@/assets/arrow-in.png'
+import arrowOut from '@/assets/arrow-out.png'
+import ownGoal from '@/assets/own-goal.png'
+import goal from '@/assets/goal.png'
 
+import boot from '@/assets/boot.png'
+import redCard from '@/assets/red.png'
+import yellowCard from '@/assets/yellow.png'
+
+
+export const getPlayImg = (play:any,subbedOut:boolean) => {
+    
+    
+
+    if (play.penaltyKick)
+        if (play.didScore)
+            return penalty
+        else
+            return penaltyMissed
+    else if (play.ownGoal)
+        return ownGoal
+    else if (play.didScore)
+        return goal
+    else if (play.didAssist)
+        return boot
+    else if (play.redCard)
+        return redCard
+    else if (play.yellowCard)
+        return yellowCard
+
+    else if (play.substitution)
+        if(subbedOut)
+            return arrowOut
+        else 
+        return arrowIn
+
+    else
+        return ""
+    // else if (play.substitution)
+    //     return p_in ? <Icon source={"chevron-right"} size={22} color='lime' /> : <Icon source={"chevron-left"} size={22} color='red' />
+
+
+}
 
 export const getFlag = (slug: string, SIZE: number) => {
 
@@ -210,5 +254,30 @@ export const sortRoster = (roster:any) => {
 
 
     return sortedJson
+
+}
+
+
+
+
+
+export const getPlayerColor = (position:any) => {
+
+    if (!position)
+        return "#808080"
+
+    if (position.displayName === "Arquero")
+        return "#FF8700"
+
+    else if (position.displayName.includes("Defensor") || position.displayName.includes("Lateral") || position.displayName.includes("defensivo") || position.displayName.includes("Líbero"))
+        return "#20b4ff"
+
+    else if (position.displayName.includes("Mediocampista"))
+        return "#42d515"
+
+    else if (position.displayName.includes("Atacante") || position.displayName.includes("Enganche"))
+        return "#df1d1e"
+    else
+        return "#808080"
 
 }

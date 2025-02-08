@@ -56,10 +56,10 @@ const LeaguesContainer = ({ leagues }: Props) => {
 
             fetchLaegues(date)
                 .then(resp => {
-                    setLeagues(resp)
+                    setLeagues(resp.leagues)
                 })
 
-        }, 90 * 1000);
+        }, 40 * 1000);
 
         return () => { clearInterval(interval) }
 
@@ -134,7 +134,7 @@ const LeaguesContainer = ({ leagues }: Props) => {
 
                         <>
                             {
-                                _leagues?.map((data: any, i: number) => (
+                                _leagues.map((data: any, i: number) => (
                                     <League
                                         key={i}
                                         games={data.events}
