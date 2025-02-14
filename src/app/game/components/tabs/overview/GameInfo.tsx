@@ -10,17 +10,14 @@ const Card = ({ title, value, icon }: { title: string | boolean, value: string, 
 
 
     return (
-        <div className='flex flex-row items-center justify-start gap-2 '>
-            <div className='w-[30px] h-[30px] bg-gray-900 text-sm rounded-[30px] flex justify-center items-center font-bold border-[1px] border-gray-400'>i</div>
-            <div className='flex flex-col gap-0 p-1'>
-
+        <div className='flex flex-row gap-2 items-center justify-start px-2 py-1'>
+            <div className='w-[20px] h-[20px] bg-slate-600 text-sm rounded-[20px] flex justify-center items-center font-bold  text-slate-300'>i</div>
+            <div className='flex flex-col '>
                 {
                     title &&
                     <div className='text-xs font-bold text-gray-400'>{title}</div>
                 }
-
-                <div className='text-sm '>{value}</div>
-
+                <div className={`text-xs ${title ? "" : "py-2"}`}>{value}</div>
             </div>
         </div>
     )
@@ -30,22 +27,18 @@ const Card = ({ title, value, icon }: { title: string | boolean, value: string, 
 const GameInfo = ({ game }: Props) => {
 
 
-
-
     const gameDate = convertTimestamp(game.header.competitions[0].date)
-
     const dateString = `${gameDate.dayOfWeek} ${gameDate.day} de ${gameDate.month} de ${gameDate.year}, ${gameDate.time} hs`
-
     const playing = game.header.competitions[0].status.type.state === "in"
 
     return (
 
-        <div className='shadow shadow-gray-800 bg-[--tw-color-800] flex flex-col gap-0 rounded-lg p-2 '>
-            <h3 className='text-center font-bold'>INFORMACIÓN DEL PARTIDO</h3>
+        <div className='shadow shadow-gray-800 bg-[--tw-color-800] flex flex-col  divide-y-[1px] divide-[--tw-color-700] gap-0 rounded-lg  '>
+            <h3 className='text-center font-bold py-2'>INFORMACIÓN DEL PARTIDO</h3>
 
             <Card title="Fecha" value={dateString} icon={"calendar-month"} />
 
-            {!playing && <Card title="Contador" value={timeUntil(game.header.competitions[0].date)} icon={"timer-sand"} />}
+            {/* {!playing && <Card title="Contador" value={timeUntil(game.header.competitions[0].date)} icon={"timer-sand"} />} */}
 
 
             {
@@ -79,14 +72,14 @@ const GameInfo = ({ game }: Props) => {
                 "gameNote" in game.header &&
 
                 game.header.gameNote.split(" - ").map((note: string, i: number) => (
-                    <div className='mt-2'>
-                    <Card
+                    <div className=''>
+                        <Card
 
-                        key={i}
-                        title={false}
-                        value={note.replace("Juego", "Partido")}
-                        icon="information"
-                    />
+                            key={i}
+                            title={false}
+                            value={note.replace("Juego", "Partido")}
+                            icon="information"
+                        />
                     </div>
                 ))
 
@@ -94,7 +87,7 @@ const GameInfo = ({ game }: Props) => {
 
             {
                 "groups" in game.header.competitions[0].competitors[0] &&
-                <div className='mt-4'>
+                <div className=''>
                     <Card
                         title={false}
                         value={game.header.competitions[0].competitors[0].groups.abbreviation}
@@ -110,7 +103,7 @@ const GameInfo = ({ game }: Props) => {
                 !("groups" in game.header.competitions[0].competitors[0]) &&
                 game.header.competitions[0].groups?.abbreviation.includes("Grupo") &&
 
-                <div className='mt-4'>
+                <div className=''>
                     <Card
                         title={false}
                         value={game.header.competitions[0].groups.abbreviation}

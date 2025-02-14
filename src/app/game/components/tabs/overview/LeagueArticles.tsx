@@ -1,3 +1,4 @@
+import { formatDate } from '@/utils/dates'
 import Image from 'next/image'
 import React from 'react'
 
@@ -21,18 +22,18 @@ const LeagueArticles = ({ news }: Props) => {
 
 
     return (
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col bg-[--tw-color-800] pb-2 rounded-lg divide-y-[1px] divide-[--tw-color-700]'>
 
-            <div className='text-lg font-bold text-center py-1'>Noticias Torneo</div>
+            <div className='text-lg font-bold text-center py-2  '>Noticias Torneo</div>
 
             {
                 articles.map((article: any, i: number) => (
                     
-                    <div key={i} className='flex flex-row gap-2 bg-[--tw-color-800] p-2 rounded cursor-pointer hover:bg-[--tw-color-700] transition-all'>
+                    <div key={i} className='flex flex-row gap-2 p-2 cursor-pointer hover:bg-[--tw-color-700] transition-all'>
                         <img src={article.image} className='rounded w-[60px] h-[50px]' alt='Imagen noticia' width={65} height={65}/>
                         <div className='flex flex-col gap-0'>
-                            <div className='text-gray-400 text-[11px] font-bold'>{article.published}</div>
-                            <div className='text-sm'>{article.headline}</div>
+                            <div className='text-gray-400 text-[11px] font-bold'>{formatDate(article.published)}</div>
+                            <div className='text-xs'>{article.headline}</div>
                         </div>
                     </div>
                 ))

@@ -11,12 +11,12 @@ type Props = {
 const Tabs = ({ tabs, selectedTab, setSelectedTab }: Props) => {
   return (
 
-    <div className='z-20 top-0 sticky md:relative flex flex-row self-start mb-2 shadow shadow-[--tw-color-900] md:shadow-gray-900 md:overflow-hidden overflow-x-scroll w-full mx-auto rounded-none md:rounded bg-[--tw-color-800] md:bg-[--tw-color-800] text-xs font-bold '>
+    <div className='z-20 top-0 sticky md:relative flex flex-row self-start mb-2 md:shadow shadow-[--tw-color-900] md:shadow-gray-900 md:overflow-hidden overflow-x-scroll w-full mx-auto rounded-none md:rounded bg-[--tw-color-800] md:bg-[--tw-color-800] text-xs font-bold '>
 
       {/* <div className='sticky top-0 z-20 mx-auto flex md:justify-center w-full bg-black shadow-sm shadow-black overflow-x-auto text-gray-400 '> */}
             <button
 
-              className={`flex  md:hidden  transition-all md:px-4 px-4 md:py-3 py-4 border-b-[3px] ${selectedTab === 0 ? "border-white" : "border-transparent"}`}
+              className={`flex  md:hidden active:bg-[--tw-color-900] transition-all md:px-4 px-4 md:py-3 py-4 border-b-[3px] ${selectedTab === 0 ? "border-white" : "border-transparent"}`}
               onClick={() => setSelectedTab(0)}
             >
              INFO
@@ -28,7 +28,7 @@ const Tabs = ({ tabs, selectedTab, setSelectedTab }: Props) => {
 
             <button
               key={i}
-              className={`flex transition-all md:px-3 px-4 md:py-3 py-4 border-b-[3px] ${selectedTab === i ? "border-white text-white" : "border-transparent text-gray-300"} hover:text-white`}
+              className={`flex transition-all active:bg-[--tw-color-900] md:px-3 px-4 md:py-3 py-4 border-b-[3px] ${selectedTab === i ? "border-white text-white" : "border-transparent text-gray-300"} hover:text-white`}
               onClick={() => setSelectedTab(i)}
             >
   

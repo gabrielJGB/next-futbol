@@ -1,9 +1,8 @@
 import DateSelector from '@/components/home/DateSelector'
-import LeaguesContainer from '@/components/home/LeaguesContainer'
+import Main from '@/components/home/LeaguesContainer'
+import { fetchLaegues, fetchSofaData } from '@/utils/fetch'
 
-import { fetchLaegues } from '@/utils/fetch'
-import Link from 'next/link'
-import React, { Suspense } from 'react'
+
 
 type Params = {
     params: Promise<{ date: string }>
@@ -13,14 +12,15 @@ const HomePage = async ({ params }: Params) => {
 
     const { date } = await params
     const leagues = await fetchLaegues(date)
-
+    // const sofaEvents = await fetchSofaData(date)
+    console.log("home")
+     
 
     return (
         <div className='flex flex-col gap-0 pb-10'>
 
             <DateSelector date={date} />
-            
-            <LeaguesContainer leagues={leagues} />
+            <Main leagues={leagues} sofaEvents={""}/>
             
         </div>
     )

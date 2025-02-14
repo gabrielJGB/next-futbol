@@ -24,12 +24,11 @@ const VideoCard = ({ video, muted, autoPlay, hd }: Props) => {
 
     useEffect(() => {
         setUrl(hd ? video.links.source.HD.href : video.links.mobile.source.href)
-      
     }, [hd])
     
 
     return (
-        <div className='-z-12 shadow flex flex-col gap-1 shadow-gray-800 bg-[--tw-color-800] rounded-lg pt-2'>
+        <div className='-z-12 shadow flex flex-col gap-1 shadow-gray-800  bg-[--tw-color-800] rounded-lg pt-2'>
 
 
             {

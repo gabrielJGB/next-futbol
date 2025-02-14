@@ -7,18 +7,25 @@ import { getFlag, getStatus, getStatusColor, leagueHasState } from '@/utils/game
 import { fetchLaegues } from '@/utils/fetch'
 import { useDateStore } from '@/stores/dateStore'
 import Sorted from './Sorted'
+import { useStates } from '@/stores/states'
 // import { fetchTasks } from '@/utils/fetch'
 
 type Props = {
-    leagues: any
+    leagues: any,
+    sofaEvents: any
 }
 
-const LeaguesContainer = ({ leagues }: Props) => {
+const Main = ({ leagues, sofaEvents="events" }: Props) => {
 
     const [_leagues, setLeagues] = useState(leagues.leagues)
     // const [sortedEvents, setSortedEvents] = useState<any>(false)
     const [selectedState, setSelectedState] = useState("")
     const { setStoredDate } = useDateStore()
+    const { setSofaEvents } = useStates()
+
+    useEffect(() => {
+        setSofaEvents(sofaEvents)
+    }, [])
 
 
     // useEffect( () => {
@@ -37,8 +44,8 @@ const LeaguesContainer = ({ leagues }: Props) => {
     //         .map(([date, events]) => ({ date, events })) 
     //         .sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()); 
 
-            
-            
+
+
     //     setSortedEvents(groupedByDate)
     //     console.log(sortedEvents)
 
@@ -52,14 +59,15 @@ const LeaguesContainer = ({ leagues }: Props) => {
         const date = _leagues.length > 0 ? _leagues[0].events[0].date.split("T")[0].replaceAll("-", "") : ""
         setStoredDate(date)
 
+        fetchLaegues(date)
+            .then(resp => setLeagues(resp.leagues))
+
         let interval = setInterval(() => {
 
             fetchLaegues(date)
-                .then(resp => {
-                    setLeagues(resp.leagues)
-                })
+                .then(resp => setLeagues(resp.leagues))
 
-        }, 40 * 1000);
+        }, 120 * 1000);
 
         return () => { clearInterval(interval) }
 
@@ -119,15 +127,15 @@ const LeaguesContainer = ({ leagues }: Props) => {
             </div>
 
 
-            <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-12'>
 
 
                 {
                     selectedState === "sort" ?
-                      <Sorted
+                        <Sorted
                             sortedEvents={_leagues?.sorted}
                             selectedState={selectedState}
-                       />
+                        />
 
                         :
 
@@ -160,4 +168,4 @@ const LeaguesContainer = ({ leagues }: Props) => {
     )
 }
 
-export default LeaguesContainer
+export default Main

@@ -46,6 +46,18 @@ export const getPlayImg = (play:any,subbedOut:boolean) => {
 
 }
 
+export const getDetailImg = (detail:any) => {
+
+    if (detail.penaltyKick)
+        return penalty
+    else if (detail.redCard)
+        return redCard
+    else if (detail.scoringPlay)
+        return goal
+    else 
+        return ""
+}
+
 export const getFlag = (slug: string, SIZE: number) => {
 
     const flagCode = slug.slice(0, 3)

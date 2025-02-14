@@ -26,7 +26,7 @@ export const getDates = (date: string) => {
             formated: formatDateObject(previous),
             string: previousDate
         },
-        selectedDate:{
+        selectedDate: {
             formated: formatDateObject(dateObj),
             string: date
         },
@@ -56,7 +56,7 @@ const formatDateObject = (date: Date) => {
         return "AYER";
     } else {
         const days = ['DOM', 'LUN', 'MAR', 'MIE', 'JUE', 'VIE', 'SAB'];
-        
+
         const dayOfWeek = days[date.getDay()];
         const formatedDate = `${dayOfWeek}  ${formatNumber(date.getDate())}/${formatNumber(date.getMonth() + 1)}/${formatNumber(date.getFullYear() % 100)}`;
         return formatedDate;
@@ -75,7 +75,7 @@ const isSameDay = (date1: Date, date2: Date) => {
 }
 
 
-export const convertTimestamp = (timestamp:string) => {
+export const convertTimestamp = (timestamp: string) => {
     const fechaUTC = new Date(timestamp);
     fechaUTC.setUTCHours(fechaUTC.getUTCHours() - 3);
     const hora = fechaUTC.getUTCHours().toString().padStart(2, '0') + ':' + fechaUTC.getUTCMinutes().toString().padStart(2, '0');
@@ -106,10 +106,10 @@ export const convertTimestamp = (timestamp:string) => {
 }
 
 
-export const  timeUntil = (dateString:string) => {
-    const targetDate:any = new Date(dateString);
-    const now :any = new Date();
-    let diff:any = targetDate - now;
+export const timeUntil = (dateString: string) => {
+    const targetDate: any = new Date(dateString);
+    const now: any = new Date();
+    let diff: any = targetDate - now;
 
     const isPast = diff < 0;
     diff = Math.abs(diff);
@@ -143,4 +143,16 @@ export const  timeUntil = (dateString:string) => {
     } else {
         return `Empieza en ${result}`;
     }
+}
+
+
+export const formatDate = (date: string) => {
+
+    const t = new Date(date)
+
+    const dateString = `${t.getDate()}/${String(t.getMonth() + 1)}/${t.getFullYear()}`
+    const timeString = `${String(t.getHours()).padStart(2, "0")}:${String(t.getMinutes()).padStart(2, "0")}`
+
+    return `${dateString} - ${timeString}`
+
 }

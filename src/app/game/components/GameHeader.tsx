@@ -1,10 +1,10 @@
 import React from 'react'
-import Info from './tabs/Overview'
+import Info from './tabs/Tab_Overview'
 import Link from 'next/link'
 import { formatTitle, getLogo, getStatus, getStatusColor } from '@/utils/game'
-import Team from './Team'
-import Status from './Status'
-import HeaderDetails from './Details'
+import Team from './GameTeam'
+import Status from './GameStatus'
+import HeaderDetails from './GameDetails'
 
 type Props = {
     game: any,
@@ -22,19 +22,25 @@ const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "" 
     const home = game.competitors[0]
     const away = game.competitors[1]
     const stageName = stage?.split(",")[1]
-    
+
 
     return (
-        <div className='z-20 relative w-full md:w-[40%] flex flex-col gap-4 '>
-            <div className="flex flex-col gap-1 bg-[--tw-color-800]   rounded-none md:rounded-lg shadow shadow-slate-900 py-1">
+        <div className='flex flex-col gap-4 '>
+            <div className="flex flex-col gap-1 bg-[--tw-color-800] rounded-none md:rounded-lg  py-1">
 
-                <div className="hover:underline font-bold text-center   ">
-                    <Link href={`/league/${leagueId} `}>
-                        {leagueName}
-                    </Link>
+
+                <Link
+                    href={`/league/${leagueId}`}
+                    className="hover:underline font-bold text-center"
+                >
+                    {leagueName}
+                </Link>
+
+
+                <div className='text-center text-[10px] text-gray-400  font-bold'>
+                    {formatTitle(stageName).toUpperCase()}
                 </div>
 
-                <div className='text-center text-[12px] text-gray-400  font-bold'>{formatTitle(stageName).toUpperCase()}</div>
                 <div className="grid grid-cols-3 justify-center items-center w-full  ">
 
                     <Team team={home.team} />
@@ -56,9 +62,8 @@ const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "" 
                     <HeaderDetails details={details} homeId={home.id} awayId={away.id} />
                 }
 
-
-
             </div>
+
             <div className='hidden md:block'>
                 <Info game={gameData} />
             </div>

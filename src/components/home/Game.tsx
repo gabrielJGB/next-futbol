@@ -37,6 +37,7 @@ const GameCard = ({ gameState, selectedState, status, statusColor, home, away,id
 
     return (
         <div className={`text-black ${gameState === selectedState || selectedState === "" ? "flex" : "hidden"} flex-col gap-[1px] shadow shadow-slate-900`}>
+
             <div className='grid grid-cols-10 gap-[1px]'>
 
                 <div
@@ -52,12 +53,11 @@ const GameCard = ({ gameState, selectedState, status, statusColor, home, away,id
                     redCards={home.redCards}
                 />
 
-
-
-
                 <div className={`${home.winner && "border-black"}  border-b-[2px] bg-white col-span-1 flex flex-col justify-center items-center text-2xl font-bold`}>
                     {home.score}
                 </div>
+
+
 
                 <div className={`${away.winner && "border-black"} border-b-[2px] bg-white col-span-1 flex flex-col justify-center items-center text-2xl font-bold`}>
                     {away.score}
@@ -70,6 +70,8 @@ const GameCard = ({ gameState, selectedState, status, statusColor, home, away,id
                     name={away.name}
                     redCards={away.redCards}
                 />
+
+                
                 <Link href={`/game/${id}`} className='bg-[--tw-color-600]  text-white flex justify-center items-center col-span-1 text-2xl font-bold cursor-pointer active:bg-[--tw-color-700] md:active:bg-[--tw-color-500] md:hover:bg-[--tw-color-500] '>
                     +
                 </Link>
@@ -80,7 +82,7 @@ const GameCard = ({ gameState, selectedState, status, statusColor, home, away,id
                 {
                     [home.scorers, away.scorers].map((scorer: any, j: number) => (
 
-                        <div key={j} className={`flex flex-row  ${scorer.length ? "py-[2px]" : ""} px-[5px] flex-wrap justify-center  bg-slate-300`}>
+                        <div key={j} className={`flex flex-row  ${scorer.length ? "py-[2px]" : ""} px-[5px] flex-wrap justify-center text-white bg-slate-300`}>
 
                             {
                                 scorer &&

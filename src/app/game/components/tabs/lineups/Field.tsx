@@ -1,15 +1,19 @@
 import { sortRoster } from '@/utils/game'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FieldLine from './FieldLine'
 import fieldBackground from '@/assets/field2.png'
 import field from '../../../assets/field2.png'
 
 type Props = {
     game: any,
+    homeLogo: string,
+    awayLogo: string,
+    homeFormation: string,
+    awayFormation: string,
 
 }
 
-const Field = ({ game }: Props) => {
+const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo }: Props) => {
     const BACKGROUND_IMG = "https://raw.githubusercontent.com/gabrielJGB/futbol-11/refs/heads/main/assets/field55.png"
 
     const formations = [game.rosters[0].formation.split("-"), game.rosters[1].formation.split("-")]
@@ -81,77 +85,91 @@ const Field = ({ game }: Props) => {
 
 
     const [lines] = useState<any>([getLines(0), getLines(1)])
+    const [windowWidth, setWindowWidth] = useState(0)
 
+    useEffect(() => {
 
+        if (window != undefined)
+            setWindowWidth(window.innerWidth)
+
+    }, [])
 
 
 
 
     return (
 
-        <div className=''>
-            <div
-                style={{
-                    backgroundImage: `url("/field2.png")`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "space",
-                    
-                }}
-                className='z-10 top-0 relative flex  flex-row md:w-full bg-field bg-contain bg-no-repeat w-[850px] rounded-lg shadow shadow-gray-900 bg-center px-[3px]'
+        <div
+            className='z-10 top-0 relative flex  flex-row bg-field bg-contain bg-no-repeat  rounded-lg shadow shadow-gray-900 bg-center px-[3px] justify-center  h-[460px] md:h-[500px]'
 
-            >
+            style={{
+                backgroundImage: `url("/field2.png")`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "space",
+                width: windowWidth < 800 ? (windowWidth * 2) : "auto",
+
+            }}
+
+        >
+
+
+
+            <div className='absolute top-1 left-1 font-bold text-sm flex flex-row items-center gap-2'>
                 {
-                    [0, 1].map((j, k) => (
+                    homeLogo != "-" &&
+                    <img src={homeLogo} alt="logo" />
+                }
+                <div
+                    style={{ textShadow: "black 1px 1px 1px" }}
+                    className='font-bold text-sm'>{homeFormation}</div>
+            </div>
 
-                        <div
-
-                            className={`flex ${k === 0 ? "flex-row" : "flex-row-reverse"}  justify-evenly gap-1 md:w-1/2 w-full bg-center h-[500px]`}
-                        // style={{backgroundImage: `url(${field})` }}
-
-                        >
-
-                            {/* <img src={BACKGROUND_IMG} className={`relative top-0 bg-cover bg-center ${k===1?"rotate-180":""}`} alt="" /> */}
-
-
-                            {/* <img
-                                src="https://raw.githubusercontent.com/gabrielJGB/futbol-11/refs/heads/main/assets/field55.png"
-                                alt=""
-                                className=''
-                                style={{ transform: k === 1 ? [{ rotateY: '180deg' }] : [] }}
-                            /> */}
-
-                            {
-                                lines[k].map((line: any, i: number) => (
-
-                                    <FieldLine
-                                        key={i}
-                                        line={line}
-                                        lineIndex={i}
-                                        color={k === 0 ? homeColor : awayColor}
-                                        isHome={k === 0}
-                                        playersInLine={formations[k].length + 1}
-                                        isThisBoca={game.header.competitions[0].competitors[k].team.id === "5"}
-                                    />
-
-                                ))
-                            }
+            <div className='absolute top-1 right-1 flex flex-row-reverse items-center gap-2'>
+                {
+                    awayLogo != "-" &&
+                    <img src={awayLogo} alt="logo" />
+                }
+                <div
+                    style={{ textShadow: "black 1px 1px 1px" }}
+                    className='font-bold text-sm'>{awayFormation}</div>
+            </div>
 
 
-                            {/* 
+
+            {
+                [0, 1].map((j, k) => (
+
+                    <div
+                        key={k}
+                        className={`flex ${k === 0 ? "flex-row" : "flex-row-reverse"}  justify-evenly gap-1 md:w-1/2 w-full bg-center `}
+                    >
+
+
+
                         {
                             lines[k].map((line: any, i: number) => (
 
+                                <FieldLine
+                                    key={i}
+                                    line={line}
+                                    lineIndex={i}
+                                    color={k === 0 ? homeColor : awayColor}
+                                    isHome={k === 0}
+                                    playersInLine={formations[k].length + 1}
+                                    isThisBoca={game.header.competitions[0].competitors[k].team.id === "5"}
+                                />
+
                             ))
-                        } */}
+                        }
 
-                        </div>
+                    </div>
 
-                    ))
-                }
+                ))
+            }
 
-            </div>
         </div>
+
     )
 }
 

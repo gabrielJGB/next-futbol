@@ -1,5 +1,6 @@
 import React from 'react'
-import GameContainer from '@/components/game/GameContainer'
+import Main from '@/app/game/components/Main'
+import { fetchGame } from '@/utils/fetch'
 
 type Params = {
     params: Promise<{ id: string }>
@@ -8,8 +9,7 @@ type Params = {
 const Page = async ({ params }: Params) => {
 
     const { id } = await params
-    const response = await fetch(`https://site.web.api.espn.com/apis/site/v2/sports/soccer/all/summary?region=ar&lang=es&contentorigin=deportes&event=${id}`);
-    const gameData = await response.json();
+    const gameData = await fetchGame(id)
 
     let tabs = [
         { show: false, name: "Info" },
@@ -46,7 +46,7 @@ const Page = async ({ params }: Params) => {
 
 
     return (
-        <GameContainer tabs={tabs} gameData={gameData} />
+        <Main tabs={tabs} gameData={gameData} id={id}/>
     )
 }
 

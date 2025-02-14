@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Plyr from "plyr";
 import "plyr/dist/plyr.css";
 
-const VideoPlayer = ({  videoUrl, thumbnail, muted, autoPlay }: { videoUrl: string, thumbnail: string, muted: boolean, autoPlay: boolean,  }) => {
+const VideoPlayer = ({ videoUrl, thumbnail, muted, autoPlay }: { videoUrl: string, thumbnail: string, muted: boolean, autoPlay: boolean, }) => {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const playerRef = useRef<Plyr | null>(null);
@@ -20,12 +20,12 @@ const VideoPlayer = ({  videoUrl, thumbnail, muted, autoPlay }: { videoUrl: stri
           'play-large',
           'play',
           'mute',
-          'volume',
           'current-time',
           'progress',
           'settings',
+          'pip',
           'fullscreen',
-          'download'
+
         ],
       });
 
@@ -34,10 +34,20 @@ const VideoPlayer = ({  videoUrl, thumbnail, muted, autoPlay }: { videoUrl: stri
   }, []);
 
 
- 
+
   return (
-    <video ref={videoRef} className="plyr rounded-bl-lg" playsInline autoPlay={autoPlay} muted={muted} controls data-poster={thumbnail}>
-      <source src={videoUrl} type="video/mp4" />
+    <video
+      ref={videoRef}
+      className="plyr rounded-b-lg"
+      autoPlay={autoPlay}
+      muted={muted}
+      data-poster={thumbnail}
+      playsInline
+      controls
+    >
+
+      <source src={videoUrl}  type="video/mp4" />
+
     </video>
   );
 };

@@ -1,3 +1,18 @@
+import { convertTimestamp } from "./dates";
+
+export const fetchGame = async (id: string) => {
+
+    const response = await fetch(`https://site.web.api.espn.com/apis/site/v2/sports/soccer/all/summary?region=ar&lang=es&contentorigin=deportes&event=${id}`);
+
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    const game = await response.json();
+    return game
+
+}
+
 export const fetchLaegues = async (dates: string) => {
 
     const url = `https://site.web.api.espn.com/apis/site/v2/sports/soccer/scorepanel?league=all&lang=es&region=ar&contentorigin=deportes&limit=250&dates=${dates}`
@@ -29,3 +44,35 @@ export const fetchLaegues = async (dates: string) => {
 }
 
 
+
+
+export const fetchSofaData = async (selectedDate: string) => {
+
+    try {
+        const year = selectedDate.slice(0, 4)
+        const month = selectedDate.slice(4, 6)
+        const day = selectedDate.slice(6, 8)
+        const formatedDate = `${year}-${month}-${day}`
+
+
+        const res = await fetch(`https://api.sofascore.com/api/v1/sport/football/scheduled-events/${formatedDate}`)
+
+        if (!res.ok) {
+            return false
+        }
+
+        const data = await res.json()
+
+
+        if ("events" in data)
+            return data.events
+
+        else
+            return false
+
+
+    } catch (error) {
+        return false
+    }
+
+}
