@@ -11,7 +11,7 @@ const AttackMomentum = ({}: Props) => {
   console.log(sofaEvents)
 
   return (
-    <div>AttackMomentum</div>
+    <div className="p-2 rounded-lg bg-[--tw-color-800] text-sm font-bold">Attack Momentum</div>
   )
 }
 

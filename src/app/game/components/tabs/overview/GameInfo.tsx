@@ -11,7 +11,7 @@ const Card = ({ title, value, icon }: { title: string | boolean, value: string, 
 
     return (
         <div className='flex flex-row gap-2 items-center justify-start px-2 py-1'>
-            <div className='w-[20px] h-[20px] bg-slate-600 text-sm rounded-[20px] flex justify-center items-center font-bold  text-slate-300'>i</div>
+            <div className='w-[20px] h-[20px] bg-slate-600 text-sm rounded-[20px] flex justify-center items-center font-bold  text-slate-300'>!</div>
             <div className='flex flex-col '>
                 {
                     title &&
