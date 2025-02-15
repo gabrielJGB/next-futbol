@@ -10,17 +10,18 @@ import Videos from './tabs/Tab_Videos'
 
 type Props = {
   selectedTab: number,
-  game: any
+  game: any,
+  sofaId:any
 }
 
-const TabContent = ({ game, selectedTab }: Props) => {
+const TabContent = ({ game, selectedTab,sofaId }: Props) => {
 
 
 
   const getSelected = () => {
     switch (selectedTab) {
       case 0:
-        return <div className='block md:hidden'><Info game={game} /></div>
+        return <div className='block md:hidden'><Info game={game} sofaId={sofaId}/></div>
       case 1:
         return <Lineups game={game} />
       case 2:

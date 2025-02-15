@@ -11,10 +11,11 @@ import { fetchGame } from '@/utils/fetch'
 type Props = {
     gameData: any,
     tabs: any,
-    id: string
+    id: string,
+    sofaId: string
 }
 
-const Main = ({ gameData, tabs, id }: Props) => {
+const Main = ({ gameData, tabs, id, sofaId }: Props) => {
 
     const [selectedTab, setSelectedTab] = useState(0)
     const [game, setGame] = useState(gameData)
@@ -25,21 +26,21 @@ const Main = ({ gameData, tabs, id }: Props) => {
     }, [])
 
 
-    // useEffect(() => {
-    //     fetchGame(id)
-    //         .then(resp => setGame(resp))
+    useEffect(() => {
+        fetchGame(id)
+            .then(resp => setGame(resp))
 
-    //     let interval = setInterval(() => {
-    //         console.log("Fetching game id", id);
+        let interval = setInterval(() => {
+            console.log("Fetching game id", id);
 
-    //         fetchGame(id)
-    //             .then(resp => setGame(resp))
+            fetchGame(id)
+                .then(resp => setGame(resp))
 
-    //     }, 180 * 1000);
+        }, 180 * 1000);
 
-    //     return () =>  clearInterval(interval) 
+        return () => clearInterval(interval)
 
-    // }, [])
+    }, [])
 
 
 
@@ -56,12 +57,13 @@ const Main = ({ gameData, tabs, id }: Props) => {
                     stage={game.header.season.name}
                     leagueId={game.header.league.slug}
                     gameData={game}
+                    sofaId={sofaId}
                 />
             </div>
 
             <div className='z-20 relative top-0 w-full md:w-[65%]'>
                 <TabBar tabs={tabs} selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-                <TabContent game={game} selectedTab={selectedTab} />
+                <TabContent game={game} selectedTab={selectedTab} sofaId={sofaId}/>
             </div>
 
         </div>

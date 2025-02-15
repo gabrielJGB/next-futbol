@@ -293,3 +293,32 @@ export const getPlayerColor = (position:any) => {
         return "#808080"
 
 }
+
+
+export const getSofaId = (game:any, sofaEvents:any) => {
+
+    if (game) {
+
+
+        const home = game.header.competitions[0].competitors[0].team
+        const away = game.header.competitions[0].competitors[1].team
+
+
+        const respId = sofaEvents?.find((event:any) =>
+            (
+                event.homeTeam.name.toLowerCase().trim() === home.displayName.toLowerCase().trim() ||
+                event.homeTeam.shortName.toLowerCase().trim() === home.name.toLowerCase().trim() ||
+                event.homeTeam.nameCode.toLowerCase().trim() === home.abbreviation.toLowerCase().trim()) &&
+
+            (
+                event.awayTeam.name.toLowerCase().trim() === away.displayName.toLowerCase().trim() ||
+                event.awayTeam.shortName.toLowerCase().trim() === away.name.toLowerCase().trim() ||
+                event.awayTeam.nameCode.toLowerCase().trim() === away.abbreviation.toLowerCase().trim())
+        ) || false
+
+
+
+        return (respId ? respId.id : false)
+    }
+
+}

@@ -1,4 +1,4 @@
-import { convertTimestamp } from "./dates";
+import { convertTimestamp, formatDate2 } from "./dates";
 
 export const fetchGame = async (id: string) => {
 
@@ -49,13 +49,8 @@ export const fetchLaegues = async (dates: string) => {
 export const fetchSofaData = async (selectedDate: string) => {
 
     try {
-        const year = selectedDate.slice(0, 4)
-        const month = selectedDate.slice(4, 6)
-        const day = selectedDate.slice(6, 8)
-        const formatedDate = `${year}-${month}-${day}`
-
-
-        const res = await fetch(`https://api.sofascore.com/api/v1/sport/football/scheduled-events/${formatedDate}`)
+        const dateString = formatDate2(selectedDate)
+        const res = await fetch(`https://api.sofascore.com/api/v1/sport/football/scheduled-events/${dateString}`)
 
         if (!res.ok) {
             return false

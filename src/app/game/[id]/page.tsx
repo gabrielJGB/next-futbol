@@ -1,6 +1,7 @@
 import React from 'react'
 import Main from '@/app/game/components/Main'
-import { fetchGame } from '@/utils/fetch'
+import { fetchGame, fetchSofaData } from '@/utils/fetch'
+import { getSofaId } from '@/utils/game'
 
 type Params = {
     params: Promise<{ id: string }>
@@ -10,6 +11,11 @@ const Page = async ({ params }: Params) => {
 
     const { id } = await params
     const gameData = await fetchGame(id)
+    const date = gameData.header.competitions[0].date
+    const sofaDate = await fetchSofaData(date)
+    const sofaId = getSofaId(gameData,sofaDate)
+
+    console.log(sofaId)
 
     let tabs = [
         { show: false, name: "Info" },
@@ -46,7 +52,7 @@ const Page = async ({ params }: Params) => {
 
 
     return (
-        <Main tabs={tabs} gameData={gameData} id={id}/>
+        <Main tabs={tabs} gameData={gameData} id={id} sofaId={sofaId}/>
     )
 }
 

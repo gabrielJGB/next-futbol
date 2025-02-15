@@ -1,10 +1,15 @@
+import Link from 'next/link'
 import React from 'react'
 
 type Props = {}
 
 const Nav = (props: Props) => {
   return (
-    <nav className="bg-[--tw-color-800] font-bold  p-3 shadow-none md:shadow shadow-slate-900">Next Futbol</nav>
+    <nav className="bg-[--tw-color-800] font-bold  p-3 shadow-none md:shadow shadow-slate-900">
+      <Link href={"/"}>
+        Next Futbol
+      </Link>
+    </nav>
   )
 }
 

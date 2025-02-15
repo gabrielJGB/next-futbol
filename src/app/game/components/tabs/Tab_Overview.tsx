@@ -7,12 +7,13 @@ import AttackMomentum from './overview/AttackMomentum'
 
 
 type Props = {
-  game: any
+  game: any,
+  sofaId: any
 }
 
 const getVideo = (game: any) => {
 
-  const highlight = game.videos.find((video: any) => video.duration > 200)
+  const highlight = game.videos.find((video: any) => video.duration > 250)
   if (highlight != undefined) {
     return highlight
 
@@ -21,7 +22,7 @@ const getVideo = (game: any) => {
   }
 }
 
-const Overview = ({ game }: Props) => {
+const Overview = ({ game, sofaId }: Props) => {
 
 
 
@@ -33,10 +34,12 @@ const Overview = ({ game }: Props) => {
         <VideoCard hd={true} video={getVideo(game)} muted={false} autoPlay={false} />
       }
 
-      <GameInfo game={game} />
+      {
+        sofaId &&
+        <AttackMomentum sofaId={sofaId} />
+      }
 
- 
-      <AttackMomentum />
+      <GameInfo game={game} />
 
       {
         "news" in game && game.news.articles.length > 0 ?

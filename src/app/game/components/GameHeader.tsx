@@ -13,10 +13,10 @@ type Props = {
     stage?: string,
     details: any,
     gameData: any,
-
+    sofaId:any
 }
 
-const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "" }: Props) => {
+const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "",sofaId }: Props) => {
 
 
     const home = game.competitors[0]
@@ -65,7 +65,7 @@ const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "" 
             </div>
 
             <div className='hidden md:block'>
-                <Info game={gameData} />
+                <Info game={gameData} sofaId={sofaId}/>
             </div>
 
         </div>

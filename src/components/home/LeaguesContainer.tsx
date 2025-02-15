@@ -24,7 +24,8 @@ const Main = ({ leagues, sofaEvents="events" }: Props) => {
     const { setSofaEvents } = useStates()
 
     useEffect(() => {
-        setSofaEvents(sofaEvents)
+
+        
     }, [])
 
 

@@ -156,3 +156,14 @@ export const formatDate = (date: string) => {
     return `${dateString} - ${timeString}`
 
 }
+
+
+
+export const formatDate2 = (date: string) => {
+
+    const t = new Date(date)
+    const dateString = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2,"0")}-${t.getDate()}`
+
+    return dateString
+
+}
