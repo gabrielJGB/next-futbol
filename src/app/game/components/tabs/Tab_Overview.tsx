@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import GameInfo from './overview/GameInfo'
 import VideoCard from './overview/VideoCard'
@@ -35,7 +36,7 @@ const Overview = ({ game, sofaId }: Props) => {
       }
 
       {
-        sofaId &&
+        false &&
         <AttackMomentum sofaId={sofaId} />
       }
 

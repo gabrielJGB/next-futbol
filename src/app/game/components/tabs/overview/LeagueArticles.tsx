@@ -1,5 +1,6 @@
 import { formatDate } from '@/utils/dates'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 type Props = {
@@ -8,15 +9,21 @@ type Props = {
 
 const LeagueArticles = ({ news }: Props) => {
 
+
+
+    const regex = /(\d+)/g;
     const articles = news.articles.map((x: any) => {
         return {
             headline: x.headline,
             image: x.images[0].url,
             published: x.published,
             type: x.type,
-            href: x.links.api.self.href,
+            id: x.links.api.self.href.match(regex)[1],
         }
     })
+    
+    
+    
     
     
 
@@ -24,18 +31,18 @@ const LeagueArticles = ({ news }: Props) => {
     return (
         <div className='flex flex-col bg-[--tw-color-800] pb-2 rounded-lg divide-y-[1px] divide-[--tw-color-700]'>
 
-            <div className='text-lg font-bold text-center py-2  '>Noticias Torneo</div>
+            <div className='text-lg font-bold text-center py-2  '>{news.header}</div>
 
             {
                 articles.map((article: any, i: number) => (
                     
-                    <div key={i} className='flex flex-row gap-2 p-2 cursor-pointer hover:bg-[--tw-color-700] transition-all'>
+                    <Link key={i} href={`/${article.type === "dStory"?"article":"video"}/${article.id}`} className='flex flex-row gap-2 p-2 cursor-pointer hover:bg-[--tw-color-700] transition-all'>
                         <img src={article.image} className='rounded w-[60px] h-[50px]' alt='Imagen noticia' width={65} height={65}/>
                         <div className='flex flex-col gap-0'>
                             <div className='text-gray-400 text-[11px] font-bold'>{formatDate(article.published)}</div>
                             <div className='text-xs'>{article.headline}</div>
                         </div>
-                    </div>
+                    </Link>
                 ))
             }
 

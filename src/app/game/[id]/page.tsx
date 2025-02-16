@@ -11,11 +11,11 @@ const Page = async ({ params }: Params) => {
 
     const { id } = await params
     const gameData = await fetchGame(id)
-    const date = gameData.header.competitions[0].date
-    const sofaDate = await fetchSofaData(date)
-    const sofaId = getSofaId(gameData,sofaDate)
+    //const date = gameData.header.competitions[0].date
+  //  const sofaData = await fetchSofaData(date)
+//    const sofaId = getSofaId(gameData,sofaData)
 
-    console.log(sofaId)
+
 
     let tabs = [
         { show: false, name: "Info" },
@@ -52,7 +52,7 @@ const Page = async ({ params }: Params) => {
 
 
     return (
-        <Main tabs={tabs} gameData={gameData} id={id} sofaId={sofaId}/>
+        <Main tabs={tabs} gameData={gameData} id={id} sofaId={""}/>
     )
 }
 

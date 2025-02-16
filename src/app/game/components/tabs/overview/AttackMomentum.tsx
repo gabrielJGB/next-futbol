@@ -1,4 +1,4 @@
-
+"use client"
 import React, { useEffect } from 'react'
 import Iframe from 'react-iframe'
 
@@ -17,16 +17,25 @@ const AttackMomentum = ({ sofaId }: Props) => {
 
 //      <iframe width="100%" height="286" src={src}></iframe>
 
+	useEffect(()=>{
+		
+		
+
+	},[])
+
+
+
   return (
     <div className="bg-[--tw-color-800] rounded-lg p-2">
       <h2 className='text-center font-bold mx-auto pt-1 pb-2'>ATTACK MOMENTUM</h2>
-			
-			<Iframe url={src}
+			{src}
+				
+			<iframe width="100%" height="286" src={src}  ></iframe>
 
-						      width="100%"
-						      height="100%"
-						      styles={{height: "286px"}}
-			/>
+
+
+			
+
     </div>
   )
 }

@@ -71,3 +71,36 @@ export const fetchSofaData = async (selectedDate: string) => {
     }
 
 }
+
+
+export const fetchArticle = async (id:string) => {
+
+    try {
+        const res = await fetch(`https://now.core.api.espn.com/v1/sports/news/${id}?lang=es`)
+        const data = await res.json()
+        return data
+
+    } catch (error) {
+        throw error
+    }
+
+}
+
+export const fetchVideo = async (id:string) => {
+
+    try {
+        const res = await fetch(`https://api-app.espn.com/v1/video/clips/${id}?lang=es`)
+        const data = await res.json()
+
+        
+        if ("videos" in data && data.videos.length > 0)
+            return data.videos[0]
+
+        else
+            throw Error("No se pudo obtener el video")
+
+    } catch (error) {
+        throw error
+    }
+
+}
