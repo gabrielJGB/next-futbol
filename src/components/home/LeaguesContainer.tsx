@@ -128,7 +128,7 @@ const Main = ({ leagues, sofaEvents="events" }: Props) => {
             </div>
 
 
-            <div className='flex flex-col gap-12'>
+            <div className='flex flex-col md:gap-12 gap-8'>
 
 
                 {

@@ -25,7 +25,6 @@ const VideoPlayer = ({ videoUrl, thumbnail, muted, autoPlay }: { videoUrl: strin
           'settings',
           'pip',
           'fullscreen',
-
         ],
       });
 

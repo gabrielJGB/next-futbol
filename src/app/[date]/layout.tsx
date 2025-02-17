@@ -1,10 +1,11 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-
 import '../calendar.css';
 import CalendarContainer from '@/components/home/Calendar';
 import { useStates } from '@/stores/states';
 import Menu from '@/components/home/Menu';
+import Image from 'next/image';
+import calendar from '@/assets/calendar.png';
 
 
 const HomeLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
@@ -30,7 +31,14 @@ const HomeLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <CalendarContainer />
       </div>
 
-      <div className='cursor-pointer md:hidden flex fixed  bottom-4 right-4 w-[60px] h-[60px] rounded-lg shadow shadow-black text-white bg-[--tw-color-800]  border-[--tw-color-800] active:bg-[--tw-color-900] border-[1px] text-center font-bold items-center justify-center' onClick={() => toggleShowCalendar()}>C</div>
+      <div className='cursor-pointer md:hidden flex fixed  bottom-4 right-4 w-[60px] h-[60px] rounded-lg shadow shadow-black text-white bg-[--tw-color-800]  border-[--tw-color-800] active:bg-[--tw-color-900] border-[1px] text-center font-bold items-center justify-center' onClick={() => toggleShowCalendar()}>
+        {
+          showCalendar?
+          <div className='text-2xl'>x</div>
+          :
+          <Image src={calendar} width={20} height={20} alt="icon" style={{filter:"invert(1)"}} />
+        }
+      </div>
 
     </div>
   )

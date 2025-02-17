@@ -1,7 +1,8 @@
 import React from 'react'
 import Game from './Game'
 import { } from '@/utils/fetch'
-import { getStatus, getStatusColor } from '@/utils/game'
+import { getLogo, getStatus, getStatusColor } from '@/utils/game'
+import GameAlt from './GameAlt'
 
 const IMG_SIZE = 24
 
@@ -25,7 +26,8 @@ const League = ({ games,flagUrl,leagueName,leagueHasState,selectedState }: Leagu
             score: game.status.type.state != "pre" ? game.competitors[i].score : "",
             scorers: game.details.filter((d: any) => d.team.id === game.competitors[i].id && d.scoringPlay && !d.shootout),
             redCards: game.details.filter((d: any) => d.team.id === game.competitors[i].id && d.redCard),
-            winner:game.competitors[i].winner
+            winner:game.competitors[i].winner,
+            logo:getLogo(game.competitors[i],45)
         }
     }
 
@@ -53,7 +55,7 @@ const League = ({ games,flagUrl,leagueName,leagueHasState,selectedState }: Leagu
             <div className='flex flex-col text-black gap-2 mb-2 m-1 md:m-2'>
             {
                 games.map((game: any, i: number) => (
-                    <Game
+                    <GameAlt
                             key={i}
                             id={game.id}
                             gameState={game.status.type.state}

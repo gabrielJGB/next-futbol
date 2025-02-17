@@ -36,7 +36,7 @@ const GameCard = ({ gameState, selectedState, status, statusColor, home, away,id
 
 
     return (
-        <div className={`text-black ${gameState === selectedState || selectedState === "" ? "flex" : "hidden"} flex-col gap-[1px] shadow shadow-slate-900`}>
+        <div className={`text-black ${gameState === selectedState || selectedState === "" ? "flex" : "hidden"} flex-col gap-[1px]`}>
 
             <div className='grid grid-cols-10 gap-[1px]'>
 

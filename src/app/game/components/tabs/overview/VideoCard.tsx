@@ -19,7 +19,7 @@ const VideoCard = ({ video, muted, autoPlay, hd }: Props) => {
     const timestamp = convertTimestamp(video.originalPublishDate)
     const date = timestamp.DDMMYYYY
     const time = timestamp.time
-    
+    const published = `${date} ${time}`
 
 
     useEffect(() => {
@@ -36,6 +36,7 @@ const VideoCard = ({ video, muted, autoPlay, hd }: Props) => {
                 <div className='text-[18px] font-bold px-2'>{video.headline}</div>
             }
 
+            <div className='text-[11px] px-2 font-bold text-gray-300'>{published}</div>    
 
             {
                 "description" in video &&
