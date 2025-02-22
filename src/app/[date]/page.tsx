@@ -2,6 +2,7 @@ import DateSelector from '@/components/home/DateSelector'
 import Main from '@/components/home/Main'
 import { fetchLaegues, fetchLeaguesExtra, fetchSofaData } from '@/utils/fetch'
 import { getHeadline } from '@/utils/game'
+import { Metadata } from 'next'
 
 
 
@@ -9,13 +10,16 @@ type Params = {
     params: Promise<{ date: string }>
 }
 
+export const metadata: Metadata = {}
+
 const HomePage = async ({ params }: Params) => {
 
     const { date } = await params
     const leagues: any = await fetchLaegues(date)
+    metadata.title = "Futbol 1"
+
+
     // const leaguesExtra = await fetchLeaguesExtra(date)
-
-
     // const leagues = leaguesArray.map((league: any) => ({
     //     ...league,
     //     events: league.events.map((event: any, j: any) => ({
@@ -23,11 +27,6 @@ const HomePage = async ({ params }: Params) => {
     //         headline: getHeadline(event.id, leaguesExtra)
     //     }))
     // }))
-
-
-
-    
-    
 
 
     return (

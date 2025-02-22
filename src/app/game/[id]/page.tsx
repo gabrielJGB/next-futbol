@@ -2,21 +2,26 @@ import React from 'react'
 import Main from '@/app/game/components/Main'
 import { fetchGame, fetchSofaData } from '@/utils/fetch'
 import { getSofaId } from '@/utils/game'
+import { Metadata } from 'next'
 
 type Params = {
     params: Promise<{ id: string }>
 }
 
+
+
+export const metadata: Metadata = {}
+
 const Page = async ({ params }: Params) => {
 
     const { id } = await params
     const gameData = await fetchGame(id)
-    //const date = gameData.header.competitions[0].date
-  //  const sofaData = await fetchSofaData(date)
-//    const sofaId = getSofaId(gameData,sofaData)
 
-    
-
+    const homeName = gameData.boxscore.teams[0].team.displayName
+    const awayName = gameData.boxscore.teams[1].team.displayName
+    // metadata.title = ""
+    // metadata.title = ""
+    // metadata.title = `${homeName} vs ${awayName} - Futbol 1`
 
     let tabs = [
         { show: false, name: "Info" },
