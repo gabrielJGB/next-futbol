@@ -7,7 +7,7 @@ const Nav = (props: Props) => {
   return (
     <nav className="bg-[--tw-color-800] font-bold  p-3 shadow-none md:shadow shadow-slate-900">
       <Link href={"/"}>
-        Next Futbol
+        Futbol 1
       </Link>
     </nav>
   )

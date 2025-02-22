@@ -66,7 +66,7 @@ export const getFlag = (slug: string, SIZE: number) => {
 
 
     if (arr.includes(flagCode)) {
-        return undefined
+        return "-"
     }
 
     return `https://a1.espncdn.com/combiner/i?img=/i/teamlogos/countries/500/${flagCode}.png?w=${SIZE + p}&h=${SIZE + p}`
@@ -187,7 +187,7 @@ export const getStatusColor = (status: string) => {
 
     switch (status) {
         case "pre":
-            return `rgb(21, 128, 61)`
+            return `rgb(0, 111, 41)`
         case "in":
             return `rgb(185, 28, 28)`
         case "post":
@@ -322,3 +322,36 @@ export const getSofaId = (game:any, sofaEvents:any) => {
     }
 
 }
+
+
+export const getHeadline = (id: any, leaguesArray: any) => {
+
+
+    for (const leagues of leaguesArray) {
+        const found = leagues.events.find((event: any) => event.id === id)
+
+        if (found && "video" in found)
+            if ("headline" in found.video)
+                return found.video.headline
+            else if ("title" in found.video)
+                return found.video.title
+    }
+
+    return undefined
+
+}
+
+
+
+export const getTeamObject = (game: any, i: number) => {
+        return {
+            id: game.competitors[i].id,
+            name: game.competitors[i].team.shortDisplayName,
+            logoURL: game.competitors[i].team.logo,
+            score: game.status.type.state != "pre" ? game.competitors[i].score : "",
+            scorers: game.details.filter((d: any) => d.team.id === game.competitors[i].id && d.scoringPlay && !d.shootout),
+            redCards: game.details.filter((d: any) => d.team.id === game.competitors[i].id && d.redCard),
+            winner:game.competitors[i].winner,
+            logo:getLogo(game.competitors[i],40)
+        }
+    }

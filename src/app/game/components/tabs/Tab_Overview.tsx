@@ -4,6 +4,7 @@ import GameInfo from './overview/GameInfo'
 import VideoCard from './overview/VideoCard'
 import LeagueArticles from './overview/LeagueArticles'
 import AttackMomentum from './overview/AttackMomentum'
+import GameArticle from './overview/GameArticle'
 
 
 
@@ -40,7 +41,16 @@ const Overview = ({ game, sofaId }: Props) => {
         <AttackMomentum sofaId={sofaId} />
       }
 
+      
+            {
+                "article" in game &&
+                <GameArticle article={game.article} />
+      
+              }
+      
+
       <GameInfo game={game} />
+
 
       {
         "news" in game && game.news.articles.length > 0 ?

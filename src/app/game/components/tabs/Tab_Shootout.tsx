@@ -1,8 +1,10 @@
 import React from 'react'
 
-type Props = {}
+type Props = {
+  game:any
+}
 
-const Shootout = (props: Props) => {
+const Shootout = ({game}: Props) => {
   return (
     <div>Shootout</div>
   )

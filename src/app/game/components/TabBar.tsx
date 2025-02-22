@@ -16,7 +16,7 @@ const Tabs = ({ tabs, selectedTab, setSelectedTab }: Props) => {
       {/* <div className='sticky top-0 z-20 mx-auto flex md:justify-center w-full bg-black shadow-sm shadow-black overflow-x-auto text-gray-400 '> */}
             <button
 
-              className={`flex  md:hidden active:bg-[--tw-color-900] transition-all md:px-4 px-4 md:py-3 py-4 border-b-[3px] ${selectedTab === 0 ? "border-white" : "border-transparent"}`}
+              className={`flex  md:hidden active:bg-[--tw-color-900] hover:text-white transition-all md:px-4 px-4 md:py-3 py-4 border-b-[3px] ${selectedTab === 0 ? "border-[--tw-primary]" : "border-transparent"}`}
               onClick={() => setSelectedTab(0)}
             >
              INFO
@@ -28,7 +28,7 @@ const Tabs = ({ tabs, selectedTab, setSelectedTab }: Props) => {
 
             <button
               key={i}
-              className={`flex transition-all active:bg-[--tw-color-900] md:px-3 px-4 md:py-3 py-4 border-b-[3px] ${selectedTab === i ? "border-white text-white" : "border-transparent text-gray-300"} hover:text-white`}
+              className={`flex transition-all active:bg-[--tw-color-900] hover:text-white md:px-3 px-4 md:py-3 py-4 border-b-[3px] ${selectedTab === i ? "border-[--tw-primary] " : "border-transparent text-gray-300"}`}
               onClick={() => setSelectedTab(i)}
             >
   

@@ -8,6 +8,8 @@ import { fetchLaegues } from '@/utils/fetch'
 import { useDateStore } from '@/stores/dateStore'
 import Sorted from './Sorted'
 import { useStates } from '@/stores/states'
+import { formatDate3 } from '@/utils/dates'
+import { delay} from '@/data/constants.json'
 // import { fetchTasks } from '@/utils/fetch'
 
 type Props = {
@@ -17,7 +19,7 @@ type Props = {
 
 const Main = ({ leagues, sofaEvents="events" }: Props) => {
 
-    const [_leagues, setLeagues] = useState(leagues.leagues)
+    const [_leagues, setLeagues] = useState(leagues)
     // const [sortedEvents, setSortedEvents] = useState<any>(false)
     const [selectedState, setSelectedState] = useState("")
     const { setStoredDate } = useDateStore()
@@ -57,18 +59,18 @@ const Main = ({ leagues, sofaEvents="events" }: Props) => {
 
     useEffect(() => {
 
-        const date = _leagues.length > 0 ? _leagues[0].events[0].date.split("T")[0].replaceAll("-", "") : ""
+        const date = _leagues.length > 0 ? formatDate3(_leagues[0].events[0].date) : ""
         setStoredDate(date)
 
         fetchLaegues(date)
-            .then(resp => setLeagues(resp.leagues))
+            .then(resp => setLeagues(resp))
 
         let interval = setInterval(() => {
 
             fetchLaegues(date)
-                .then(resp => setLeagues(resp.leagues))
+                .then(resp => setLeagues(resp))
 
-        }, 120 * 1000);
+        }, delay * 1000);
 
         return () => { clearInterval(interval) }
 
@@ -95,7 +97,7 @@ const Main = ({ leagues, sofaEvents="events" }: Props) => {
 
     return (
 
-        <div className='flex flex-col md:gap-10 gap-7 mt-8 md:mx-0 mx-[2px] '>
+        <div className='flex flex-col md:gap-10 gap-7 mt-8 mx-1 '>
 
             <div className='flex flex-row justify-center items-stretch gap-0 border-[1px] border-gray-800 text-gray-400 text-xs font-bold transition-all'>
                 <button

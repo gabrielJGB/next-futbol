@@ -39,7 +39,7 @@ const LeagueArticles = ({ news }: Props) => {
                     <Link key={i} href={`/${article.type === "dStory"?"article":"video"}/${article.id}`} className='flex flex-row gap-2 p-2 cursor-pointer hover:bg-[--tw-color-700] transition-all'>
                         <img src={article.image} className='rounded w-[60px] h-[50px]' alt='Imagen noticia' width={65} height={65}/>
                         <div className='flex flex-col gap-0'>
-                            <div className='text-gray-400 text-[11px] font-bold'>{formatDate(article.published)}</div>
+                            <div className='text-gray-400 text-[11px] font-bold'>{article.type === "dStory"?"[Artículo]":"[Video]"} - {formatDate(article.published)}</div>
                             <div className='text-xs'>{article.headline}</div>
                         </div>
                     </Link>

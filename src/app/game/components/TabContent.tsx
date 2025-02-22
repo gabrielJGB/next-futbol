@@ -25,15 +25,15 @@ const TabContent = ({ game, selectedTab,sofaId }: Props) => {
       case 1:
         return <Lineups game={game} />
       case 2:
-        return <Prev />
+        return <Prev game={game}  />
       case 3:
-        return <Shootout />
+        return <Shootout game={game} />
       case 4:
-        return <Commentary />
+        return <Commentary game={game} />
       case 5:
-        return <Stats />
+        return <Stats game={game} />
       case 6:
-        return <Positions />
+        return <Positions game={game} />
       case 7:
         return <Videos game={game} />
 

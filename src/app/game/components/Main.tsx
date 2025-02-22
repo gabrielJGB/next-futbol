@@ -4,9 +4,8 @@ import React, { useEffect, useState } from 'react'
 import GameHeader from '@/app/game/components/GameHeader'
 import TabContent from '@/app/game/components/TabContent'
 import TabBar from '@/app/game/components/TabBar'
-import Info from './tabs/Tab_Overview'
 import { fetchGame } from '@/utils/fetch'
-
+import { delay} from '@/data/constants.json'
 
 type Props = {
     gameData: any,
@@ -36,7 +35,7 @@ const Main = ({ gameData, tabs, id, sofaId }: Props) => {
             fetchGame(id)
                 .then(resp => setGame(resp))
 
-        }, 180 * 1000);
+        }, delay * 1000);
 
         return () => clearInterval(interval)
 

@@ -1,6 +1,7 @@
 import DateSelector from '@/components/home/DateSelector'
-import Main from '@/components/home/LeaguesContainer'
-import { fetchLaegues, fetchSofaData } from '@/utils/fetch'
+import Main from '@/components/home/Main'
+import { fetchLaegues, fetchLeaguesExtra, fetchSofaData } from '@/utils/fetch'
+import { getHeadline } from '@/utils/game'
 
 
 
@@ -11,17 +12,30 @@ type Params = {
 const HomePage = async ({ params }: Params) => {
 
     const { date } = await params
-    const leagues = await fetchLaegues(date)
-    // const sofaEvents = await fetchSofaData(date)
-    console.log("home")
-     
+    const leagues: any = await fetchLaegues(date)
+    // const leaguesExtra = await fetchLeaguesExtra(date)
+
+
+    // const leagues = leaguesArray.map((league: any) => ({
+    //     ...league,
+    //     events: league.events.map((event: any, j: any) => ({
+    //         ...event,
+    //         headline: getHeadline(event.id, leaguesExtra)
+    //     }))
+    // }))
+
+
+
+    
+    
+
 
     return (
         <div className='flex flex-col gap-0 pb-10'>
 
             <DateSelector date={date} />
-            <Main leagues={leagues} sofaEvents={""}/>
-            
+            <Main leagues={leagues} sofaEvents={""} />
+
         </div>
     )
 }

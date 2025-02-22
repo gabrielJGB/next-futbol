@@ -31,12 +31,12 @@ const HomeLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <CalendarContainer />
       </div>
 
-      <div className='cursor-pointer md:hidden flex fixed  bottom-4 right-4 w-[60px] h-[60px] rounded-lg shadow shadow-black text-white bg-[--tw-color-800]  border-[--tw-color-800] active:bg-[--tw-color-900] border-[1px] text-center font-bold items-center justify-center' onClick={() => toggleShowCalendar()}>
+      <div className='cursor-pointer md:hidden flex fixed  bottom-4 right-4 w-[60px] h-[60px] rounded-[16px] shadow shadow-black text-white bg-[--tw-primary]  border-[--tw-color-700] active:bg-[--tw-color-900] border-[1px] text-center font-bold items-center justify-center' onClick={() => toggleShowCalendar()}>
         {
           showCalendar?
           <div className='text-2xl'>x</div>
           :
-          <Image src={calendar} width={20} height={20} alt="icon" style={{filter:"invert(1)"}} />
+          <Image src={calendar} width={25} height={25} alt="icon" style={{filter:"invert(1)"}} />
         }
       </div>
 

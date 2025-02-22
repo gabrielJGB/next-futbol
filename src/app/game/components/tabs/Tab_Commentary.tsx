@@ -1,8 +1,10 @@
 import React from 'react'
 
-type Props = {}
+type Props = {
+  game:any
+}
 
-const Commentary = (props: Props) => {
+const Commentary = ({game}: Props) => {
   return (
     <div>Commentary</div>
   )

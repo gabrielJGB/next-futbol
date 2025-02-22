@@ -15,6 +15,7 @@ const Page = async ({ params }: Params) => {
   //  const sofaData = await fetchSofaData(date)
 //    const sofaId = getSofaId(gameData,sofaData)
 
+    
 
 
     let tabs = [

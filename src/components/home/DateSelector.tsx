@@ -25,11 +25,11 @@ const DateSelector =  ({ date }: Props) => {
                 {previousDate.formated}
             </Link>
 
-            <div className='w-full  py-3  border-b-[2px] border-white'>
+            <div className='w-full  py-3  border-b-[2px] border-[--tw-primary] text-white'>
                 {selectedDate.formated}
             </div>
 
-            <Link href={`/${nextDate.string}`} className='w-full  py-3 text-gray-400 hover:text-white'>
+            <Link href={`/${nextDate.string}`} className='w-full  py-3 text-gray-400 hover:text-white hover:text--[--tw-primary]'>
                 {nextDate.formated}
             </Link>
         </div>

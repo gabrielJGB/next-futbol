@@ -1,8 +1,10 @@
 import React from 'react'
 
-type Props = {}
+type Props = {
+  game:any
+}
 
-const Positions = (props: Props) => {
+const Positions = ({game}: Props) => {
   return (
     <div>Positions</div>
   )

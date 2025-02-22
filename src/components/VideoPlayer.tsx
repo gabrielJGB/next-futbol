@@ -39,7 +39,6 @@ const VideoPlayer = ({ videoUrl, thumbnail, muted, autoPlay }: { videoUrl: strin
       ref={videoRef}
       className="plyr rounded-b-lg"
       autoPlay={autoPlay}
-      muted={muted}
       data-poster={thumbnail}
       playsInline
       controls

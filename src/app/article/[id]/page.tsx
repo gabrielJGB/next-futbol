@@ -17,15 +17,16 @@ const Page = async ({ params }: Params) => {
   const regex = /https:\/\/twitter\.com\/[^\/]+\/status\/\d+/g;
   let tweets = article.story.match(regex);
   const story = article.story
-    .replaceAll("<p>", "<p style=margin-top:14px>")
-    .replaceAll("<h2>", "<h2 style=margin-top:20px;font-size:17px;font-weight:bold >")
+    .replaceAll("<p>", "<p style=margin-top:18px>")
+    .replaceAll("<h2>", "<h2 style=margin-top:20px;font-size:18px;font-weight:bold >")
+    .replace("<hr>", "<hr style=margin-top:10px>")
     .replace("twitter.com", "xcancel.com")
 
   if (tweets)
     tweets = tweets.map((item: any, i: number) => (item.replace("twitter.com", "xcancel.com")))
 
   console.log(article);
-  
+
 
   return (
     <div className='flex flex-col  justify-center items-center mx-auto'>
@@ -34,15 +35,22 @@ const Page = async ({ params }: Params) => {
 
         <div className='pt-2 text-sm text-gray-300 font-bold '>{published}hs</div>
 
-        <p className='text-gray-300 text-[16px]'>{article.description}</p>
+        <p className='text-gray-300 text-[16px] '>{article.description}</p>
 
         {
           "images" in article &&
-          <img className='rounded-lg' src={article.images[0].url} alt="Imagen" />
+
+          article.images.filter(((x:any)=>x.type === "inline")).map((image: any, i: number) => (
+            <div key={i}  className='flex flex-col gap-2'>
+              <img className='rounded-lg' src={image.url} alt="Imagen" />
+              <div className='text-xs text-gray-300'>{image.caption}</div>
+            </div>
+          ))
+
         }
 
 
-        <p className='pt-1 text-[13px] leading-5' dangerouslySetInnerHTML={{ __html: story }}></p>
+        <p className='pt-1 md:text-[14px] text-[14px] md:leading-6 leading-6' dangerouslySetInnerHTML={{ __html: story }}></p>
 
 
         {
@@ -52,7 +60,7 @@ const Page = async ({ params }: Params) => {
           ))
         }
 
-        <hr />
+        <hr  className='mt-2'/>
 
         {
           "video" in article && article.video.length > 0 &&

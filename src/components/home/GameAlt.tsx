@@ -7,7 +7,7 @@ interface Game {
     id: string,
     status: string,
     statusColor: string,
-    headline?: string,
+    headline: string | boolean,
     gameState: string,
     selectedState: string,
     home: {
@@ -18,7 +18,8 @@ interface Game {
         scorers?: [],
         redCards?: [],
         winner: boolean,
-        logo:string,
+        logo: string,
+
 
     },
     away: {
@@ -29,53 +30,84 @@ interface Game {
         scorers?: [],
         redCards?: [],
         winner: boolean,
-        logo:string
+        logo: string
     }
 
 }
 
-const GameAlt = ({ gameState, selectedState, status, statusColor, home, away, id }: Game) => {
+const GameAlt = ({ gameState, selectedState, status, statusColor, home, away, id, headline }: Game) => {
 
 
 
     return (
-        <Link href={`/game/${id}`} className={`border-[1px] border-[--tw-color-600] hover:scale-[102%] transition-all shadow shadow-[--tw-color-800] rounded-lg text-white ${gameState === selectedState || selectedState === "" ? "flex" : "hidden"} flex-col gap-[1px]`}>
+        <Link
+            
+            href={`/game/${id}`}
+            className={`border-[1px] border-[--tw-color-600] active:border-[--tw-primary] md:hover:scale-[102%] transition-all shadow shadow-[--tw-color-800] rounded-lg text-white ${gameState === selectedState || selectedState === "" ? "flex" : "hidden"} flex-col gap-[1px]`}
+
+        >
+            {/* <div className='rounded-t-lg text-xs font-bold text-gray-200 text-center px-2 p-1 bg-[--tw-color-900]'>
+                Octavos de final
+            </div> */}
 
             <div className='grid grid-cols-8 gap-[1px] rounded-r-lg'>
 
                 <TeamAlt
-                    
-                    name={home.name.replace("ROS","Central")}
+
+                    name={home.name.replace("ROS", "Central")}
                     redCards={home.redCards}
                     scorers={home.scorers}
                     logo={home.logo}
                     isHome={true}
                 />
-                
 
-                <div className={`${home.winner ? "border-[--tw-color-300]":"border-black"}  border-l-[2px] bg-[--tw-color-950] col-span-1 flex flex-col justify-center items-center text-[21px] font-bold`}>
-                    {home.score}
+                <div className={`flex flex-row ${home.winner ? "border-[--tw-primary]" : "border-[--tw-color-600]"}  border-l-[1px] bg-[--tw-color-950] col-span-1 justify-between px-1 items-center text-[21px] font-bold`}>
+                    <div></div>
+                    <div className=''>{home.score}</div>
+                    <div className='flex flex-col gap-1'>
+                        {
+                            home.redCards ?
+                                home.redCards.map((_, i) => (
+                                    <div key={i} className='bg-red-600  w-[4px] h-[8px]'></div>
+                                ))
+                                :
+                                <div></div>
+
+
+                        }
+                    </div>
                 </div>
 
 
                 <TeamAlt
-                    
-                    name={away.name.replace("ROS","Central")}
+
+                    name={away.name.replace("ROS", "Central")}
                     redCards={away.redCards}
                     scorers={away.scorers}
                     logo={away.logo}
                     isHome={false}
                 />
 
-                <div className={`${away.winner ? "border-[--tw-color-300]":"border-black"} border-l-[2px] bg-[--tw-color-950] col-span-1 flex flex-col justify-center items-center text-[21px] font-bold`}>
-                    {away.score}
+                <div className={`flex flex-row ${away.winner ? "border-[--tw-primary]" : "border-[--tw-color-600]"}  border-l-[1px] bg-[--tw-color-950] col-span-1 justify-between px-1 items-center text-[21px] font-bold`}>
+                    <div></div>
+                    <div className=''>{away.score}</div>
+                    <div className='flex flex-col flex-wrap gap-1'>
+                        {
+                            away.redCards ?
+                                away.redCards.map((_, i) => (
+                                    <div key={i} className='bg-red-600  w-[4px] h-[8px]'></div>
+                                ))
+                                :
+                                <div></div>
+                        }
 
+                    </div>
                 </div>
 
 
                 <div
                     style={{ backgroundColor: statusColor }}
-                    className={`${statusColor === "rgb(185, 28, 28)" ? "animate-pulse" : ""}  text-white row-span-2 row-start-1 col-start-8 col-span-1 flex justify-center items-center text-[10px] md:text-[11px] font-bold text-center rounded-r-lg px-[1px]`}>
+                    className={`${gameState === "in" ? "animate-pulse md:text-[13px]" : ""}  text-white row-span-2 row-start-1 col-start-8 col-span-1 flex justify-center items-center text-[10px] md:text-[11px] font-bold text-center rounded-r-lg px-[1px]`}>
                     {status}
                 </div>
 
@@ -88,36 +120,14 @@ const GameAlt = ({ gameState, selectedState, status, statusColor, home, away, id
                     +
                 </Link> */}
             </div>
-            {/* <div className='grid grid-cols-8 gap-[1px] ' >
+            {
+                headline != undefined && false &&
+                <div className='italic rounded-b-lg text-xs font-medium text-gray-200 px-2 py-2 bg-[--tw-color-900]'>
+                    {headline}
+                </div>
 
+            }
 
-                {
-                    [home.scorers, away.scorers].map((scorer: any, j: number) => (
-
-                        <div key={j} className={`col-span-4 ${j === 1 ? "col-start-7" : ""} flex flex-row  ${scorer.length ? "py-[2px]" : ""} px-[5px] flex-wrap justify-center text-white bg-slate-300`}>
-
-                            {
-                                scorer &&
-                                scorer.map((goal: any, i: number) => (
-
-                                    <div key={i} className='text-[11px] text-black text-center '>
-
-                                        <span className='font-bold text-xs'>{goal.clock.displayValue}</span>
-                                        {
-                                            "athletesInvolved" in goal &&
-                                            <span> {goal.athletesInvolved[0].shortName}</span>
-                                        }
-                                        {i != scorer.length - 1 && <span className='px-[3px]'>;</span>}
-                                    </div>
-
-                                ))
-                            }
-
-                        </div>
-                    ))
-                }
-
-            </div> */}
         </Link>
     )
 }

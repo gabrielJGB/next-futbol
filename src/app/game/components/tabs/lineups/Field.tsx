@@ -23,6 +23,7 @@ const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo }: Props
     const homeColor = game.header.competitions[0].competitors[0].team.color || "white"
     const awayColor = game.header.competitions[0].competitors[1].team.color || "black"
 
+
     const switchPositions = (k: number, p1: number, p2: number) => {
         let aux = rosters[k][p1]
         rosters[k][p1] = rosters[k][p2]
@@ -60,6 +61,13 @@ const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo }: Props
 
         if (formations[k][1] === "3" && formations[k][2] === "1" && formations[k][3] === "2") {
             switchPositions(k, 7, 8)
+
+        }
+
+        if (formations[k][1] === "4" && formations[k][2] === "1" && formations[k][3] === "1") {
+            // switchPositions(k, 5, 6)
+            // switchPositions(k, 7,8)
+            switchPositions(k, 9,10)
 
         }
 

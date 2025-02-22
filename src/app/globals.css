@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 
-
+/*    #00d800      */ 
 :root {
 
-
-  --primary:theme('colors.slate.500'); 
+  
+  --tw-primary:#00d800; 
   --foreground:theme('colors.white');
   --tw-black:theme('colors.black');
   --tw-white:theme('colors.white');
@@ -22,7 +22,7 @@
   --tw-color-900: theme('colors.slate.900');
   --tw-color-950: theme('colors.slate.950');
 
-  --plyr-color-main: #1eff00;
+  --plyr-color-main: var(--tw-primary);
 
 }
 
