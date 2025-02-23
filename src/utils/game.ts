@@ -215,7 +215,7 @@ export const leagueHasState = (objeto: any, state: string) => {
     return false;
 }
 
-export const formatTitle = (title:string) => {
+export const formatTitle = (title:string| undefined) => {
 
     if(title === undefined)
         return ""

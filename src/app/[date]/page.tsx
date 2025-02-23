@@ -16,24 +16,27 @@ const HomePage = async ({ params }: Params) => {
 
     const { date } = await params
     const leagues: any = await fetchLaegues(date)
-    metadata.title = "Futbol 1"
 
 
-    // const leaguesExtra = await fetchLeaguesExtra(date)
-    // const leagues = leaguesArray.map((league: any) => ({
-    //     ...league,
-    //     events: league.events.map((event: any, j: any) => ({
-    //         ...event,
-    //         headline: getHeadline(event.id, leaguesExtra)
-    //     }))
-    // }))
+    const res = await fetchLeaguesExtra(date)
+
+    const leaguesData = res.map((league:any) => ({
+        id:league.id,
+        events: league.events.map((event:any) => ({
+            id:event.id,
+            headline:"video" in event ? event.video.title:undefined,
+            stage:league.isTournament? event.group.name:undefined,
+            leg:league.isTournament && event.leg?event.leg.text:undefined,
+        }))
+    }))
+
 
 
     return (
         <div className='flex flex-col gap-0 pb-10'>
 
             <DateSelector date={date} />
-            <Main leagues={leagues} sofaEvents={""} />
+            <Main leagues={leagues} leaguesData={leaguesData} />
 
         </div>
     )

@@ -15,7 +15,9 @@ type Props = {
 
 const getVideo = (game: any) => {
 
-  const highlight = game.videos.find((video: any) => video.duration > 250)
+  const highlight = game.videos.find((video: any) => video.duration > 229)
+
+  
   if (highlight != undefined) {
     return highlight
 

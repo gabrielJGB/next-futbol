@@ -49,15 +49,15 @@ const formatDateObject = (date: Date) => {
     yesterday.setDate(yesterday.getDate() - 1);
 
     if (isSameDay(date, today)) {
-        return "HOY";
+        return "Hoy";
     } else if (isSameDay(date, tomorrow)) {
-        return "MAÑANA";
+        return "Mañana";
     } else if (isSameDay(date, yesterday)) {
-        return "AYER";
+        return "Ayer";
     } else {
         const days = ['DOM', 'LUN', 'MAR', 'MIE', 'JUE', 'VIE', 'SAB'];
-
-        const dayOfWeek = days[date.getDay()];
+        const days_lower = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
+        const dayOfWeek = days_lower[date.getDay()];
         const formatedDate = `${dayOfWeek}  ${formatNumber(date.getDate())}/${formatNumber(date.getMonth() + 1)}/${formatNumber(date.getFullYear() % 100)}`;
         return formatedDate;
     }

@@ -12,42 +12,43 @@ type League = {
     flagUrl: string | undefined,
     leagueName: string,
     games: [],
-    leagueHasState:boolean,
-    selectedState:string,
+    leagueHasState: boolean,
+    selectedState: string,
+    leagueData: any
 }
 
-const League = ({ games,flagUrl,leagueName,leagueHasState,selectedState }: League) => {
-    
-    
-    return (
-        <div className={`${leagueHasState || selectedState === ""?"flex":"hidden"}  flex-col w-full bg-[--tw-color-800]  shadow shadow-gray-950 rounded-lg transition ease-in-out`}>
+const League = ({ games, flagUrl, leagueName, leagueHasState, selectedState, leagueData }: League) => {
 
-             <div className='w-full flex flex-row justify-between items-center pt-2 pb-1 md:pt-2 px-1 md:px-2'>
-                
+
+    return (
+        <div className={`${leagueHasState || selectedState === "" ? "flex" : "hidden"}  flex-col w-full bg-[--tw-color-800]  shadow shadow-gray-950 rounded-lg transition ease-in-out`}>
+
+            <div className='w-full flex flex-row justify-between items-center pt-2 pb-1 md:pt-2 px-1 md:px-2'>
+
                 {
                     flagUrl != "-" ?
-                    <img src={flagUrl} alt="Logo" width={IMG_SIZE} height={IMG_SIZE} />
-                    :
-                    <BiWorld width={ICON} height={ICON} color='white'  />
-                    
+                        <img src={flagUrl} alt="Logo" width={IMG_SIZE} height={IMG_SIZE} />
+                        :
+                        <BiWorld width={ICON} height={ICON} color='white' />
+
                 }
                 <div className='cursor-pointer hover:underline w-full text-sm md:text-[16px] text-white font-bold text-center'>{leagueName}</div>
 
                 {
                     flagUrl != "-" ?
 
-                    <img src={flagUrl} alt="Logo" width={IMG_SIZE} height={IMG_SIZE} />
-                    :
-                    <BiWorld width={ICON} height={ICON} color='white' />
+                        <img src={flagUrl} alt="Logo" width={IMG_SIZE} height={IMG_SIZE} />
+                        :
+                        <BiWorld width={ICON} height={ICON} color='white' />
                 }
 
             </div>
 
 
             <div className='flex flex-col text-black gap-2 mb-2 m-1 md:m-2'>
-            {
-                games.map((game: any, i: number) => (
-                    <GameAlt
+                {
+                    games.map((game: any, i: number) => (
+                        <GameAlt
                             key={i}
                             id={game.id}
                             gameState={game.status.type.state}
@@ -56,11 +57,11 @@ const League = ({ games,flagUrl,leagueName,leagueHasState,selectedState }: Leagu
                             status={getStatus(game.status.type.name, game.status.type.detail, game.date)}
                             home={getTeamObject(game.competitions[0], 0)}
                             away={getTeamObject(game.competitions[0], 1)}
-                            headline={"headline" in game? game.headline:false}
+                            gameData={ leagueData != undefined ? leagueData.events.filter(((event: any) => event.id === game.id))[0] : undefined}
 
                         />
-                ))
-            }
+                    ))
+                }
             </div>
 
         </div>

@@ -14,10 +14,10 @@ import { delay_sec} from '@/data/constants.json'
 
 type Props = {
     leagues: any,
-    sofaEvents: any
+    leaguesData: any
 }
 
-const Main = ({ leagues, sofaEvents="events" }: Props) => {
+const Main = ({ leagues, leaguesData }: Props) => {
 
     const [_leagues, setLeagues] = useState(leagues)
     // const [sortedEvents, setSortedEvents] = useState<any>(false)
@@ -26,7 +26,8 @@ const Main = ({ leagues, sofaEvents="events" }: Props) => {
     const { setSofaEvents } = useStates()
 
     useEffect(() => {
-
+        
+        
         
     }, [])
 
@@ -153,7 +154,7 @@ const Main = ({ leagues, sofaEvents="events" }: Props) => {
                                         leagueName={data.leagues[0].name}
                                         leagueHasState={leagueHasState(data, selectedState)}
                                         selectedState={selectedState}
-
+                                        leagueData={leaguesData.filter((league:any)=>league.id === data.leagues[0].id ) [0]}
                                     />
                                 ))
                             }

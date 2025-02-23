@@ -11,19 +11,19 @@ type Props = {
     redCards?: [],
     scorers?: [],
     isHome: boolean
-    
+    rounded:any,
 }
 
 
 
-const TeamAlt = ({  name, isHome , scorers ,logo}: Props) => {
+const TeamAlt = ({  name, isHome , scorers ,logo,rounded}: Props) => {
 
     
     
 
     return (
 
-        <div className={`flex flex-row gap-x-2  text-white  col-span-6 bg-[--tw-color-900] px-1 ${isHome ? "rounded-tl-lg" : "rounded-bl-lg"} `}>
+        <div className={`flex flex-row gap-x-2  text-white  col-span-6 bg-[--tw-color-900] px-1 ${isHome&&!rounded.top ? "rounded-tl-lg" : ""} ${!isHome && !rounded.bottom ? "rounded-bl-lg" : ""} `}>
 
             <div className='shrink-0 flex flex-row py-2 gap-2 items-center pr-2 border-r-[1px] border-[--tw-color-800] '>
                 {
@@ -32,7 +32,7 @@ const TeamAlt = ({  name, isHome , scorers ,logo}: Props) => {
                         :
                         <Image src={teamLogo404} width={24} height={24} alt="Logo" />
                 }
-                <div className=' text-[12px] md:text-[12px]  font-bold text-center'>{name}</div>
+                <div className=' text-[12px] md:text-[12px]  font-bold text-center'>{name.replace("ROS", "Central")}</div>
             </div>
 
 
