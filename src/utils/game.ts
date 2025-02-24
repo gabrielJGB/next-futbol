@@ -12,9 +12,9 @@ import redCard from '@/assets/red.png'
 import yellowCard from '@/assets/yellow.png'
 
 
-export const getPlayImg = (play:any,subbedOut:boolean) => {
-    
-    
+export const getPlayImg = (play: any, subbedOut: boolean) => {
+
+
 
     if (play.penaltyKick)
         if (play.didScore)
@@ -33,10 +33,10 @@ export const getPlayImg = (play:any,subbedOut:boolean) => {
         return yellowCard
 
     else if (play.substitution)
-        if(subbedOut)
+        if (subbedOut)
             return arrowOut
-        else 
-        return arrowIn
+        else
+            return arrowIn
 
     else
         return ""
@@ -46,7 +46,7 @@ export const getPlayImg = (play:any,subbedOut:boolean) => {
 
 }
 
-export const getDetailImg = (detail:any) => {
+export const getDetailImg = (detail: any) => {
 
     if (detail.penaltyKick)
         return penalty
@@ -54,7 +54,7 @@ export const getDetailImg = (detail:any) => {
         return redCard
     else if (detail.scoringPlay)
         return goal
-    else 
+    else
         return ""
 }
 
@@ -84,17 +84,17 @@ export const getLogoURL = (logoFull: string, size: number) => {
 }
 
 
-export const getLogo = (team_p:any, SIZE:number) => {
+export const getLogo = (team_p: any, SIZE: number) => {
     let logo = ""
     const p = 7
 
     if (team_p) {
 
 
-        let team = "team" in team_p ? team_p.team : team_p
+        let team = "team" in team_p && typeof(team_p.team) != "string" ? team_p.team : team_p
 
         if (typeof (team) === "object" && "logo" in team && Array.isArray(team.logo)) {
-            
+
             logo = team.logo[0].href
             logo = logo.replace("https://a.espncdn.com/i", `https://a1.espncdn.com/combiner/i?img=/i`)
             logo += `&h=${SIZE + p}&w=${SIZE + p}`
@@ -110,7 +110,7 @@ export const getLogo = (team_p:any, SIZE:number) => {
         }
 
         if (typeof (team) === "object" && "logos" in team && team.logos.length > 0) {
-            
+
             logo = team.logos.length > 1 ? team.logos[1].href : team.logos[0].href
             logo = logo.replace("https://a.espncdn.com/i", `https://a1.espncdn.com/combiner/i?img=/i`)
             logo += `&h=${SIZE + p}&w=${SIZE + p}`
@@ -215,9 +215,9 @@ export const leagueHasState = (objeto: any, state: string) => {
     return false;
 }
 
-export const formatTitle = (title:string| undefined) => {
+export const formatTitle = (title: string | undefined) => {
 
-    if(title === undefined)
+    if (title === undefined)
         return ""
 
     title = title.replace("Argentine", "").replace(",", " -")
@@ -241,7 +241,7 @@ export const formatTitle = (title:string| undefined) => {
 }
 
 
-export const sortRoster = (roster:any) => {
+export const sortRoster = (roster: any) => {
 
     // const order = ["G", "LI", "DCI", "DC", "DCD", "LD", "MI", "MCI", "MCD", "MD", "MO", "MI", "MCI", "MC", "MO", "MCD", "MD", "ACI", "ACD", "AI", "ACI", "A", "ACD", "AD"];
 
@@ -250,7 +250,7 @@ export const sortRoster = (roster:any) => {
 
     // const order = ["G", "LI", "DCI", "DC", "DCD", "LD", "MI","MD","MI","MO","MD","A"]
 
-    const sortedJson = roster.sort((a:any, b:any) => {
+    const sortedJson = roster.sort((a: any, b: any) => {
         const indexA = a.position?.abbreviation ? order.indexOf(a.position?.abbreviation) : -1;
         const indexB = b.position?.abbreviation ? order.indexOf(b.position?.abbreviation) : -1;
 
@@ -273,7 +273,7 @@ export const sortRoster = (roster:any) => {
 
 
 
-export const getPlayerColor = (position:any) => {
+export const getPlayerColor = (position: any) => {
 
     if (!position)
         return "#808080"
@@ -295,7 +295,7 @@ export const getPlayerColor = (position:any) => {
 }
 
 
-export const getSofaId = (game:any, sofaEvents:any) => {
+export const getSofaId = (game: any, sofaEvents: any) => {
 
     if (game) {
 
@@ -304,7 +304,7 @@ export const getSofaId = (game:any, sofaEvents:any) => {
         const away = game.header.competitions[0].competitors[1].team
 
 
-        const respId = sofaEvents?.find((event:any) =>
+        const respId = sofaEvents?.find((event: any) =>
             (
                 event.homeTeam.name.toLowerCase().trim() === home.displayName.toLowerCase().trim() ||
                 event.homeTeam.shortName.toLowerCase().trim() === home.name.toLowerCase().trim() ||
@@ -344,14 +344,198 @@ export const getHeadline = (id: any, leaguesArray: any) => {
 
 
 export const getTeamObject = (game: any, i: number) => {
-        return {
-            id: game.competitors[i].id,
-            name: game.competitors[i].team.shortDisplayName,
-            logoURL: game.competitors[i].team.logo,
-            score: game.status.type.state != "pre" ? game.competitors[i].score : "",
-            scorers: game.details.filter((d: any) => d.team.id === game.competitors[i].id && d.scoringPlay && !d.shootout),
-            redCards: game.details.filter((d: any) => d.team.id === game.competitors[i].id && d.redCard),
-            winner:game.competitors[i].winner,
-            logo:getLogo(game.competitors[i],40)
-        }
+    return {
+        id: game.competitors[i].id,
+        name: game.competitors[i].team.shortDisplayName,
+        logoURL: game.competitors[i].team.logo,
+        score: game.status.type.state != "pre" ? game.competitors[i].score : "",
+        scorers: game.details.filter((d: any) => d.team.id === game.competitors[i].id && d.scoringPlay && !d.shootout),
+        redCards: game.details.filter((d: any) => d.team.id === game.competitors[i].id && d.redCard),
+        winner: game.competitors[i].winner,
+        logo: getLogo(game.competitors[i], 40)
     }
+}
+
+
+
+export const translateEventText = (text: string) => {
+
+    switch (text) {
+        case "Goal - Free-kick":
+            return "Gol de tiro libre"
+
+        case "Gol, anotación":
+            return "Gol"
+        case "Tiro a la meta":
+            return "Tiro al arco"
+        case "Balón mano":
+            return "Mano"
+        case "Fuera de lugar":
+            return "Fuera de juego"
+        case "Penal - Anotado":
+            return "Penal convertido"
+        case "Shot Hit Woodwork":
+            return "Tiro en el travesáneo"
+        case "Goal - Volley":
+            return "Gol de volea"
+        case "Penalty - Saved":
+            return "Penal atajado"
+        case "Penal -Errado":
+            return "Penal fallado"
+        case "VAR - Referee decision cancelled":
+            return "El VAR anuló la desición del árbitro"
+        case "Start 2nd Half Extra Time":
+            return "Inicio del segundo tiempo extra"
+        case "Start Extra Time":
+            return "Inicio del tiempo extra"
+        case "End Extra Time":
+            return "Final del tiempo extra"
+        case "Start Shootout":
+            return "Inicio de la tanda de penales"
+        case "Throw in":
+            return "Saque lateral"
+        default:
+            return text
+    }
+
+}
+
+
+export const getEventColor = (id:string) => {
+
+    switch (id) {
+        case '94':
+            return "#ECF900"
+
+        case '93':
+            return "#E60200"
+        case '138':
+        case '98':
+        case '137':
+        case '70':
+        case '173':
+        case '97':
+            return "#00E903"
+
+        default:
+            return "#FFFFFF"
+
+    }
+}
+
+
+// export const getEventIcon = (id, i) => {
+//     const sub_imgs = [arrow_in, arrow_out]
+//     const score_imgs = [goal, boot]
+//     const foul = ["De", "A"]
+//     const SIZE = 14
+
+
+//     switch (id) {
+//         case '94':
+//             return <Image source={yellow_card} style={{ width: SIZE, height: SIZE }} />
+
+//         case '93':
+//             return <Image source={red_card} style={{ width: SIZE, height: SIZE }} />
+
+//         case '76':
+//             return <Image source={sub_imgs[i]} style={{ width: SIZE, height: SIZE }} />
+
+//         case '36':
+//         case '66':
+//             return ""
+//             return <Text style={{ color: "white" }}> {foul[i]}</Text>
+
+//         case '138':
+//         case '98':
+//         case '137':
+//         case '70':
+//         case '173':
+//         case '97':
+//             return <Image source={score_imgs[i]} style={{ width: SIZE, height: SIZE }} />
+
+//         default:
+//             return <View></View>
+
+//     }
+
+// }
+
+
+
+export const translateStatLabel = (label:string) => {
+
+    switch (label) {
+        case "Fouls":
+            return "Faltas"
+        case "Corner Kicks":
+            return "Tiros de esquina"
+        case "Possession":
+            return "% Posesión"
+        case "POSSESSION":
+            return "% Posesión"
+        case "Fuera de Lugar":
+            return "Fuera de Juego"
+        case "Salvadas":
+            return "Atajadas"
+        case "TIROS":
+            return "Tiros totales"
+        case "SHOTS":
+            return "Tiros totales"
+        case "ON GOAL":
+            return "Tiros al arco"
+        case "A GOL":
+            return "Tiros al arco"
+        case "On Target %":
+            return "% Tiros al arco"
+        case "% al arco":
+            return "Tiros"
+        case "Penalty Goals":
+            return "Goles de penal"
+        case "Penalty Kicks Taken":
+            return "Penales atajados"
+        case "Accurate Passes":
+            return "Pases precisos"
+        case "Passes":
+            return "Pases"
+        case "Pass Completion %":
+            return "% Pases completados"
+        case "Accurate Crosses":
+            return "Centros precisos"
+
+        case "Cross %":
+            return "% Centros"
+        case "Crosses":
+            return "Centros"
+        case "Tackles":
+            return "Barridas"
+        case "Tackle %":
+            return "% Barridas"
+
+        case "Effective Tackles":
+            return "Barridas efectivas"
+
+        case "Blocked Shots":
+            return "Tiros bloqueados"
+        case "Long Balls %":
+            return "% Pases aereos"
+        case "Accurate Long Balls":
+            return "Pases aereos precisos"
+
+        case "Long Balls":
+            return "Pases arereos"
+
+        case "Clearances":
+            return "Despejes"
+        case "Effective Clearances":
+            return "Despejes efectivos"
+
+        case "Interceptions":
+            return "Intercepciones"
+
+
+        default:
+            return label
+    }
+
+}

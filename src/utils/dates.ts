@@ -40,7 +40,7 @@ export const getDates = (date: string) => {
 
 }
 
-const formatDateObject = (date: Date) => {
+export const formatDateObject = (date: Date) => {
 
     const today = new Date();
     const tomorrow = new Date(today);
