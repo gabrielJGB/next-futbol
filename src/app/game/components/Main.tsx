@@ -5,7 +5,7 @@ import GameHeader from '@/app/game/components/GameHeader'
 import TabContent from '@/app/game/components/TabContent'
 import TabBar from '@/app/game/components/TabBar'
 import { fetchGame } from '@/utils/fetch'
-import { delay_sec} from '@/data/constants.json'
+import { delay_sec } from '@/data/constants.json'
 
 type Props = {
     gameData: any,
@@ -19,25 +19,36 @@ const Main = ({ gameData, tabs, id, sofaId }: Props) => {
     const [selectedTab, setSelectedTab] = useState(0)
     const [game, setGame] = useState(gameData)
 
+    const gameDate = new Date(gameData.header.competitions[0].date)
+    const todayDate = new Date()
+
     useEffect(() => {
         if (window != undefined)
             setSelectedTab(window.screen.width < 800 ? 0 : 1)
     }, [])
 
-
+    
+    
+    
     useEffect(() => {
+        
         fetchGame(id)
             .then(resp => setGame(resp))
 
-        let interval = setInterval(() => {
-            console.log("Fetching game id", id);
+        const recentGame = todayDate.getTime() < gameDate.getTime() + (3600 * 1000 * 3) && todayDate.getTime() > gameDate.getTime() - (3600 * 1000 * 1)
 
-            fetchGame(id)
-                .then(resp => setGame(resp))
+        if (recentGame) {
+            let interval = setInterval(() => {
+                console.log("Fetching game id ", id , new Date() );
 
-        }, delay_sec * 1000);
+                fetchGame(id)
+                    .then(resp => setGame(resp))
 
-        return () => clearInterval(interval)
+            }, delay_sec * 1000);
+
+            return () => clearInterval(interval)
+        }
+
 
     }, [])
 
@@ -62,7 +73,7 @@ const Main = ({ gameData, tabs, id, sofaId }: Props) => {
 
             <div className='z-20 relative top-0 w-full md:w-[65%]'>
                 <TabBar tabs={tabs} selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-                <TabContent game={game} selectedTab={selectedTab} sofaId={sofaId}/>
+                <TabContent game={game} selectedTab={selectedTab} sofaId={sofaId} />
             </div>
 
         </div>

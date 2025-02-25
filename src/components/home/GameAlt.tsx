@@ -66,7 +66,7 @@ const GameAlt = ({ gameState, selectedState, status, statusColor, home, away, id
                     [home, away].map((team: any, j: number) => (
                         <>
                             <TeamAlt
-
+                                key={j}
                                 name={team.name}
                                 redCards={team.redCards}
                                 scorers={team.scorers}

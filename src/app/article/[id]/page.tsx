@@ -25,8 +25,9 @@ const Page = async ({ params }: Params) => {
   if (tweets)
     tweets = tweets.map((item: any, i: number) => (item.replace("twitter.com", "xcancel.com")))
 
-  console.log(article);
-
+  
+  console.log(article );
+  
 
   return (
     <div className='flex flex-col  justify-center items-center mx-auto'>
@@ -40,7 +41,7 @@ const Page = async ({ params }: Params) => {
         {
           "images" in article &&
 
-          article.images.filter(((x:any)=>x.type === "inline")).map((image: any, i: number) => (
+          article.images.filter(((x:any)=>x.type === "inline" || x.type === "header")).map((image: any, i: number) => (
             <div key={i}  className='flex flex-col gap-2'>
               <img className='rounded-lg' src={image.url} alt="Imagen" />
               <div className='text-xs text-gray-300'>{image.caption}</div>

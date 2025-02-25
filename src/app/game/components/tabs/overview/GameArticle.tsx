@@ -7,8 +7,6 @@ type Props = {
 
 const GameArticle = ({ article }: Props) => {
 
-    console.log(article);
-
 
     return (
         <Link href={`/article/${article.id}`} className='flex flex-col gap-1 transition-all hover:bg-[--tw-color-700] bg-[--tw-color-800] rounded-lg p-2'>

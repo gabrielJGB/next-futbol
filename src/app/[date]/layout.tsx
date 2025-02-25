@@ -33,7 +33,7 @@ const HomeLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         {/* <Link className='rounded mt-1 p-1 text-xs bg-[--tw-color-800]' href={`/`}>Volver a hoy</Link> */}
       </div>
 
-      <div className='cursor-pointer md:hidden flex fixed  bottom-4 right-4 w-[60px] h-[60px] rounded-[16px] shadow shadow-black text-white bg-[--tw-primary]  border-[--tw-color-700] border-[0px] text-center font-bold items-center justify-center' onClick={() => toggleShowCalendar()}>
+      <div className='cursor-pointer md:hidden flex fixed active:bg-[#13b313] bottom-4 right-4 w-[60px] h-[60px] rounded-[16px] shadow shadow-black text-white bg-[--tw-primary]  border-[--tw-color-700] border-[0px] text-center font-bold items-center justify-center' onClick={() => toggleShowCalendar()}>
         {
           showCalendar?
           <div className='text-2xl'>x</div>

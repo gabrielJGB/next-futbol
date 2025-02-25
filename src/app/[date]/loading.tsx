@@ -11,7 +11,7 @@ const Loading = (props: Props) => {
         <div className='flex items-center justify-center w-full h-full border-b-[2px] border-transparent'>---</div>
       </div>
 
-    <div className='flex flex-col gap-7 px-[2px] sm:mx-0'>
+    <div className='flex flex-col gap-7 px-[2px] mx-1'>
 
 
     {
