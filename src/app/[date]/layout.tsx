@@ -15,7 +15,8 @@ const HomeLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   const { showCalendar, toggleShowCalendar, hideCalendar } = useStates()
 
   useEffect(() => {
-    return () => hideCalendar() 
+    
+    return ( ) => hideCalendar() 
   }, [])
 
 
@@ -28,12 +29,12 @@ const HomeLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       <div className='w-full sm:w-[500px]'>{children}</div>
 
 
-      <div className={`${showCalendar ? "flex" : "hidden"} flex-col fixed justify-center top-0 pt-[170px] md:pt-0 h-full md:relative md:flex w-full  md:w-[330px] md:h-[350px] px-[2px] text-center bg-[rgb(0,0,0,0.7)] rounded shadow-none md:shadow shadow-slate-900`}  >
+      <div className={`${showCalendar ? "flex" : "hidden"} flex-col fixed justify-center top-0 pt-[170px] md:pt-0 h-full md:relative md:flex w-full  md:w-[330px] md:h-[350px] px-[2px] text-center bg-[rgb(0,0,0,0.7)] rounded-lg shadow-none md:shadow shadow-slate-900`}  >
         <CalendarContainer />
         {/* <Link className='rounded mt-1 p-1 text-xs bg-[--tw-color-800]' href={`/`}>Volver a hoy</Link> */}
       </div>
 
-      <div className='cursor-pointer md:hidden flex fixed active:bg-[#13b313] bottom-4 right-4 w-[60px] h-[60px] rounded-[16px] shadow shadow-black text-white bg-[--tw-primary]  border-[--tw-color-700] border-[0px] text-center font-bold items-center justify-center' onClick={() => toggleShowCalendar()}>
+      <div className='cursor-pointer md:hidden flex fixed transition-all active:bg-[#13b313] bottom-4 right-4 w-[60px] h-[60px] rounded-[16px] shadow shadow-black text-white bg-[--tw-primary]  border-[--tw-color-700] border-[0px] text-center font-bold items-center justify-center' onClick={() => toggleShowCalendar()}>
         {
           showCalendar?
           <div className='text-2xl'>x</div>

@@ -13,7 +13,7 @@ const RosterPlayer = ({ player }: Props) => {
 
     return (
         <Link
-            className='flex flex-row flex-wrap items-center gap-2 text-[13px] px-2 py-2 hover:bg-[--tw-color-700] transition-all cursor-pointer'
+            className='flex flex-row flex-wrap items-center gap-2 text-[13px] md:py-2 py-3 hover:bg-[--tw-color-700] transition-all cursor-pointer'
             href={`/player/${player.athlete.id}`}
         >
 

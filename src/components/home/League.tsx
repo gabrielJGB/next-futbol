@@ -1,7 +1,7 @@
 import React from 'react'
 import Game from './Game'
 import { } from '@/utils/fetch'
-import { getLogo, getStatus, getStatusColor, getTeamObject } from '@/utils/game'
+import { formatTitle, getLogo, getStatus, getStatusColor, getTeamObject } from '@/utils/game'
 import GameAlt from './GameAlt'
 import { BiWorld } from 'react-icons/bi'
 
@@ -32,7 +32,7 @@ const League = ({ games, flagUrl, leagueName, leagueHasState, selectedState, lea
                         <BiWorld width={ICON} height={ICON} color='white' />
 
                 }
-                <div className='cursor-pointer hover:underline w-full text-sm md:text-[16px] text-white font-bold text-center'>{leagueName}</div>
+                <div className='cursor-pointer hover:underline w-full text-sm md:text-[16px] text-white font-bold text-center'>{formatTitle(leagueName)}</div>
 
                 {
                     flagUrl != "-" ?

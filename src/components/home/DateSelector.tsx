@@ -20,7 +20,7 @@ const DateSelector =  ({ date }: Props) => {
     
 
     return (
-        <div className='flex flex-row justify-between items-center  w-full shadow-none  md:shadow  md:shadow-slate-900 bg-[--tw-color-800] text-xs text-center font-bold '>
+        <div className='flex flex-row justify-between items-center  w-full shadow-none  md:shadow  md:shadow-slate-900 bg-[--tw-color-800] text-xs text-center font-bold md:rounded-lg'>
             <Link href={`/${previousDate.string}`} className='w-full  py-3 text-gray-400 cursor-pointer hover:text-white'>
                 {previousDate.formated}
             </Link>

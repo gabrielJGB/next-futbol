@@ -17,7 +17,7 @@ const Page = async ({ params }: Params) => {
   const regex = /https:\/\/twitter\.com\/[^\/]+\/status\/\d+/g;
   let tweets = article.story.match(regex);
   const story = article.story
-    .replaceAll("<p>", "<p style=margin-top:18px>")
+    .replaceAll("<p>", "<p style=margin-top:19px>")
     .replaceAll("<h2>", "<h2 style=margin-top:20px;font-size:18px;font-weight:bold >")
     .replace("<hr>", "<hr style=margin-top:10px>")
     .replace("twitter.com", "xcancel.com")
@@ -25,14 +25,28 @@ const Page = async ({ params }: Params) => {
   if (tweets)
     tweets = tweets.map((item: any, i: number) => (item.replace("twitter.com", "xcancel.com")))
 
-  
-  console.log(article );
-  
+
+  const getTagRoute = (category: any) => {
+
+
+    if (category.type === "team") {
+      return `/team/${category.team.id}`
+
+    } else if (category.type === "athlete") {
+      return `/player/${category.athlete.id}`
+
+    } else if (category.type === "league") {
+      return `/league/${category.league.description}`
+    } else
+      return '/'
+
+  }
+
 
   return (
     <div className='flex flex-col  justify-center items-center mx-auto'>
-      <div className='flex flex-col gap-2 justify-center md:mt-6 pt-2 md:px-6 px-2 md:w-[60%] w-[100%] bg-[--tw-color-800] pb-2 rounded'>
-        <h1 className='text-2xl font-bold'>{article.headline}</h1>
+      <div className='flex flex-col gap-2 justify-center md:mt-6 md:pt-3 pt-2 md:px-6 px-2 md:w-[60%] w-[100%] bg-[--tw-color-800] pb-2 rounded'>
+        <h1 className='md:text-3xl text-2xl  font-bold'>{article.headline}</h1>
 
         <div className='pt-2 text-sm text-gray-300 font-bold '>{published}hs</div>
 
@@ -41,8 +55,8 @@ const Page = async ({ params }: Params) => {
         {
           "images" in article &&
 
-          article.images.filter(((x:any)=>x.type === "inline" || x.type === "header")).map((image: any, i: number) => (
-            <div key={i}  className='flex flex-col gap-2'>
+          article.images.filter(((x: any) => x.type === "inline" || x.type === "header")).map((image: any, i: number) => (
+            <div key={i} className='flex flex-col gap-2'>
               <img className='rounded-lg' src={image.url} alt="Imagen" />
               <div className='text-xs text-gray-300'>{image.caption}</div>
             </div>
@@ -51,7 +65,7 @@ const Page = async ({ params }: Params) => {
         }
 
 
-        <p className='pt-1 md:text-[14px] text-[14px] md:leading-6 leading-6' dangerouslySetInnerHTML={{ __html: story }}></p>
+        <p className='pt-1 px-2 md:text-[14px] text-[14px] md:leading-6 leading-6' dangerouslySetInnerHTML={{ __html: story }}></p>
 
 
         {
@@ -61,7 +75,13 @@ const Page = async ({ params }: Params) => {
           ))
         }
 
-        <hr  className='mt-2'/>
+        {
+
+          "source" in article &&
+          <div className='text-xs pt-2 text-gray-400 font-bold'>FUENTE: {article.source}</div>
+        }
+
+        <hr className='mt-2' />
 
         {
           "video" in article && article.video.length > 0 &&
@@ -78,11 +98,24 @@ const Page = async ({ params }: Params) => {
           </div>
         }
 
-        {
+        <div className='text-sm mt-2'>En esta noticia:</div>
+        <div className='flex flex-wrap flex-row gap-2 mb-2'>
+          {
+            "categories" in article &&
+            article.categories.map((cat: any, i: number) => {
 
-          "source" in article &&
-          <div className='text-xs pt-2 text-gray-400 font-bold'>FUENTE: {article.source}</div>
-        }
+              return cat.description && (
+                <Link key={i} href={getTagRoute(cat)} className=' bg-[--tw-color-700] border-[1px] border-[--tw-color-600] p-2 rounded curser-pointer text-xs hover:bg-[--tw-color-600]'>
+                  {cat.description.split("-")[0]}
+                </Link>
+              )
+            }
+            )
+          }
+        </div>
+
+
+
 
 
         {

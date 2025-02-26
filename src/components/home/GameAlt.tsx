@@ -116,7 +116,7 @@ const GameAlt = ({ gameState, selectedState, status, statusColor, home, away, id
             </div>
             {
                 headline &&
-                <div className='italic rounded-b-lg md:text-xs text-[11px] font-medium text-gray-400 px-3 py-2 bg-[--tw-color-900]'>
+                <div className=' rounded-b-lg md:text-xs text-[11px] font-medium text-gray-400 px-3 py-2 bg-[--tw-color-900]'>
                     {headline}
                 </div>
 

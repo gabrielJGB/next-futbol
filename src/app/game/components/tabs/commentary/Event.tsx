@@ -56,10 +56,10 @@ const Event = ({ text, clock, participants, typeId, typeText, team }: Props) => 
                 <div className='flex flex-col gap-1'>
                     {
                         participants.map((elem: any, i: number) => (
-                            <div key={i} className='flex flex-row items-center gap-2 p-1 bg-[--tw-color-900] '>
+                            <div key={i} className='flex flex-row items-center rounded gap-2 py-1 px-2 w-max bg-[--tw-color-900] '>
 
                                 {/* {getEventIcon(typeId, i)} */}
-                                <div className='text-xs rounded-sm '>{elem.athlete.displayName}</div>
+                                <div className='text-xs'>{elem.athlete.displayName}</div>
 
                             </div>
                         ))

@@ -1,39 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono,Rubik } from "next/font/google";
-import "./globals.css";
+import { Inter } from "next/font/google";
 import Nav from "@/components/Nav";
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-
-const rubik = Rubik({
-  variable: "--font-rubik-sans",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
-  title: "Futbol 1",
-  description: "Futbol 1, resultados de las ligas de futbol de todo el mundo.",
+  title: "Fútbol 1",
+  description: 'Fútbol 1 tiene los resultados en vivo de todas las ligas del mundo, formaciones, noticias, fixtures, estadísticas, videos y mucho más.',
   
 };
 
 export const viewport: Viewport = {
-  themeColor: 'black',
+  themeColor: '#0f172a',
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body
-        className={`bg-[--tw-color-950] ${geistMono.variable} antialiased pb-[200px]`}
+        className={`bg-[--tw-color-950] ${inter.className} antialiased pb-[200px]`}
       >
         <Nav />
         

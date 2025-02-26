@@ -15,9 +15,9 @@ const Card = ({ title, value, icon }: { title: string | boolean, value: string, 
             <div className='flex flex-col '>
                 {
                     title &&
-                    <div className='text-xs font-bold text-gray-400'>{title}</div>
+                    <div className='text-[12px] font-bold text-gray-400'>{title}</div>
                 }
-                <div className={`text-xs ${title ? "" : "py-2"}`}>{value}</div>
+                <div className={`text-[13px] ${title ? "" : "py-2"}`}>{value === "Ida" || value === "Vuelta" ? "Partido de " + value : value}</div>
             </div>
         </div>
     )
@@ -33,8 +33,8 @@ const GameInfo = ({ game }: Props) => {
 
     return (
 
-        <div className='shadow shadow-gray-800 bg-[--tw-color-800] flex flex-col  divide-y-[1px] divide-[--tw-color-700] gap-0 rounded-lg  '>
-            <h3 className='text-center font-bold py-2'>INFORMACIÓN DEL PARTIDO</h3>
+        <div className='shadow shadow-gray-800 bg-[--tw-color-800] flex flex-col p-2 divide-y-[1px] divide-[--tw-color-700] gap-0 rounded-lg  '>
+            <h3 className='text-center font-bold pb-2'>DATOS DEL PARTIDO</h3>
 
             <Card title="Fecha" value={dateString} icon={"calendar-month"} />
 

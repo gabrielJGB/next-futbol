@@ -62,7 +62,7 @@ const Main = ({ leagues, leaguesData }: Props) => {
 
         <div className='flex flex-col md:gap-10 gap-7 mt-8 mx-1 '>
 
-            <div className='flex flex-row justify-center items-stretch gap-0 border-[1px] border-gray-800 text-gray-400 text-xs font-bold transition-all'>
+            <div className='flex flex-row justify-center items-stretch gap-0 border-[1px] border-gray-800 text-gray-400 text-xs  transition-all rounded'>
                 <button
                     className={`flex-1 ${selectedState === "post" ? "bg-slate-900 text-white border-slate-700" : "bg-gray-950 border-transparent"}  hover:text-white border-[1px] p-2  cursor-pointer`}
                     onClick={() => setSelectedState(prev => prev === "post" ? "" : "post")}

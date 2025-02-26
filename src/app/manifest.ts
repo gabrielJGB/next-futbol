@@ -2,13 +2,14 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Futbol 1',
-    short_name: 'Futbol 1',
+    name: 'Fútbol 1',
+    short_name: 'Fútbol 1',
     description: 'Fútbol 1 tiene los resultados en vivo de todas las ligas del mundo, formaciones, noticias, fixtures, estadísticas, videos y mucho más.',
     start_url: '/',
     display: 'standalone',
     background_color: '#0f172a',
-    theme_color: '#000000',
+    theme_color: '#0f172a',
+    categories: ["deportes", "sports", "futbol", "football", "soccer"],
     screenshots: [
       {
         "src": "/screenshot_1.png",
@@ -25,19 +26,20 @@ export default function manifest(): MetadataRoute.Manifest {
         "label": "Pantalla de partido"
       },
       {
-        "src": "/screenshot_1.png",
+        "src": "/screenshot_3.png",
         "sizes": "390x844",
         "type": "image/webp",
-        "form_factor": "narrow",
-        "label": "Pantalla de inicio"
+        "form_factor": "wide",
+        "label": "Pantalla de partido"
       },
       {
-        "src": "/screenshot_2.png",
+        "src": "/screenshot_4.png",
         "sizes": "390x844",
         "type": "image/webp",
-        "form_factor": "narrow",
+        "form_factor": "wide",
         "label": "Pantalla de partido"
-      }
+      },
+
 
     ],
     icons: [

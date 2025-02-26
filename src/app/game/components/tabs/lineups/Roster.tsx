@@ -27,7 +27,7 @@ const Roster = ({ roster, logo }: Props) => {
             className='flex flex-col gap-2 col-span-1 w-full '
         >
 
-            <div className='bg-[--tw-color-800] py-1 pb-2 rounded-lg divide-y-[1px] divide-[--tw-color-700]'>
+            <div className='bg-[--tw-color-800] rounded-lg divide-y-[1px] p-2 divide-[--tw-color-700]'>
                 <div className='flex flex-row items-center gap-3 justify-center'>
                     {
                         logo != "-" &&
@@ -44,7 +44,7 @@ const Roster = ({ roster, logo }: Props) => {
             </div>
 
 
-            <div className='bg-[--tw-color-800] py-1 pb-2 rounded-lg divide-y-[1px] divide-[--tw-color-700]'>
+            <div className='bg-[--tw-color-800]  rounded-lg divide-y-[1px] p-2 divide-[--tw-color-700]'>
                 <div className='flex flex-row items-center gap-3 justify-center'>
                     {
                         logo != "-" &&
