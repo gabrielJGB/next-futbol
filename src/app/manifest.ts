@@ -7,36 +7,36 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Fútbol 1 tiene los resultados en vivo de todas las ligas del mundo, formaciones, noticias, fixtures, estadísticas, videos y mucho más.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#0f172a',
-    theme_color: '#0f172a',
+    background_color: '#1e293b',
+    theme_color: '#1e293b',
     categories: ["deportes", "sports", "futbol", "football", "soccer"],
     screenshots: [
       {
         "src": "/screenshot_1.png",
-        "sizes": "390x844",
+        "sizes": "1170x2532",
         "type": "image/webp",
         "form_factor": "wide",
         "label": "Pantalla de inicio"
       },
       {
         "src": "/screenshot_2.png",
-        "sizes": "390x844",
+        "sizes": "1170x2532",
         "type": "image/webp",
         "form_factor": "wide",
         "label": "Pantalla de partido"
       },
       {
         "src": "/screenshot_3.png",
-        "sizes": "390x844",
+        "sizes": "1170x2532",
         "type": "image/webp",
-        "form_factor": "wide",
+        "form_factor": "narrow",
         "label": "Pantalla de partido"
       },
       {
         "src": "/screenshot_4.png",
-        "sizes": "390x844",
+        "sizes": "1170x2532",
         "type": "image/webp",
-        "form_factor": "wide",
+        "form_factor": "narrow",
         "label": "Pantalla de partido"
       },
 

@@ -48,7 +48,7 @@ const Event = ({ text, clock, participants, typeId, typeText, team }: Props) => 
 
             {
                 text &&
-                <div className='md:text-xs text-sm text-gray-300 py-3'> {text}</div>
+                <div className='text-xs text-gray-300 py-3'> {text}</div>
             }
 
             {

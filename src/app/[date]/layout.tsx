@@ -29,7 +29,7 @@ const HomeLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       <div className='w-full sm:w-[500px]'>{children}</div>
 
 
-      <div className={`${showCalendar ? "flex" : "hidden"} flex-col fixed justify-center top-0 pt-[170px] md:pt-0 h-full md:relative md:flex w-full  md:w-[330px] md:h-[350px] px-[2px] text-center bg-[rgb(0,0,0,0.7)] rounded-lg shadow-none md:shadow shadow-slate-900`}  >
+      <div className={`${showCalendar ? "flex" : "hidden"} flex-col fixed justify-center top-0  md:pt-0 h-full md:relative md:flex w-full  md:w-[330px] md:h-[350px] md:px-0 px-[7px] text-center bg-[rgb(0,0,0,0.7)] rounded-lg shadow-none md:shadow shadow-slate-900`}  >
         <CalendarContainer />
         {/* <Link className='rounded mt-1 p-1 text-xs bg-[--tw-color-800]' href={`/`}>Volver a hoy</Link> */}
       </div>

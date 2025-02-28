@@ -27,7 +27,8 @@ const Page = async ({ params }: Params) => {
 
 
   const getTagRoute = (category: any) => {
-
+    console.log(category);
+    
 
     if (category.type === "team") {
       return `/team/${category.team.id}`
@@ -36,7 +37,7 @@ const Page = async ({ params }: Params) => {
       return `/player/${category.athlete.id}`
 
     } else if (category.type === "league") {
-      return `/league/${category.league.description}`
+      return `/league/${category.leagueId}`
     } else
       return '/'
 

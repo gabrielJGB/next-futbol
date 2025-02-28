@@ -13,15 +13,20 @@ type Props = {
     stage?: string,
     details: any,
     gameData: any,
-    sofaId:any
+    sofaId: any
 }
 
-const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "",sofaId }: Props) => {
+const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "", sofaId }: Props) => {
 
 
     const home = game.competitors[0]
     const away = game.competitors[1]
     const stageName = stage?.split(",")[1]
+
+    const shootout = game.status.type.name === "STATUS_FINAL_PEN" ? `(${game.competitors[0].shootoutScore}-${game.competitors[1].shootoutScore})` : false
+    
+    console.log(game,shootout);
+    
 
 
     return (
@@ -51,6 +56,7 @@ const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "",
                         homeScore={home.score}
                         awayScore={away.score}
                         winner={home.winner ? "home" : (away.winner ? "away" : false)}
+                        shootout={shootout}
                     />
 
                     <Team team={away.team} />
@@ -65,7 +71,7 @@ const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "",
             </div>
 
             <div className='hidden md:block'>
-                <Info game={gameData} sofaId={sofaId}/>
+                <Info game={gameData} sofaId={sofaId} />
             </div>
 
         </div>

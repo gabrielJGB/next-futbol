@@ -8,7 +8,7 @@ type Props = {
   game: any
 }
 
-const IMG_SIZE = 17
+const IMG_SIZE = 18
 
 const getTeamLogo = (teamName: string, game: any) => {
 

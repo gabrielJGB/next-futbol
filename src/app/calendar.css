@@ -104,12 +104,12 @@
 .react-calendar__tile {
   max-width: 100%;
   padding: 10px 6.6667px;
-  
+
   font: inherit;
   font-size: 0.833em;
   border-radius: 7px;
   text-align: center;
-  
+
   /* border-width:1px;
   border-style: solid;
   border-color: transparent; */
@@ -117,7 +117,7 @@
 
 .react-calendar__tile:hover {
   background-color: var(--tw-color-700);
-  
+
   /* border-width: 1px;
   border-style: solid;
   border-color: var(--tw-primary); */
@@ -173,6 +173,24 @@
 
   .calendar-container {
     display: none;
+  }
+
+  .react-calendar__navigation button:enabled:hover {
+    background-color: unset;
+  }
+
+  .react-calendar__navigation button:enabled:active {
+    background-color: var(--tw-color-700);
+  }
+
+  .react-calendar__tile:hover {
+    background-color: unset;
 
   }
+
+  .react-calendar__tile:active {
+    background-color: var(--tw-color-700);
+
+  }
+
 }

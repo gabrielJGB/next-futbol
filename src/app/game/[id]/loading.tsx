@@ -10,7 +10,7 @@ const Loading = (props: Props) => {
 
                 <div className='flex flex-col gap-4  sm:mx-0'>
 
-                    <div className='rounded-none md:rounded-lg bg-[--tw-color-800]  shadow shadow-slate-900 h-[180px]'></div>
+                    <div className='rounded-none md:rounded-lg bg-[--tw-color-800]  md:shadow shadow-none shadow-slate-900 h-[180px]'></div>
 
                     <div className='w-full px-1 md:px-0 mt-0 flex flex-col gap-4'>
                         <div className='animate-pulse rounded-lg bg-[--tw-color-800]  shadow shadow-slate-900 h-[220px]'></div>

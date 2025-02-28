@@ -472,7 +472,7 @@ export const translateStatLabel = (label:string) => {
         case "Corner Kicks":
             return "Tiros de esquina"
         case "Possession":
-            return "% Posesión"
+            return "Posesión"
         case "POSSESSION":
             return "% Posesión"
         case "Fuera de Lugar":

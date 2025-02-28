@@ -28,6 +28,8 @@ const FieldPlayer = ({ player, color, isThisBoca, plays, subbedOutFor }: Props) 
                 return "yellow"
         }
 
+        // if (subbedOutFor)
+        //     return "#c5c5c5"
 
         return "white"
         // return subbedOutFor ? "#c1c1c1" : "white"
@@ -35,6 +37,11 @@ const FieldPlayer = ({ player, color, isThisBoca, plays, subbedOutFor }: Props) 
 
     const getName = (name: any) => {
         const arr = name.split(" ")
+
+
+
+        if (arr.length === 2 && arr[1] === "")
+            return name
 
         if (arr.length === 2)
             return `${arr[1]}`
@@ -73,9 +80,7 @@ const FieldPlayer = ({ player, color, isThisBoca, plays, subbedOutFor }: Props) 
                         <div className='bg-blue-800 h-[10px] w-[32px] rounded-t-[6px]'></div>
                         <div className='bg-yellow-500 h-[12px] w-[32px] '></div>
                         <div className='bg-blue-800 h-[10px] w-[32px] rounded-b-[6px]'></div>
-                        {/* <div style={{ height: 10.15, width: 30.5, backgroundColor: "#103279", borderTopRightRadius: 6.5, borderTopLeftRadius: 6.5 }}></div>
-                        <div style={{ height: 10.15, width: 30.5, backgroundColor: "#e0a91c" }}></div>
-                        <div style={{ height: 10.15, width: 30.5, backgroundColor: "#103279", borderBottomLeftRadius: 6.5, borderBottomRightRadius: 6.5 }}></div> */}
+
                     </div>
                 }
 
@@ -83,10 +88,10 @@ const FieldPlayer = ({ player, color, isThisBoca, plays, subbedOutFor }: Props) 
             </div>
 
             <div
-                style={{ textShadow: "black 1px 1px 1px" }}
+                style={{ textShadow: "black 1px 1px 2px" }}
                 className='flex flex-col gap-0 justify-center items-center text-xs md:text-sm text-center max-w-[100px] font-bold'
             >
-                <div className='flex flex-row items-center gap-1 '>
+                <div className='flex flex-row items-center gap-[2px] '>
                     {
                         subbedOutFor &&
                         <Image src={arrowOut} width={IMG_SIZE} height={IMG_SIZE} alt="arrow" />
@@ -96,9 +101,19 @@ const FieldPlayer = ({ player, color, isThisBoca, plays, subbedOutFor }: Props) 
 
                 {
                     subbedOutFor &&
-                    <div className='flex flex-row items-center gap-1'>
+                    <div className='flex flex-row items-center gap-[1px]'>
                         <Image src={arrowIn} width={IMG_SIZE} height={IMG_SIZE} alt="arrow" />
-                        <div className='text-[10px]'>{subbedOutFor.jersey}. {getName(subbedOutFor.athlete.displayName)}</div>
+                        <div className='flex flex-row items-center gap-1 text-[10px]'>
+
+                            <div
+                                style={{ background: ` ${isThisBoca ? "rgb(30 ,64, 175)" : `#${color}`} `, textShadow: "black 1px 1px 1px" }}
+                                className={`z-2 relative flex border-[1px] border-gray-900 justify-center items-center rounded   w-[18px] h-[17px] shadow shadow-gray-800`}
+                            >
+                                {subbedOutFor.jersey}
+                            </div>
+
+                            <div className='md:text-[12px] text-[9px]'>{getName(subbedOutFor.athlete.displayName)}</div>
+                        </div>
                     </div>
                 }
 
