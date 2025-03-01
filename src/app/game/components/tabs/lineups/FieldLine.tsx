@@ -8,12 +8,13 @@ type Props = {
     isHome: boolean,
     playersInLine: number,
     isThisBoca: boolean,
+    invertField: boolean,
 }
 
-const FieldLine = ({ line, lineIndex, color, isHome, playersInLine, isThisBoca }: Props) => {
+const FieldLine = ({ line, lineIndex, invertField, color, isHome, playersInLine, isThisBoca }: Props) => {
 
     return (
-        <div className={`flex ${isHome ? "flex-col" : "flex-col-reverse"} justify-evenly gap-1 `}>
+        <div className={`flex ${isHome ? (!invertField ? "flex-col" : "flex-col-reverse") : (!invertField ? "flex-col-reverse" : "flex-col")} justify-evenly gap-1 `}>
             {
                 line.map((player: any, p: number) => (
                     <FieldPlayer

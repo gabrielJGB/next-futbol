@@ -22,7 +22,7 @@ export const fetchLaegues = async (dates: string) => {
     const response: any = await fetch(url, { "cache": "no-store" });
 
 
-    if (!response.ok ) {
+    if (!response.ok) {
         throw new Error(response.statusText);
     }
 
@@ -48,26 +48,34 @@ export const fetchLaegues = async (dates: string) => {
 
 
 
-    return leagues.scores 
+    return leagues.scores
 
 }
 
 
 export const fetchLeaguesExtra = async (dates: string) => {
-    const url = `https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=soccer&lang=es&region=ar&dates=${dates}`
-    const response: any = await fetch(url, { "cache": "no-store" });
-    const parsed = await response.json();
-    const leagues = parsed.sports[0].leagues
 
-    return leagues
+    try {
 
-    // const newData = data.scores.map((league: any) => ({
-    //     ...league,
-    //     events: league.events.map((event: any, j: any) => ({
-    //         ...event,
-    //         headline: getHeadline(event.id, leaguesArray)
-    //     }))
-    // }))
+
+        const url = `https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=soccer&lang=es&region=ar&dates=${dates}`
+        const response: any = await fetch(url, { "cache": "no-store" });
+        const parsed = await response.json();
+        const leagues = parsed.sports[0].leagues
+
+        return leagues
+
+        // const newData = data.scores.map((league: any) => ({
+        //     ...league,
+        //     events: league.events.map((event: any, j: any) => ({
+        //         ...event,
+        //         headline: getHeadline(event.id, leaguesArray)
+        //     }))
+        // }))
+    } catch (error) {
+        console.log(error)
+
+    }
 
 
 

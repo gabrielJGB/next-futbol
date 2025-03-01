@@ -20,7 +20,7 @@ const HomePage = async ({ params }: Params) => {
 
     const res = await fetchLeaguesExtra(date)
 
-    const leaguesData = res.map((league:any) => ({
+    const leaguesData = res?.map((league:any) => ({
         id:league.id,
         events: league.events.map((event:any) => ({
             id:event.id,

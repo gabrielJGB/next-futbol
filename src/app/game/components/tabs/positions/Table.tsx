@@ -46,7 +46,7 @@ const Table = ({ entries }: Props) => {
 
                                     {getLogoTag(typeof (team.team) === "object" ? team.team : team)}
 
-                                    <div className='text-start text-[11px]  pl-2'>{typeof (team.team) === "object" ? team.team.shortDisplayName : team.team}</div>
+                                    <div className='text-start md:text-[13px] text-[11px]  pl-2'>{typeof (team.team) === "object" ? team.team.shortDisplayName : team.team}</div>
                                 </div>
                             </td>
 

@@ -540,3 +540,18 @@ export const translateStatLabel = (label:string) => {
     }
 
 }
+
+export const countStates = (leagues:any) => {
+  return leagues.reduce(
+    (acc:any, league:any) => {
+      league.events.forEach((event:any) => {
+        const state = event.status.type.state;
+        if (state in acc) {
+          acc[state]++;
+        }
+      });
+      return acc;
+    },
+    { pre: 0, in: 0, post: 0 }
+  );
+};

@@ -15,6 +15,8 @@ const Stats = ({ game }: Props) => {
   const awayLogo = getLogo(away.team, IMG_SIZE)
   const statsLength = game.boxscore.teams[0].statistics.length
 
+  
+  
 
   const stats = [
     {
@@ -33,7 +35,7 @@ const Stats = ({ game }: Props) => {
     },
     {
       displayName: "PASES",
-      values: ["totalPasses", "accuratePasses", "totalLongBalls", "accurateLongBalls"].map((stat: any) => ({
+      values: ["totalPasses", "accuratePasses","totalLongBalls", "accurateLongBalls"].map((stat: any) => ({
         home: home.statistics.find((homeStat: any) => homeStat.name === stat),
         away: away.statistics.find((awayStat: any) => awayStat.name === stat),
       }))
@@ -69,13 +71,15 @@ const Stats = ({ game }: Props) => {
               </div>
 
               {
-                section.values.map((value: any, j: number) => (
-                  <Stat
-                    key={j}
-                    homeStat={value.home}
-                    awayStat={value.away}
-                  />
-                ))
+                section.values[0].home != undefined  &&
+                  section.values.map((value: any, j: number) => (
+                    <Stat
+                      key={j}
+                      homeStat={value.home}
+                      awayStat={value.away}
+                    />
+                  ))
+                  
               }
             </div>
           ))

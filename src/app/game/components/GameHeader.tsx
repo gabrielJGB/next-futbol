@@ -25,7 +25,7 @@ const GameHeader = ({ game, leagueName, gameData, leagueId, details, stage = "",
 
     const shootout = game.status.type.name === "STATUS_FINAL_PEN" ? `(${game.competitors[0].shootoutScore}-${game.competitors[1].shootoutScore})` : false
     
-    console.log(game,shootout);
+    
     
 
 

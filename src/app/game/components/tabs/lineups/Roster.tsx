@@ -5,7 +5,8 @@ import Image from 'next/image'
 
 type Props = {
     roster: any,
-    logo: any
+    logo: any,
+    
 }
 
 const Roster = ({ roster, logo }: Props) => {
@@ -24,7 +25,7 @@ const Roster = ({ roster, logo }: Props) => {
 
         <div
             style={{ minWidth: windowWidth < 800 ? (windowWidth - 10) : "auto" }}
-            className='flex flex-col gap-2 col-span-1 w-full '
+            className={` flex flex-col gap-2 col-span-1 w-full`}
         >
 
             <div className='bg-[--tw-color-800] rounded-lg divide-y-[1px] p-2 divide-[--tw-color-700]'>

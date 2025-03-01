@@ -10,11 +10,12 @@ type Props = {
     awayLogo: string,
     homeFormation: string,
     awayFormation: string,
-
+    invertField: boolean,
+    setInvertField: any
 }
 
-const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo }: Props) => {
-    const BACKGROUND_IMG = "https://raw.githubusercontent.com/gabrielJGB/futbol-11/refs/heads/main/assets/field55.png"
+const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo, invertField, setInvertField }: Props) => {
+
 
     const formations = [game.rosters[0].formation.split("-"), game.rosters[1].formation.split("-")]
     const rosterHome = game.rosters[0].roster.filter((elem: any) => elem.starter)
@@ -67,7 +68,7 @@ const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo }: Props
         if (formations[k][1] === "4" && formations[k][2] === "1" && formations[k][3] === "1") {
             // switchPositions(k, 5, 6)
             // switchPositions(k, 7,8)
-            switchPositions(k, 9,10)
+            switchPositions(k, 9, 10)
 
         }
 
@@ -108,9 +109,10 @@ const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo }: Props
     return (
 
         <div
-            className='z-10 top-0 relative flex  flex-row bg-field bg-contain bg-no-repeat  rounded-lg shadow shadow-gray-900 bg-center px-[3px] justify-center  h-[460px] md:h-[500px]'
+            className={`z-10 top-0 relative flex  ${!invertField ? "flex-row" : "flex-row-reverse"} bg-field bg-contain bg-no-repeat  rounded-lg shadow shadow-gray-900 bg-center px-[3px] justify-center  h-[460px] md:h-[500px]`}
 
             style={{
+
                 backgroundImage: `url("/field2.png")`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -121,27 +123,28 @@ const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo }: Props
 
         >
 
+            <button
+                className='absolute left-[47%] p-1 bg-[rgb(0,0,0,0.5)] active:bg-gray-900 md:hover:bg-gray-900 text-gray-400 md:hover:text-white transition-all font-bold rounded text-center px-3 mt-1 mb-2 mx-auto border-gray-600 border-[1px]'
+                onClick={() => setInvertField(!invertField)}
+            > {"<->"} </button>
 
+            {
+                [
+                    { logo: homeLogo, formation: homeFormation },
+                    { logo: awayLogo, formation: awayFormation }
+                ].map((elem: any, i: number) => (
 
-            <div className='absolute top-1 left-1 font-bold text-sm flex flex-row items-center gap-2'>
-                {
-                    homeLogo != "-" &&
-                    <img src={homeLogo} alt="logo" />
-                }
-                <div
-                    style={{ textShadow: "black 1px 1px 1px" }}
-                    className='font-bold text-sm'>{homeFormation}</div>
-            </div>
-
-            <div className='absolute top-1 right-1 flex flex-row-reverse items-center gap-2'>
-                {
-                    awayLogo != "-" &&
-                    <img src={awayLogo} alt="logo" />
-                }
-                <div
-                    style={{ textShadow: "black 1px 1px 1px" }}
-                    className='font-bold text-sm'>{awayFormation}</div>
-            </div>
+                    <div key={i} className={`absolute top-1 ${i === 0 && !invertField ? "left-1" : (i === 1 && invertField ? "left-1" : "right-1")} font-bold text-sm flex flex-row items-center gap-2`}>
+                        {
+                            elem.logo != "-" &&
+                            <img src={elem.logo} alt="logo" />
+                        }
+                        <div
+                            style={{ textShadow: "black 1px 1px 1px" }}
+                            className='font-bold text-sm'>{elem.formation}</div>
+                    </div>
+                ))
+            }
 
 
 
@@ -150,7 +153,7 @@ const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo }: Props
 
                     <div
                         key={k}
-                        className={`flex ${k === 0 ? "flex-row" : "flex-row-reverse"}  justify-evenly gap-1 md:w-1/2 w-full bg-center `}
+                        className={`flex ${k === 0 ? (!invertField ? "flex-row" : "flex-row-reverse") : (!invertField ? "flex-row-reverse" : "flex-row")}  justify-evenly gap-1 md:w-1/2 w-full bg-center `}
                     >
 
 
@@ -166,6 +169,7 @@ const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo }: Props
                                     isHome={k === 0}
                                     playersInLine={formations[k].length + 1}
                                     isThisBoca={game.header.competitions[0].competitors[k].team.id === "5"}
+                                    invertField={invertField}
                                 />
 
                             ))

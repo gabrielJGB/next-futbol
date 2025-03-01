@@ -3,7 +3,7 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import League from './League'
 import GameCard from './Game'
-import { getFlag, getStatus, getStatusColor, leagueHasState } from '@/utils/game'
+import { countStates, getFlag, getStatus, getStatusColor, leagueHasState } from '@/utils/game'
 import { fetchLaegues } from '@/utils/fetch'
 import { useDateStore } from '@/stores/dateStore'
 import Sorted from './Sorted'
@@ -23,23 +23,24 @@ const Main = ({ leagues, leaguesData }: Props) => {
     const [selectedState, setSelectedState] = useState("")
     const { setStoredDate } = useDateStore()
     const { setSofaEvents } = useStates()
-
+    const gamesStatesCount = countStates(leagues)
 
 
     useEffect(() => {
 
-        const date = _leagues.length > 0 ? formatDate3(_leagues[0].events[0].date) : ""
-        const dateObject = new Date(_leagues[0].events[0].date)
+        const date: any = _leagues.length > 0 ? formatDate3(_leagues[0].events[0].date) : undefined
+        const dateObject = date != undefined? new Date(_leagues[0]?.events[0].date) : undefined
 
         setStoredDate(date)
 
         fetchLaegues(date)
             .then(resp => setLeagues(resp))
-        
+            .catch(error => setLeagues([]))
 
-        if (isSameDay(dateObject, new Date()) ) {
-            console.log("Fetching Leagues ", new Date() );
-            
+
+        if (dateObject != undefined && isSameDay(dateObject, new Date())) {
+            console.log("Fetching Leagues ", new Date());
+
             let interval = setInterval(() => {
                 fetchLaegues(date)
                     .then(resp => setLeagues(resp))
@@ -62,26 +63,26 @@ const Main = ({ leagues, leaguesData }: Props) => {
 
         <div className='flex flex-col md:gap-10 gap-7 mt-8 mx-1 '>
 
-            <div className='flex flex-row justify-center items-stretch gap-0 border-[1px] border-gray-800 text-gray-400 text-xs  transition-all rounded'>
+            <div className='flex flex-row justify-center items-stretch gap-0  text-gray-300 text-xs  transition-all rounded '>
                 <button
-                    className={`flex-1 ${selectedState === "post" ? "bg-slate-900 text-white border-slate-700" : "bg-gray-950 border-transparent"}  hover:text-white border-[1px] p-2  cursor-pointer`}
+                    className={`flex-1 ${selectedState === "post" ? "bg-slate-900 text-white border-slate-700" : " border-transparent"}  hover:text-white border-[1px] p-2  cursor-pointer transition-all`}
                     onClick={() => setSelectedState(prev => prev === "post" ? "" : "post")}
                 >
-                    Finalizados
+                    Finalizados ({gamesStatesCount.post})
                 </button>
 
                 <button
-                    className={`flex-1 ${selectedState === "in" ? "bg-red-900 text-white border-red-700" : "bg-gray-950 border-transparent"}  hover:text-white border-[1px] p-2   cursor-pointer`}
+                    className={`flex-1 ${selectedState === "in" ? "bg-red-900 text-white border-red-700" : "border-transparent"}  hover:text-white border-[1px] p-2   cursor-pointer transition-all`}
                     onClick={() => setSelectedState(prev => prev === "in" ? "" : "in")}
                 >
-                    Jugando
+                    Jugando ({gamesStatesCount.in})
                 </button>
 
                 <button
-                    className={`flex-1 ${selectedState === "pre" ? "bg-green-900 text-white border-green-700" : "bg-gray-950 border-transparent"}  hover:text-white border-[1px] p-2   cursor-pointer`}
+                    className={`flex-1 ${selectedState === "pre" ? "bg-green-900 text-white border-green-700" : " border-transparent"}  hover:text-white border-[1px] p-2   cursor-pointer transition-all`}
                     onClick={() => setSelectedState(prev => prev === "pre" ? "" : "pre")}
                 >
-                    Programados
+                    Programados ({gamesStatesCount.pre})
                 </button>
 
             </div>
@@ -106,7 +107,7 @@ const Main = ({ leagues, leaguesData }: Props) => {
                                         leagueName={data.leagues[0].name}
                                         leagueHasState={leagueHasState(data, selectedState)}
                                         selectedState={selectedState}
-                                        leagueData={leaguesData.filter((league: any) => league.id === data.leagues[0].id)[0]}
+                                        leagueData={leaguesData?.filter((league: any) => league.id === data.leagues[0].id)[0]}
                                     />
                                 ))
                             }

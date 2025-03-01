@@ -13,7 +13,7 @@ const Videos = ({ game }: Props) => {
 
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col-reverse px-1 gap-6'>
 {/* 
       <button
         className={`${hd ? "bg-green-800" : "bg-black"} cursor-pointer w-[120px] py-1 text-xs text-white border-[1px] border-gray-500 rounded`}
