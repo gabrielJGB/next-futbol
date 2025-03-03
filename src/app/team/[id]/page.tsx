@@ -22,9 +22,9 @@ const Team = async ({ params }: Params) => {
     
 
     return (
-        <div>
+        
         <Main id={id} />
-        </div>
+        
     )
 }
 

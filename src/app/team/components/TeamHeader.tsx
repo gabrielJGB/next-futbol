@@ -21,7 +21,7 @@ const TeamHeader = ({ team }: Props) => {
       }
 
       <div>
-        <div className='mb-0 text-2xl font-bold '>{team.name}</div>
+        <div className='mb-0 md:text-2xl text-lg font-bold '>{team.name}</div>
         <div className='mb-0 md:text-sm text-xs text-gray-400'>{team.standingSummary}</div>
       </div>
     </div>
