@@ -1,4 +1,5 @@
 import { getLogo } from '@/utils/game'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 type Props = {
@@ -8,11 +9,11 @@ const IMG_SIZE = 23
 
 const Table = ({ entries }: Props) => {
 
-    console.log(entries);
-    
+    const {push} = useRouter()
+
 
     const getLogoTag = (team: any) => {
-        
+
         const logo = getLogo(team, IMG_SIZE)
 
         return <img src={logo} alt="Logo" width={IMG_SIZE} height={IMG_SIZE} />
@@ -37,7 +38,11 @@ const Table = ({ entries }: Props) => {
 
                 {
                     entries.map((team: any, i: number) => (
-                        <tr key={i} className={`${i%2===0?"bg-[--tw-color-800]":"bg-[--tw-color-900]"} border-b-[1px] border-[--tw-color-950] md:text-[14px] text-[12px]`}>
+                        <tr
+                            key={i}
+                            className={`${i % 2 === 0 ? "bg-[--tw-color-800]" : "bg-[--tw-color-900]"} md:hover:bg-[--tw-color-700] cursor-pointer transition-all border-b-[1px] border-[--tw-color-950] md:text-[14px] text-[12px]`}
+                            onClick={()=> push(`/team/${team.id}`)}
+                        >
 
                             <td className='font-semibold text-center py-2'>{team.stats.find((stat: any) => stat.name === "rank").value}</td>
 

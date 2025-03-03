@@ -33,7 +33,7 @@ const Player = ({ player }: Props) => {
     const height = player.displayHeight != undefined ? player.displayHeight.replace(" m", "") : false
 
     return (
-        <div className='flex flex-row items-center justify-between text-xs py-2 md:hover:bg-[--tw-color-700] active:bg-[--tw-color-700] transition-all cursor-pointer px-1'>
+        <div className='flex flex-row items-center justify-between text-xs md:py-2 py-3 md:hover:bg-[--tw-color-700] active:bg-[--tw-color-700] transition-all cursor-pointer px-1'>
             <div className='flex flex-row items-center gap-2'>
                 <div className='w-[23px] py-[1px] bg-[--tw-color-950] rounded text-center font-bold'>{"jersey" in player ? `${player.jersey}` : "-"}</div>
                 {

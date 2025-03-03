@@ -40,7 +40,7 @@ const VideoCard = ({ video, muted, autoPlay, hd }: Props) => {
 
             {
                 "description" in video &&
-                <div className='text-gray-300 text-xs px-2 pb-1 leading-4'>{video.description}</div>
+                <div className='text-gray-300 md:text-xs text-[11px] px-2 pb-1 leading-4'>{video.description}</div>
             }
 
 

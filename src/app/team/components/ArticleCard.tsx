@@ -57,10 +57,10 @@ const ArticleCard = ({ article }: Props) => {
       {
         <div className='flex flex-col gap-2 p-2'>
           <div className='text-xs text-gray-400 font-bold'>{formatDate(article.published)}</div>
-          <div className='text-[20px] leading-6 font-bold '>
+          <div className='text-[20px] leading-6 font-semibold'>
             {`${article.type === 'Media' ? "[Video]" : ""} ${article.headline}`}
           </div>
-          <div className='text-xs'>{article.description}</div>
+          <div className='text-[12px] text-gray-300'>{article.description}</div>
         </div>
       }
 

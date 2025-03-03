@@ -45,7 +45,7 @@ const Prev = ({ game }: Props) => {
                   </h2>
                 </div>
 
-                <div key={i} className='flex flex-col gap-2 bg-[--tw-color-800] md:col-span-1 col-span-2 p-2 rounded-lg pb-2'>
+                <div key={i} className='flex flex-col gap-2 md:col-span-1 col-span-2 p-2 rounded-lg pb-2'>
 
                   {
                     team.events.map((event: any, j: number) => (
@@ -83,7 +83,7 @@ const Prev = ({ game }: Props) => {
 
             <h2 className='p-2 text-center text-xl font-bold'>Últimos enfrentamientos</h2>
 
-            <div className='flex flex-col gap-2 bg-[--tw-color-800] mx-1 p-2  rounded-lg'>
+            <div className='flex flex-col gap-2  mx-1 p-2  rounded-lg'>
               {
 
                 headToHeadGames.events.map((event: any, j: number) => (

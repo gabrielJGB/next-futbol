@@ -115,6 +115,10 @@
   border-color: transparent; */
 }
 
+.react-calendar__tile:active{
+  background-color: var(--tw-primary);
+}
+
 .react-calendar__tile:hover {
   background-color: var(--tw-color-700);
 

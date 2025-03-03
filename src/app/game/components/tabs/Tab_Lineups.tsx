@@ -34,11 +34,11 @@ const Lineups = ({ game }: Props) => {
 
     return (
         <>
-
+{/* 
             {
                 roster && !formation &&
                 <TeamSelector game={game} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
-            }
+            } */}
 
 
             <div className=' overflow-x-auto  px-1 md:px-0'>

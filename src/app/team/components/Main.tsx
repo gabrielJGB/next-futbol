@@ -6,6 +6,7 @@ import TeamArticles from './TeamArticles'
 import { fetchRoster, fetchTeam, fetchTeamArticles } from '@/utils/fetch'
 import TeamHeader from './TeamHeader'
 import TabBar from './TabBar'
+import Spinner from '@/components/Spinner'
 
 type Props = {
     id: any
@@ -27,7 +28,7 @@ const Main = ({ id }: Props) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log("fetching team")
+            console.log("fetching team id:", id)
             try {
                 const [res1, res2, res3] = await Promise.all([
                     fetchTeam(id, false).then(res => res),
@@ -59,7 +60,7 @@ const Main = ({ id }: Props) => {
                 return <TeamRoster data={data?.res2 || null} selectedTab={selectedTab} />
             else if (selectedTab === 2)
                 return <TeamArticles data={data?.res3 || null} selectedTab={selectedTab} />
-        }else{
+        } else {
             return (
                 <>
                     <TeamFixture data={data?.res1 || null} selectedTab={selectedTab} teamId={id} />
@@ -73,7 +74,8 @@ const Main = ({ id }: Props) => {
 
 
 
-    if (loading) return <div className='text-sm mx-auto my-4 text-center'>Cargando...</div>;
+    if (loading)
+        return <Spinner />
 
     return (
 

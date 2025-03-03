@@ -26,7 +26,7 @@ const getResultColor = (gameResult: any) => {
     if (gameResult === "P")
         return "#e91e1e"
     else if (gameResult === "G")
-        return "#33af33"
+        return "#13ff13"
     else if (gameResult === "E")
         return "#cbcb38"
     else

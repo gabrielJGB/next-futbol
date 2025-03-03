@@ -9,12 +9,15 @@ const IMG_SIZE = 60
 
 const TeamHeader = ({ team }: Props) => {
   
-
   const logo = getLogo(team, IMG_SIZE)
+
+  if(team === null)
+    return <div></div>
 
   return (
     <div className='flex flex-row items-center gap-3 md:bg-[--tw-color-950] bg-[--tw-color-800] p-3  '>
 
+      
       {
         logo != "-" &&
         <img src={logo} alt="Logo" width={IMG_SIZE} height={IMG_SIZE} />

@@ -1,8 +1,34 @@
-import { convertTimestamp, timeUntil } from '@/utils/dates'
+import { convertTimestamp } from '@/utils/dates'
 import React from 'react'
+import { BiCalendar, BiCrown } from 'react-icons/bi'
+import { FaCity } from 'react-icons/fa'
+import { GiWhistle } from 'react-icons/gi'
+import { HiInformationCircle } from 'react-icons/hi'
+import { MdStadium } from 'react-icons/md'
 
 type Props = {
     game: any
+}
+
+const CALENDAR = 22
+
+const getIcon = (icon: string) => {
+
+    switch (icon) {
+        case "calendar":
+            return <BiCalendar size={CALENDAR} color='white' />
+        case "city":
+            return <FaCity size={CALENDAR} color='white' />
+        case "crowd":
+            return <BiCrown size={CALENDAR} color='white' />
+        case "whistle":
+            return <GiWhistle size={CALENDAR} color='white' />
+        case "stadium":
+            return <MdStadium size={CALENDAR} color='white' />
+        case "information":
+            return <HiInformationCircle size={CALENDAR} color='white' />
+    }
+
 }
 
 const Card = ({ title, value, icon }: { title: string | boolean, value: string, icon: string }) => {
@@ -10,14 +36,14 @@ const Card = ({ title, value, icon }: { title: string | boolean, value: string, 
 
 
     return (
-        <div className='flex flex-row gap-2 items-center justify-start px-2 py-1'>
-            {/* <div className='w-[20px] h-[20px] bg-slate-600 text-sm rounded-[20px] flex justify-center items-center font-bold  text-slate-300'>!</div> */}
+        <div className='flex flex-row gap-2 items-center justify-start px-1 py-1'>
+            {getIcon(icon)}
             <div className='flex flex-col '>
                 {
                     title &&
                     <div className='text-[12px] font-bold text-gray-400'>{title}</div>
                 }
-                <div className={`text-[13px] ${title ? "" : "py-2"}`}>{value === "Ida" || value === "Vuelta" ? "Partido de " + value : value}</div>
+                <div className={`text-[12px] ${title ? "" : "py-2"}`}>{value === "Ida" || value === "Vuelta" ? "Partido de " + value : value}</div>
             </div>
         </div>
     )
@@ -36,7 +62,7 @@ const GameInfo = ({ game }: Props) => {
         <div className='shadow shadow-gray-800 bg-[--tw-color-800] flex flex-col p-2 divide-y-[1px] divide-[--tw-color-700] gap-0 rounded-lg  '>
             <h3 className='text-center font-bold pb-2'>DATOS DEL PARTIDO</h3>
 
-            <Card title="Fecha" value={dateString} icon={"calendar-month"} />
+            <Card title="Fecha" value={dateString} icon={"calendar"} />
 
             {/* {!playing && <Card title="Contador" value={timeUntil(game.header.competitions[0].date)} icon={"timer-sand"} />} */}
 
@@ -91,7 +117,7 @@ const GameInfo = ({ game }: Props) => {
                     <Card
                         title={false}
                         value={game.header.competitions[0].competitors[0].groups.abbreviation}
-                        icon="information-outline"
+                        icon="information"
                     />
                 </div>
 
@@ -107,7 +133,7 @@ const GameInfo = ({ game }: Props) => {
                     <Card
                         title={false}
                         value={game.header.competitions[0].groups.abbreviation}
-                        icon="information-outline"
+                        icon="information"
                     />
                 </div>
 

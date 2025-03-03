@@ -2,8 +2,8 @@ import React from 'react'
 import { formatDate4 } from '@/utils/dates'
 import { getLogo } from '@/utils/game'
 import Link from 'next/link'
-import { BiTrophy } from 'react-icons/bi'
 import { BsTrophyFill } from 'react-icons/bs'
+
 
 type Props = {
     event: any,
@@ -46,11 +46,10 @@ const FixtureGame = ({ event, teamId, num }: Props) => {
             className='flex flex-col divide-y-[1px] divide-[--tw-color-700] px-1 bg-[--tw-color-800] border-[1px] border-transparent md:hover:border-[--tw-primary] active:border-[--tw-primary] transition-all rounded-lg'
         >
 
-            <div className='flex flex-row item-center justify-between py-[1px] font-semibold text-[11px] text-gray-400'>
+            <div className='flex flex-row item-center justify-between py-[2px] font-semibold md:text-xs text-[10px] text-gray-400'>
                 <div className='flex flex-row items-center gap-2'>
                     {isTournament && <BsTrophyFill color='white' size={12} />}
-                    
-                    <div>{leagueName}</div>
+                    <div className='md:text-xs text-[11px]'>{leagueName}</div>
                 </div>
                 <div>{formatDate4(event.date).replaceAll("-", "/")}</div>
             </div>
@@ -65,10 +64,11 @@ const FixtureGame = ({ event, teamId, num }: Props) => {
                             <img src={rivalLogo} alt="Logo" width={LOGO} height={LOGO} />
                         }
                         <div className='text-xs'>{rival.team.displayName}</div>
+                        
                     </div>
                 </div>
-                <div className={`${getScoreColor()} text-center min-w-[40px] font-bold px-2 py-1`}>
-
+                <div className={`${getScoreColor()} text-center min-w-[40px] rounded font-bold px-2 py-1`}>
+                        
                     {
                         event.played &&
                         `${teamScore}-${rivalScore}`

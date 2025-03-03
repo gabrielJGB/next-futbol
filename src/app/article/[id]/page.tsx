@@ -1,4 +1,5 @@
 import VideoCard from '@/app/game/components/tabs/overview/VideoCard'
+import Spinner from '@/components/Spinner'
 import { formatDate, formatDate2 } from '@/utils/dates'
 import { fetchArticle } from '@/utils/fetch'
 import Link from 'next/link'
@@ -48,7 +49,6 @@ const Page = async ({ params }: Params) => {
     <div className='flex flex-col  justify-center items-center mx-auto'>
       <div className='flex flex-col gap-2 justify-center md:mt-6 md:pt-3 pt-2 md:px-6 px-2 md:w-[60%] w-[100%] bg-[--tw-color-800] pb-2 rounded'>
         <h1 className='md:text-3xl text-2xl  font-bold'>{article.headline}</h1>
-
         <div className='pt-2 text-sm text-gray-300 font-bold '>{published}hs</div>
 
         <p className='text-gray-300 text-[16px] '>{article.description}</p>

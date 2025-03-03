@@ -4,8 +4,8 @@ type Props = {}
 
 const Loading = (props: Props) => {
   return (
-    <p className='p-2 text-center'>
-      Cargando...
+    <p className='mt-4 flex items-center justify-center'>
+      <div className='spinner'></div>
     </p>
   )
 }
