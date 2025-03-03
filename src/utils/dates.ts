@@ -162,7 +162,7 @@ export const formatDate = (date: string) => {
 export const formatDate2 = (date: string) => {
 
     const t = new Date(date)
-    const dateString = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2,"0")}-${t.getDate()}`
+    const dateString = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`
 
     return dateString
 
@@ -179,3 +179,13 @@ export const formatDate3 = (date: string) => {
 
 }
 
+
+export const formatDate4 = (date: string) => {
+
+    const t = new Date(date)
+
+    const dateString = `${ String(t.getDate()).padStart(2,"0")}/${String(t.getMonth() + 1).padStart(2,"0")}/${t.getFullYear()}`
+
+    return `${dateString} `
+
+}

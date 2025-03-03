@@ -1,3 +1,4 @@
+import { fetchRoster, fetchTeam, fetchTeamArticles } from '@/utils/fetch'
 import type { NextApiRequest, NextApiResponse } from 'next'
  
 export default async function handler(
@@ -5,12 +6,18 @@ export default async function handler(
   res: NextApiResponse
 ) {
 
-//   const { name, message } = req.body
+  let { teamId, season } = req.body
  
   try {
+    if(season === undefined)
+        season = false
+
+    const team = await fetchTeam(teamId, false)
     
-    res.json({message:"epa"})
+    res.json(team)
+
+
   } catch (err) {
-    res.status(500).send({ error: 'Failed to fetch data' })
+    res.status(500).send({ error: err })
   }
 }

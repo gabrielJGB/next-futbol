@@ -3,6 +3,7 @@ import { getLogo } from '@/utils/game'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import teamLogo404 from '@/assets/team.png'
+import Link from 'next/link'
 
 type Props = {
     team: any
@@ -16,7 +17,7 @@ const Team = ({ team }: Props) => {
     const logo = getLogo(team, 40)
 
     return (
-        <div className='flex flex-col gap-1 items-center justify-between hover:underline transition-all cursor-pointer'>
+        <Link href={`/team/${team.id}`} className='flex flex-col gap-1 items-center justify-between hover:underline transition-all cursor-pointer'>
 
             {
                 logo != "-" ?
@@ -26,7 +27,7 @@ const Team = ({ team }: Props) => {
             }
             <div className='text-sm md:text-xs font-bold text-center'>{team.shortDisplayName}</div>
 
-        </div>
+        </Link>
     )
 }
 

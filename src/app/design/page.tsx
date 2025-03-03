@@ -4,25 +4,13 @@ type Props = {}
 
 const Loading = (props: Props) => {
   return (
-    <div className='flex flex-col w-full gap-7 '>
-      <div className='grid grid-cols-3 items-center text-center bg-[--tw-color-800] w-full h-[43px]'>
-        <div className='w-full h-full border-b-[2px] border-transparent'>--- --/--/--</div>
-        <div className='w-full h-full border-b-[2px] border-[--tw-primary]'>--- --/--/--</div>
-        <div className='w-full h-full border-b-[2px] border-transparent'>--- --/--/--</div>
-      </div>
-
-    <div className='flex flex-col gap-7 px-[2px] sm:mx-0'>
-
-
-    {
-      Array.from({ length: 8 }).map( (_, i) => (
-        <div key={i} className='animate-pulse bg-[--tw-color-800] rounded-lg shadow shadow-slate-900 h-[200px]'></div>
- 
-      ))
-    }
-
-    </div>
-
+    <div className='flex flex-col w-full gap-7 py-3 px-20 text-sm '>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci dolorem ab, iusto, eveniet magnam doloremque reprehenderit culpa ea esse autem dolore aliquam placeat voluptas. Aut eveniet dolorum minus error libero?
+        Harum eius corporis architecto voluptatum incidunt facilis vitae iure iste sit accusamus sint eum pariatur dicta placeat amet impedit illum, deleniti officiis reprehenderit quibusdam ad voluptate. Numquam dolor quia saepe?</p>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci dolorem ab, iusto, eveniet magnam doloremque reprehenderit culpa ea esse autem dolore aliquam placeat voluptas. Aut eveniet dolorum minus error libero?
+        Harum eius corporis architecto voluptatum incidunt facilis vitae iure iste sit accusamus sint eum pariatur dicta placeat amet impedit illum, deleniti officiis reprehenderit quibusdam ad voluptate. Numquam dolor quia saepe?</p>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci dolorem ab, iusto, eveniet magnam doloremque reprehenderit culpa ea esse autem dolore aliquam placeat voluptas. Aut eveniet dolorum minus error libero?
+        Harum eius corporis architecto voluptatum incidunt facilis vitae iure iste sit accusamus sint eum pariatur dicta placeat amet impedit illum, deleniti officiis reprehenderit quibusdam ad voluptate. Numquam dolor quia saepe?</p>
     </div>
   )
 }

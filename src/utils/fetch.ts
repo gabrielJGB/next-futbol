@@ -140,3 +140,135 @@ export const fetchVideo = async (id: string) => {
     }
 
 }
+
+export const fetchTeam = async (teamId: string, season: number | boolean) => {
+    try {
+        
+        let url1 = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/${teamId}/schedule?region=ar&lang=es`
+        let url2 = url1 + "&fixture=true"
+
+        if (season) {
+            url1 = url1 + `&season=${season}`
+            url2 = url2 + `&season=${season}`
+        }
+
+        const res1 = await fetch(url1)
+        const data1 = await res1.json()
+
+        if ("events" in data1 && data1.events.length === 0)
+            throw new Error("Sin datos")
+
+
+        const res2 = await fetch(url2)
+        const data2 = await res2.json()
+
+        const previousGames = data1.events
+        const nextGames = data2.events
+
+        previousGames.forEach((object: any) => {
+            object['played'] = true;
+        })
+
+        nextGames.forEach((object: any) => {
+            object['played'] = false;
+        })
+
+
+        let events = [...previousGames, ...nextGames]
+
+        events.sort((a, b) => {
+            return a.date.localeCompare(b.date);
+        })
+
+
+        delete data1.events
+
+        return { teamData: { ...data1 }, events }
+
+
+
+    } catch (error) {
+        throw error
+    }
+
+}
+
+
+export const fetchRoster = async (teamId: string) => {
+
+    try {
+        const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/${teamId}?enable=roster&lang=es`
+        const res = await fetch(url)
+        const data = await res.json()
+        return data
+
+    } catch (error) {
+        throw error
+    }
+
+}
+
+
+export const fetchTeamArticles = async (teamId:string) => {
+
+    const articleCount = 32
+    const url = `https://site.web.api.espn.com/apis/v2/flex?sport=soccer&league=soccer&region=ar&lang=es&contentorigin=deportes&team=${teamId}&limit=${articleCount}&offset=0&pubkey=soccer-clubhouse`
+    const res = await fetch(url)
+    const data = await res.json()
+    const articles = data.columns[1].items[0].feed.filter((article:any) => article.type === "dStory")
+
+    return articles
+
+}
+
+
+// export const fetchTeam = async (teamId: string, season: string | number) => {
+
+//     try {
+//         //?enable=roster
+
+//         const url1 = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/${teamId}/schedule?region=ar&lang=es&season=${season}`
+//         const url2 = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/${teamId}/schedule?region=ar&lang=es&fixture=true&season=${season}`
+
+//         const res1 = await fetch(url1)
+//         const data1 = await res1.json()
+
+//         if ("events" in data1 && data1.events.length === 0)
+//             throw new Error("Sin datos")
+
+//         const teamResp2 = data1.season.year === data1.requestedSeason.year ? await fetch(url2) : { events: [] }
+
+//         const teamInfo = data1
+//         const previousGames = data1.events
+//         const nextGames = teamResp2.events
+
+//         previousGames.forEach((objeto: any) => {
+//             objeto['played'] = true;
+//         })
+
+//         nextGames.forEach((objeto: any) => {
+//             objeto['played'] = false;
+//         });
+
+
+//         let events = [...previousGames, ...nextGames]
+
+//         events.sort((a, b) => {
+//             return a.date.localeCompare(b.date);
+//         });
+
+
+//         const leaguesRepeated = events.map(event => event.league)
+//         const seasonLeagues = Array.from(new Set(leaguesRepeated.map(JSON.stringify))).map(JSON.parse)
+//         const leagues = seasonLeagues.map(league => ({ ...league, events: events.filter(event => event.league.id === league.id) }))
+
+//         delete teamInfo.events
+
+
+//         return { ...teamInfo, leagues }
+
+//     } catch (error) {
+//         throw error
+//     }
+
+// }

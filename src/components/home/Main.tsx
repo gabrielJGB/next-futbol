@@ -63,23 +63,23 @@ const Main = ({ leagues, leaguesData }: Props) => {
 
         <div className='flex flex-col md:gap-10 gap-7 mt-8 mx-1 '>
 
-            <div className='flex flex-row justify-center items-stretch gap-0  text-gray-300 text-xs  transition-all rounded '>
+            <div className='flex  flex-row justify-evenly  items-stretch gap-0  text-gray-300 text-xs  transition-all rounded '>
                 <button
-                    className={`flex-1 ${selectedState === "post" ? "bg-slate-900 text-white border-slate-700" : " border-transparent"}  hover:text-white border-[1px] p-2  cursor-pointer transition-all`}
+                    className={`${selectedState === "post" ? "bg-slate-900 text-white border-slate-700" : " border-transparent"} px-3 rounded hover:text-white border-[1px] p-2  cursor-pointer transition-all`}
                     onClick={() => setSelectedState(prev => prev === "post" ? "" : "post")}
                 >
                     Finalizados ({gamesStatesCount.post})
                 </button>
 
                 <button
-                    className={`flex-1 ${selectedState === "in" ? "bg-red-900 text-white border-red-700" : "border-transparent"}  hover:text-white border-[1px] p-2   cursor-pointer transition-all`}
+                    className={`${selectedState === "in" ? "bg-red-900 text-white border-red-700" : "border-transparent"} px-3 rounded hover:text-white border-[1px] p-2   cursor-pointer transition-all`}
                     onClick={() => setSelectedState(prev => prev === "in" ? "" : "in")}
                 >
                     Jugando ({gamesStatesCount.in})
                 </button>
 
                 <button
-                    className={`flex-1 ${selectedState === "pre" ? "bg-green-900 text-white border-green-700" : " border-transparent"}  hover:text-white border-[1px] p-2   cursor-pointer transition-all`}
+                    className={`${selectedState === "pre" ? "bg-green-900 text-white border-green-700" : " border-transparent"} px-3 rounded hover:text-white border-[1px] p-2   cursor-pointer transition-all`}
                     onClick={() => setSelectedState(prev => prev === "pre" ? "" : "pre")}
                 >
                     Programados ({gamesStatesCount.pre})
