@@ -141,6 +141,20 @@ export const fetchVideo = async (id: string) => {
 
 }
 
+
+const getDefaultSeason = async (teamId: string) => {
+
+    const url = `https://sports.core.api.espn.com/v2/sports/soccer/teams/${teamId}?region=ar&lang=es`
+    const res = await fetch(url)
+    const data = await res.json()
+    const text = data.record.$ref
+    const season = text.match(/seasons\/(\d+)/)[1]
+
+    return season
+
+
+}
+
 export const fetchTeam = async (teamId: string, season: number | boolean) => {
     try {
 
@@ -150,7 +164,13 @@ export const fetchTeam = async (teamId: string, season: number | boolean) => {
         if (season) {
             url1 = url1 + `&season=${season}`
             url2 = url2 + `&season=${season}`
+        } else {
+            const defaultSeason = await getDefaultSeason(teamId)
+            url1 = url1 + `&season=${defaultSeason}`
+            url2 = url2 + `&season=${defaultSeason}`
+
         }
+
 
         const res1 = await fetch(url1)
         const data1 = await res1.json()
@@ -272,3 +292,24 @@ export const fetchTeamArticles = async (teamId: string) => {
 //     }
 
 // }
+
+
+
+export const fetchSearch = async (query:string) => {
+
+    const url = `https://site.web.api.espn.com/apis/search/v2?region=ar&lang=es&limit=10&page=1&dtciVideoSearch=true&query=${query}`
+
+    try {
+
+        const res = await fetch(url)
+        const data = res.json()
+
+        return data
+
+
+    } catch (error) {
+        throw error
+    }
+
+
+}

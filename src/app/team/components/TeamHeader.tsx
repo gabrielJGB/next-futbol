@@ -9,7 +9,7 @@ const IMG_SIZE = 60
 
 const TeamHeader = ({ team }: Props) => {
   
-  const logo = getLogo(team, IMG_SIZE)
+  const logo = getLogo(team, IMG_SIZE+10)
 
   if(team === null)
     return <div></div>
