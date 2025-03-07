@@ -81,7 +81,7 @@ const SearchPage = () => {
 
 
   return (
-    <div className="mt-4 text-xs">
+    <div className="flex flex-col gap-2  mt-4 text-xs">
 
 
       {
@@ -90,21 +90,22 @@ const SearchPage = () => {
           results.totalFound === 0 ?
             <div className="text-center m-3 font-semibold ">Sin resultados</div>
             :
-            <div>
+            <div >
+              {
+                "didYouMean" in results &&
+                <Link
+                  href={`/search?query=${results.didYouMean}`}
+                  className="flex flex-row items-center gap-1 mx-10"
+                  onClick={() => { }}
+                >
+                  <div className="text-red-400">Quizás quisiste decir:</div>
+                  <div>{results.didYouMean}</div>
+                </Link>
+              }
 
               <div className={`flex md:flex-row flex-wrap flex-col justify-evenly  md:gap-6 gap-6 md:m-6 m-2`}>
 
-                {
-                  "didYouMean" in results &&
-                  <Link
-                    href={`/search?query=${results.didYouMean}`}
-                    className="flex flex-row items-center gap-1"
-                    onClick={() => { }}
-                  >
-                    <div className="text-red-400">Quizás quisiste decir:</div>
-                    <div>{results.didYouMean}</div>
-                  </Link>
-                }
+
 
                 {
                   results.results.filter((n: any) => n.totalFound > 0).map((result: any, i: number) => (

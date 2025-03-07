@@ -1,4 +1,3 @@
-import { fetchRoster, fetchTeam, fetchTeamArticles } from '@/utils/fetch'
 import React from 'react'
 import Main from '../components/Main'
 

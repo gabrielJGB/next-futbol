@@ -43,7 +43,16 @@ const Card = ({ title, value, icon }: { title: string | boolean, value: string, 
                     title &&
                     <div className='text-[12px] font-bold text-gray-400'>{title}</div>
                 }
-                <div className={`text-[12px] ${title ? "" : "py-2"}`}>{value === "Ida" || value === "Vuelta" ? "Partido de " + value : value}</div>
+
+                {
+                    title === "Ciudad" || title === "Estadio" || title === "Arbitro" ?
+                        <a className={`text-[12px] ${title ? "" : "py-2"} hover:underline`} target='__blank' href={`https://www.google.com/search?q=${value}`}>
+                            {value === "Ida" || value === "Vuelta" ? "Partido de " + value : value}
+                        </a>
+                        :
+                        <div className={`text-[12px] ${title ? "" : "py-2"}`}>{value === "Ida" || value === "Vuelta" ? "Partido de " + value : value}</div>
+                }
+
             </div>
         </div>
     )

@@ -19,7 +19,7 @@ const TabBar = ({ selectedTab, setSelectedTab }: Props) => {
           <button
             key={i}
             onClick={() => setSelectedTab(i)}
-            className={`${selectedTab === i ? "border-[--tw-primary]" : "border-transparent"} md:border-transparent max-md:active:bg-[--tw-color-900] border-b-2 py-3 md:cursor-default md:text-lg`} >{button}</button>
+            className={`${selectedTab === i ? "border-[--tw-primary]" : "border-transparent"} md:border-transparent max-md:active:bg-[--tw-color-900] border-b-2 py-3 md:cursor-default md:text-lg transition-all duration-200`} >{button}</button>
         ))
       }
 

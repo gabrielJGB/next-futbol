@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import TeamFixture from './TeamFixture'
 import TeamRoster from './TeamRoster'
 import TeamArticles from './TeamArticles'
-import { fetchRoster, fetchTeam, fetchTeamArticles } from '@/utils/fetch'
+import { fetchTeamInformation, fetchRoster, fetchTeamEvents, fetchTeamArticles } from '@/utils/fetch'
 import TeamHeader from './TeamHeader'
 import TabBar from './TabBar'
 import Spinner from '@/components/Spinner'
@@ -19,94 +19,141 @@ interface ApiResponse {
 
 const Main = ({ id }: Props) => {
 
-
-    const [data, setData] = useState<ApiResponse | null>(null);
-
-    const [loading, setLoading] = useState(true);
+    const [season, setSeason] = useState<string | boolean>(false)
     const [selectedTab, setSelectedTab] = useState(0);
+    const [currentSeason, setCurrentSeason] = useState(null);
+    const [headerInfo, setHeaderInfo] = useState<any>(false)
+    const [events, setEvents] = useState<any>(false)
+    const [roster, setRoster] = useState<any>(false)
+    const [articles, setArticles] = useState<any>(false)
 
 
     useEffect(() => {
+
         const fetchData = async () => {
-            console.log("fetching team id:", id)
+
+            setHeaderInfo(false)
+
             try {
-                const [res1, res2, res3] = await Promise.all([
-                    fetchTeam(id, false).then(res => res),
-                    fetchRoster(id).then(res => res),
-                    fetchTeamArticles(id).then(res => res)
-                ]);
+                const data = await fetchTeamInformation(id)
+                setHeaderInfo(data)
 
-                setData({ res1, res2, res3 });
             } catch (error) {
-                console.error("Error fetching data:", error);
-            } finally {
-                setLoading(false);
-
+                setHeaderInfo(false)
             }
-        };
-
-        fetchData();
-
-    }, []);
-
-
-    const getSelected = (selectedTab: any, data: any) => {
-
-        if (window.innerWidth < 768) {
-            if (selectedTab === 0)
-                return <TeamFixture data={data?.res1 || null} selectedTab={selectedTab} teamId={id} />
-
-            else if (selectedTab === 1)
-                return <TeamRoster data={data?.res2 || null} selectedTab={selectedTab} />
-            else if (selectedTab === 2)
-                return <TeamArticles data={data?.res3 || null} selectedTab={selectedTab} />
-        } else {
-            return (
-                <>
-                    <TeamFixture data={data?.res1 || null} selectedTab={selectedTab} teamId={id} />
-                    <TeamRoster data={data?.res2 || null} selectedTab={selectedTab} />
-                    <TeamArticles data={data?.res3 || null} selectedTab={selectedTab} />
-                </>
-            )
-
         }
-    }
+
+        fetchData()
+
+    }, [])
 
 
+    useEffect(() => {
 
-    if (loading)
-        return <Spinner />
+        const fetchData = async () => {
+
+            setEvents(false)
+
+            try {
+                const data = await fetchTeamEvents(id, season)
+                console.log(data);
+                
+                setEvents(data.events)
+                setCurrentSeason(data.currentSeason)
+
+            } catch (error) {
+                setEvents(false)
+            }
+        }
+
+        fetchData()
+
+    }, [season])
+
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+
+            setRoster(false)
+
+            try {
+                const data = await fetchRoster(id, season)
+                setRoster(data)
+
+
+            } catch (error) {
+                setRoster(false)
+            }
+        }
+
+        fetchData()
+
+    }, [season])
+
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+
+            setArticles(false)
+
+            try {
+                const data = await fetchTeamArticles(id)
+                setArticles(data)
+
+
+            } catch (error) {
+                setArticles(false)
+            }
+        }
+
+        fetchData()
+
+    }, [])
+
 
     return (
 
         <div className='flex flex-col md:m-6'>
 
-            <TeamHeader team={data?.res2 != null ? data.res2.team : null} />
+            <div className='bg-[--tw-color-800] md:rounded-lg p-2 pb-4 md:border-[1px] border-[--tw-color-700]'>
+                {
+                    headerInfo ?
+                        <TeamHeader team={headerInfo} />
+                        :
+                        <Spinner />
+
+                }
+            </div>
+
             <TabBar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
 
-            <div className='grid md:grid-cols-3 gap-10 mt-3 px-2'>
+            <div className='grid md:grid-cols-3 grid-cols-1 gap-10 mt-3 mx-1'>
 
-                {
-                    getSelected(selectedTab, data)
-                }
+                <div className={`${selectedTab === 0 ? "max-md:" : "max-md:hidden"} `}>
+                    {
+                        events ?
+                            <TeamFixture data={events} selectedTab={selectedTab} teamId={id} season={season} setSeason={setSeason} currentSeason={currentSeason} />
+                            : <Spinner />
+                    }
+                </div>
 
-                {/* {data?.res1 != null &&
+                <div className={`${selectedTab === 1 ? "max-md:" : "max-md:hidden"}`}>
+                    {
+                        roster ?
+                            <TeamRoster data={roster} selectedTab={selectedTab} />
+                            : <Spinner />
+                    }
+                </div>
 
-                    <TeamFixture data={data?.res1 || null} selectedTab={selectedTab} teamId={id} />
-
-                }
-                {data?.res2 != null &&
-
-                    <TeamRoster data={data?.res2 || null} selectedTab={selectedTab} />
-
-                }
-                {data?.res3 != null &&
-
-                    <TeamArticles data={data?.res3 || null} selectedTab={selectedTab} />
-
-                } */}
-
-
+                <div className={`${selectedTab === 2 ? "max-md:" : "max-md:hidden"}`}>
+                    {
+                        articles ?
+                            <TeamArticles data={articles} selectedTab={selectedTab} />
+                            : <Spinner />
+                    }
+                </div>
 
             </div>
         </div>

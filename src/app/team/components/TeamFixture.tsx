@@ -7,13 +7,20 @@ type Props = {
   data: any,
   selectedTab: number,
   teamId: string,
+  season: any,
+  setSeason: any,
+  currentSeason:any
 }
 
-const TeamFixture = ({ data, selectedTab, teamId }: Props) => {
+const TeamFixture = ({ data, selectedTab, teamId, season, setSeason,currentSeason }: Props) => {
 
   const [filterId, setFilterId] = useState("all")
-  const leaguesRepeated = data.events.map((x: any) => ({ name: x.league.name, id: x.league.id }))
-  const leagues = Array.from(new Map(leaguesRepeated.map((obj: any) => [obj.id, obj])).values())
+  const [leaguesRepeated] = useState(data.map((x: any) => ({ name: x.league.name, id: x.league.id,fullName:x.season.displayName })))
+  const [leagues] = useState(Array.from(new Map(leaguesRepeated.map((obj: any) => [obj.id, obj])).values()))
+
+
+  
+  
   
 
 
@@ -21,26 +28,38 @@ const TeamFixture = ({ data, selectedTab, teamId }: Props) => {
     <div className={`max-md:${selectedTab === 0 ? "flex " : "hidden "} rounded-lg text-sm `}>
 
       <select
-        className='w-full rounded p-2 mb-4 bg-[--tw-color-800]'
+        className='w-full rounded p-2 mb-4 bg-[--tw-color-900] border-[--tw-color-700] border-[1px] md:hover:border-[--tw-primary] active:border-[--tw-primary] transition-all text-center font-semibold cursor-pointer'
+        onChange={(e) => setSeason(e.target.value)}
+        value={season}
+      >
+        {
+          Array.from({ length: (parseInt(currentSeason)) - 2000 }, (_, index) => (parseInt(currentSeason)) - index).map((year, i) => (
+            <option key={i} className='p-2' value={year}>Temporada {`${year}/${year+1}`}</option>
+          ))
+        }
+
+      </select>
+
+      <select
+        className='w-full rounded p-2 mb-4 bg-[--tw-color-900] border-[--tw-color-700] border-[1px] md:hover:border-[--tw-primary] active:border-[--tw-primary] transition-all  text-center font-semibold cursor-pointer'
         onChange={(e) => setFilterId(e.target.value)}
       >
         <option className='p-2' value="all" >Todos los partidos</option>
         {
           leagues.map((league: any, i: number) => (
 
-            <option key={i} className='p-2' value={league.id}>{league.name}</option>
+            <option key={i} className='p-2' value={league.id}>{league.fullName}</option>
           ))
         }
 
       </select>
 
-
       <div className='flex flex-col gap-2 w-full'>
         {
-          data.events.length > 0 ?
-            data.events.filter((elem: any) => filterId != "all" ? filterId === elem.league.id : true).map((event: any, i: number) => (
+          data && data.length > 0 ?
+            data.filter((elem: any) => filterId != "all" ? filterId === elem.league.id : true).map((event: any, i: number) => (
 
-              <FixtureGame key={i} num={i} event={event} teamId={teamId} />
+              <FixtureGame key={i} num={i} event={event} teamId={teamId} showLeagueName={filterId === "all"} />
             ))
             :
             <div className='text-xs text-center mt-2'>Sin datos</div>

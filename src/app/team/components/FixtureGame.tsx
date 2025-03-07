@@ -9,10 +9,11 @@ type Props = {
     event: any,
     teamId: string,
     num: number,
+    showLeagueName:boolean,
 }
 const LOGO = 24
 
-const FixtureGame = ({ event, teamId, num }: Props) => {
+const FixtureGame = ({ event, teamId, num,showLeagueName }: Props) => {
 
 
 
@@ -22,10 +23,11 @@ const FixtureGame = ({ event, teamId, num }: Props) => {
     const teamScore = event.played ? team.score.value : ""
     const rivalScore = event.played ? rival.score.value : ""
     const homeAway = team.homeAway === "home" ? "L" : "V"
-    const leagueName = event.league.shortName
+    const leagueName = event.league.shortName.replace("Argentine","")
     const isTournament = event.league.isTournament && leagueName.trim() != "Copa de la Liga Profesional"
     const gameStage = formatTitle(event.seasonType.name).trim()
-    const title = `${leagueName} ${isTournament ? `| ${gameStage}` : ""}`
+    const title =   `${showLeagueName? leagueName :""} ${isTournament ? ` ${gameStage.split("-")[1] || gameStage}` : ""}`
+
 
     
 
@@ -50,12 +52,12 @@ const FixtureGame = ({ event, teamId, num }: Props) => {
             className='flex flex-col divide-y-[1px] divide-[--tw-color-700] px-1 bg-[--tw-color-800] border-[1px] border-transparent md:hover:border-[--tw-primary] active:border-[--tw-primary] transition-all rounded-lg'
         >
 
-            <div className='flex flex-row item-center justify-between md:py-1 py-[1px] font-semibold md:text-xs text-[10px] text-gray-400'>
+            <div className='flex flex-row item-center justify-between md:py-1 py-[1px]  md:text-[11px] text-[10px] text-gray-400'>
                 <div className='flex flex-row items-center gap-2'>
                     {isTournament && <BsTrophyFill color='white' size={12} />}
-                    <div className='md:text-xs text-[11px]'>{title}</div>
+                    <div className='font-semibold'>{title}</div>
                 </div>
-                <div>{formatDate4(event.date).replaceAll("-", "/")}</div>
+                <div className=''>{formatDate4(event.date).replaceAll("-", "/")}</div>
             </div>
 
             <div className='flex flex-row items-center justify-between md:py-1 py-2'>
@@ -67,7 +69,7 @@ const FixtureGame = ({ event, teamId, num }: Props) => {
                             rivalLogo != "-" &&
                             <img src={rivalLogo} alt="Logo" width={LOGO} height={LOGO} />
                         }
-                        <div className='text-xs'>{rival.team.displayName}</div>
+                        <div className='text-xs font-semibold'>{rival.team.displayName}</div>
                         
                     </div>
                 </div>

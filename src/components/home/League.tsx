@@ -4,9 +4,10 @@ import { } from '@/utils/fetch'
 import { formatTitle, getLogo, getStatus, getStatusColor, getTeamObject } from '@/utils/game'
 import GameAlt from './GameAlt'
 import { BiWorld } from 'react-icons/bi'
+import { BsTrophyFill } from 'react-icons/bs'
 
-const IMG_SIZE = 24
-const ICON = 30
+const IMG_SIZE = 28
+const ICON = 23
 
 type League = {
     flagUrl: string | undefined,
@@ -23,23 +24,23 @@ const League = ({ games, flagUrl, leagueName, leagueHasState, selectedState, lea
     return (
         <div className={`${leagueHasState || selectedState === "" ? "flex" : "hidden"}  flex-col w-full bg-[--tw-color-800]  shadow shadow-gray-950 rounded-lg transition ease-in-out`}>
 
-            <div className='w-full flex flex-row justify-between items-center pt-2 pb-1 md:pt-2 px-1 md:px-2'>
+            <div className='w-full flex flex-row justify-between items-center pt-2 pb-1 md:pt-2  px-2'>
 
                 {
                     flagUrl != "-" ?
                         <img src={flagUrl} alt="Logo" width={IMG_SIZE} height={IMG_SIZE} />
                         :
-                        <BiWorld width={ICON} height={ICON} color='white' />
+                        <BsTrophyFill size={ICON} color='white' />
 
                 }
-                <div className='cursor-pointer hover:underline w-full text-sm md:text-[16px] text-white font-bold text-center'>{formatTitle(leagueName)}</div>
+                <div className='cursor-pointer hover:underline w-full  text-[15px] md:text-[17px] text-white font-semibold text-center'>{formatTitle(leagueName)}</div>
 
                 {
                     flagUrl != "-" ?
 
                         <img src={flagUrl} alt="Logo" width={IMG_SIZE} height={IMG_SIZE} />
                         :
-                        <BiWorld width={ICON} height={ICON} color='white' />
+                        <BsTrophyFill size={ICON}  color='white' />
                 }
 
             </div>

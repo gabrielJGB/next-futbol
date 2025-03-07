@@ -88,7 +88,7 @@ const Main = ({ leagues, leaguesData }: Props) => {
             </div>
 
 
-            <div className='flex flex-col md:gap-12 gap-8'>
+            <div className='flex flex-col md:gap-12 gap-12'>
 
                 {
                     selectedState === "sort" ?

@@ -124,7 +124,7 @@ const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo, invertF
         >
 
             <button
-                className='absolute left-[47%] p-1 bg-[rgb(0,0,0,0.2)] active:bg-gray-900 md:hover:bg-[rgb(0,0,0,0.6)] text-gray-400 md:hover:text-gray-300 transition-all font-bold rounded text-center px-3 mt-1 mb-2 mx-auto border-gray-600 border-[1px]'
+                className='absolute left-[47%] p-1 bg-[rgb(0,0,0,0.15)] active:bg-gray-900 md:hover:bg-[rgb(0,0,0,0.6)] text-gray-400 md:hover:text-gray-300 transition-all font-bold rounded text-center px-3 mt-1 mb-2 mx-auto border-gray-600 border-[1px]'
                 onClick={() => setInvertField(!invertField)}
             > {"<->"} </button>
 
@@ -137,7 +137,7 @@ const Field = ({ game, homeFormation, awayFormation, homeLogo, awayLogo, invertF
                     <div key={i} className={`absolute top-1 ${i === 0 && !invertField ? "left-1" : (i === 1 && invertField ? "left-1" : "right-1")} font-bold text-sm flex flex-row items-center gap-2`}>
                         {
                             elem.logo != "-" &&
-                            <img src={elem.logo} alt="logo" />
+                            <img src={elem.logo} alt="logo" width={24} height={24}/>
                         }
                         <div
                             style={{ textShadow: "black 1px 1px 1px" }}

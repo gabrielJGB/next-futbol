@@ -155,44 +155,50 @@ const getDefaultSeason = async (teamId: string) => {
 
 }
 
-export const fetchTeam = async (teamId: string, season: number | boolean) => {
+
+
+export const fetchTeamInformation = async (teamId: string) => {
+
+    
+    const url = `https://sports.core.api.espn.com/v2/sports/soccer/teams/${teamId}?region=ar&lang=es`
+    const res = await fetch(url)
+
+    if (!res.ok)
+        return false
+
+    const data = await res.json()
+
+    return data
+
+
+}
+
+export const fetchTeamEvents = async (teamId: string, season: any) => {
     try {
 
-        let url1 = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/${teamId}/schedule?region=ar&lang=es`
-        let url2 = url1 + "&fixture=true"
+        const currentSeason = await getDefaultSeason(teamId)
+        season = !season ?currentSeason: season
+        let fixture = String(season) === String(currentSeason)
 
-        if (season) {
-            url1 = url1 + `&season=${season}`
-            url2 = url2 + `&season=${season}`
-        } else {
-            const defaultSeason = await getDefaultSeason(teamId)
-            url1 = url1 + `&season=${defaultSeason}`
-            url2 = url2 + `&season=${defaultSeason}`
+        const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/${teamId}/schedule?region=ar&lang=es&season=${season || currentSeason}&fixture=false`
+        const res = await fetch(url)
+        const data = await res.json()
 
+        if ("events" in data && data.events.length === 0)
+            throw Error("No data")
+
+        let previousGames = data.events
+        let nextGames = []
+
+        previousGames.forEach((object: any) => { object['played'] = true })
+
+        if (fixture) {
+            const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/${teamId}/schedule?region=ar&lang=es&season=${season || currentSeason}&fixture=true`
+            const res = await fetch(url)
+            const data = await res.json()
+            nextGames = data.events
+            nextGames.forEach((object: any) => { object['played'] = false })
         }
-
-
-        const res1 = await fetch(url1)
-        const data1 = await res1.json()
-
-        if ("events" in data1 && data1.events.length === 0)
-            return { teamData: { ...data1 }, events: [] }
-
-
-        const res2 = await fetch(url2)
-        const data2 = await res2.json()
-
-        const previousGames = data1.events
-        const nextGames = data2.events
-
-        previousGames.forEach((object: any) => {
-            object['played'] = true;
-        })
-
-        nextGames.forEach((object: any) => {
-            object['played'] = false;
-        })
-
 
         let events = [...previousGames, ...nextGames]
 
@@ -200,24 +206,23 @@ export const fetchTeam = async (teamId: string, season: number | boolean) => {
             return a.date.localeCompare(b.date);
         })
 
-
-        delete data1.events
-
-        return { teamData: { ...data1 }, events }
-
-
+        return {events,currentSeason}
 
     } catch (error) {
-        throw error
+        throw Error("Error")
     }
-
 }
 
 
-export const fetchRoster = async (teamId: string) => {
+
+export const fetchRoster = async (teamId: string, season: string | boolean) => {
 
     try {
-        const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/${teamId}?enable=roster&lang=es`
+        if (!season) {
+            season = await getDefaultSeason(teamId)
+        }
+
+        const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/seasons/${season}/teams/${teamId}?enable=roster&lang=es`
         const res = await fetch(url)
         const data = await res.json()
         return data
@@ -242,60 +247,10 @@ export const fetchTeamArticles = async (teamId: string) => {
 }
 
 
-// export const fetchTeam = async (teamId: string, season: string | number) => {
-
-//     try {
-//         //?enable=roster
-
-//         const url1 = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/${teamId}/schedule?region=ar&lang=es&season=${season}`
-//         const url2 = `https://site.api.espn.com/apis/site/v2/sports/soccer/all/teams/${teamId}/schedule?region=ar&lang=es&fixture=true&season=${season}`
-
-//         const res1 = await fetch(url1)
-//         const data1 = await res1.json()
-
-//         if ("events" in data1 && data1.events.length === 0)
-//             throw new Error("Sin datos")
-
-//         const teamResp2 = data1.season.year === data1.requestedSeason.year ? await fetch(url2) : { events: [] }
-
-//         const teamInfo = data1
-//         const previousGames = data1.events
-//         const nextGames = teamResp2.events
-
-//         previousGames.forEach((objeto: any) => {
-//             objeto['played'] = true;
-//         })
-
-//         nextGames.forEach((objeto: any) => {
-//             objeto['played'] = false;
-//         });
-
-
-//         let events = [...previousGames, ...nextGames]
-
-//         events.sort((a, b) => {
-//             return a.date.localeCompare(b.date);
-//         });
-
-
-//         const leaguesRepeated = events.map(event => event.league)
-//         const seasonLeagues = Array.from(new Set(leaguesRepeated.map(JSON.stringify))).map(JSON.parse)
-//         const leagues = seasonLeagues.map(league => ({ ...league, events: events.filter(event => event.league.id === league.id) }))
-
-//         delete teamInfo.events
-
-
-//         return { ...teamInfo, leagues }
-
-//     } catch (error) {
-//         throw error
-//     }
-
-// }
 
 
 
-export const fetchSearch = async (query:string) => {
+export const fetchSearch = async (query: string) => {
 
     const url = `https://site.web.api.espn.com/apis/search/v2?region=ar&lang=es&limit=10&page=1&dtciVideoSearch=true&query=${query}`
 
@@ -313,3 +268,7 @@ export const fetchSearch = async (query:string) => {
 
 
 }
+
+
+
+// Añadir boton (check) de mostrar estadisticas debajo de PLANTEL y mapear estos datos con la lista de jugadores:  https://site.web.api.espn.com/apis/site/v2/sports/soccer/arg.1/teams/5/statistics?region=ar&lang=es&contentorigin=deportes&level=1

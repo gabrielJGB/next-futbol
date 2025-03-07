@@ -21,16 +21,19 @@ type Props = {
 }
 
 const LOGO = 22
-const getResultColor = (gameResult: any) => {
+const getResultColor = (gameResult: any, headToHeadGame: boolean) => {
+
+    if (headToHeadGame)
+        return "border-[--tw-color-600]"
 
     if (gameResult === "P")
-        return "#e91e1e"
+        return "border-[#ff0e0e] text-[#ff0e0e]"
     else if (gameResult === "G")
-        return "#13ff13"
+        return "border-[#00ff00] text-[#00ff00]"
     else if (gameResult === "E")
-        return "#cbcb38"
-    else
-        return "gray"
+        return "border-[#ffff00] text-[#ffff00]"
+
+
 }
 
 const getLogoTag = (team: any) => {
@@ -48,11 +51,14 @@ const Game = ({ id, team, opponent, teamHome, homeScore, awayScore, leagueName, 
     const home = teamHome ? team : opponent
     const away = teamHome ? opponent : team
 
+    
+    
+
     return (
         <Link
-            style={{ borderColor: !headToHeadGame ? getResultColor(gameResult) : "gray" }}
+            // style={{ borderColor: !headToHeadGame ? getResultColor(gameResult) : "gray" }}
             href={`/game/${id}`}
-            className='flex flex-col bg-[--tw-color-900] border-slate-600 border-[1px] divide-y-[1px] divide-[--tw-color-800] rounded-lg'
+            className='flex flex-col bg-[--tw-color-800] border-[--tw-color-700] border-[1px] divide-y-[1px] divide-[--tw-color-700] rounded-lg md:hover:border-[--tw-primary] active:border-[--tw-primary]'
         >
 
             <div className='flex flex-row items-center justify-between  px-2 py-1 font-bold'>
@@ -69,7 +75,7 @@ const Game = ({ id, team, opponent, teamHome, homeScore, awayScore, leagueName, 
 
                             <div className='text-xs'>{team.displayName}</div>
                         </div>
-                        <div className={`text-center bg-[--tw-color-950] text-[22px]  py-0 ${i === 1 ? "rounded-br-lg" : ""} w-[50px] font-semibold`}>{i === 0 ? homeScore : awayScore}</div>
+                        <div className={`border-l-[2px] ${getResultColor(gameResult, headToHeadGame)} text-center bg-[--tw-color-900] text-[22px]  py-0 ${i === 1 ? "rounded-br-lg" : ""} w-[50px] font-semibold`}>{i === 0 ? homeScore : awayScore}</div>
                     </div>
 
                 ))

@@ -55,7 +55,7 @@ const GameAlt = ({ gameState, selectedState, status, statusColor, home, away, id
 
             {
                 stage &&
-                <div className='rounded-t-lg text-xs font-bold text-gray-200 text-center px-2 p-1 bg-[--tw-color-900]'>
+                <div className='rounded-t-lg text-xs font-semibold text-gray-200 text-center px-2 p-1 bg-[--tw-color-900]'>
                     {formatTitle(stage)} {leg && " - " + leg}
                 </div>
             }

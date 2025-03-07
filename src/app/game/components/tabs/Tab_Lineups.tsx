@@ -13,8 +13,8 @@ const Lineups = ({ game }: Props) => {
 
     const roster = "roster" in game.rosters[0]
     const formation = "formation" in game.rosters[0] ? game.rosters[0].formation : false
-    const homeLogo = getLogo(game.header.competitions[0].competitors[0].team, 18)
-    const awayLogo = getLogo(game.header.competitions[0].competitors[1].team, 18)
+    const homeLogo = getLogo(game.header.competitions[0].competitors[0].team, 25)
+    const awayLogo = getLogo(game.header.competitions[0].competitors[1].team, 25)
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [windowWidth, setWindowWidth] = useState(0)
     const [invertField, setInvertField] = useState(false)

@@ -14,7 +14,7 @@ const IMG_SIZE = 40
 
 const Team = ({ team }: Props) => {
 
-    const logo = getLogo(team, 40)
+    const logo = getLogo(team, IMG_SIZE+12)
 
     return (
         <Link href={`/team/${team.id}`} className='flex flex-col gap-1 items-center justify-between hover:underline transition-all cursor-pointer'>

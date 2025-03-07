@@ -5,7 +5,7 @@ type Props = {
   team: any
 }
 
-const IMG_SIZE = 60
+const IMG_SIZE = 70
 
 const TeamHeader = ({ team }: Props) => {
   
@@ -15,7 +15,7 @@ const TeamHeader = ({ team }: Props) => {
     return <div></div>
 
   return (
-    <div className='flex flex-row items-center gap-3 md:bg-[--tw-color-950] bg-[--tw-color-800] p-3  '>
+    <div className='flex flex-row items-center gap-3  px-3  '>
 
       
       {
@@ -25,7 +25,8 @@ const TeamHeader = ({ team }: Props) => {
 
       <div>
         <div className='mb-0 md:text-2xl text-lg font-bold '>{team.name}</div>
-        <div className='mb-0 md:text-sm text-xs text-gray-400'>{team.standingSummary}</div>
+        <div className='mb-0 md:text-sm text-xs text-gray-400'>{team.venue?.address?.city}, {team.venue?.address.country}</div>
+        <div className='mb-0 md:text-sm text-xs text-gray-400'>{team.venue?.fullName}</div>
       </div>
     </div>
   )
