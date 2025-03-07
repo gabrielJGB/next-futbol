@@ -184,6 +184,8 @@ export const fetchTeamEvents = async (teamId: string, season: any) => {
         const res = await fetch(url)
         const data = await res.json()
 
+        console.log(data);
+        
         if ("events" in data && data.events.length === 0)
             throw Error("No data")
 

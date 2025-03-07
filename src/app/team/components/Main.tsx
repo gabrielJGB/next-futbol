@@ -56,13 +56,11 @@ const Main = ({ id }: Props) => {
 
             try {
                 const data = await fetchTeamEvents(id, season)
-                console.log(data);
-                
                 setEvents(data.events)
                 setCurrentSeason(data.currentSeason)
 
             } catch (error) {
-                setEvents(false)
+                setEvents([])
             }
         }
 

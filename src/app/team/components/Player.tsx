@@ -31,6 +31,10 @@ const Player = ({ player }: Props) => {
 
 
     const height = player.displayHeight != undefined ? player.displayHeight.replace(" m", "") : false
+    const age = player.age
+
+    
+     
 
     return (
         <div className='flex flex-row items-center justify-between text-xs md:py-2 py-3 md:hover:bg-[--tw-color-700] active:bg-[--tw-color-700] transition-all cursor-pointer px-1'>
@@ -48,7 +52,10 @@ const Player = ({ player }: Props) => {
                     height &&
                     <div >{height.length === 4 ? height : height + "0"} <span className='text-[10px] text-gray-400'>m</span></div>
                 }
-                <div className='pl-1'>{player.age} <span className='text-[10px] text-gray-400'>años</span></div>
+                {
+                    age &&
+                    <div className='pl-1'>{age} <span className='text-[10px] text-gray-400'>años</span></div>
+                }
             </div>
         </div>
     )

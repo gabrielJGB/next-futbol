@@ -1,7 +1,6 @@
 import DateSelector from '@/components/home/DateSelector'
 import Main from '@/components/home/Main'
-import { fetchLaegues, fetchLeaguesExtra, fetchSofaData } from '@/utils/fetch'
-import { getHeadline } from '@/utils/game'
+import { fetchLaegues, fetchLeaguesExtra } from '@/utils/fetch'
 import { Metadata } from 'next'
 
 

@@ -5,7 +5,7 @@ import GameHeader from '@/app/game/components/GameHeader'
 import TabContent from '@/app/game/components/TabContent'
 import TabBar from '@/app/game/components/TabBar'
 import { fetchGame } from '@/utils/fetch'
-import { delay_sec } from '@/data/constants.json'
+import constants from '@/data/constants.json'
 
 type Props = {
     gameData: any,
@@ -44,7 +44,7 @@ const Main = ({ gameData, tabs, id, sofaId }: Props) => {
                 fetchGame(id)
                     .then(resp => setGame(resp))
 
-            }, delay_sec * 1000);
+            }, constants.delay_sec * 1000);
 
             return () => clearInterval(interval)
         }

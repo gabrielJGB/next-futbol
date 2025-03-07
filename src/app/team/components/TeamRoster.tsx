@@ -25,6 +25,7 @@ const TeamRoster = ({ data, selectedTab }: Props) => {
   const players = data.team.athletes
 
 
+
   return (
     <div className={`max-md:${selectedTab === 1 ? "flex " : "hidden "} rounded-lg text-sm w-full`}>
 
@@ -38,9 +39,11 @@ const TeamRoster = ({ data, selectedTab }: Props) => {
 
                   <div className='flex flex-col divide-y-[1px] divide-[--tw-color-700]'>
                     {
-                      players.filter((p: any) => p.position.abbreviation === position).map((player: any) => (
-                        <Player key={player.id} player={player} />
-                      ))
+                      players
+                        .filter((p: any) => "position" in p && p.position.abbreviation === position)
+                        .map((player: any) => (
+                          <Player key={player.id} player={player} />
+                        ))
 
                     }
                   </div>

@@ -40,7 +40,7 @@ const SearchPage = () => {
 
     } else if ("images" in content) {
 
-      return <img src={getLogoURL(content.images[0].url, 80)} alt="Img" className="rounded self-stretch" width={IMG + 10} height={IMG} />
+      return <img src={getLogoURL(content.images[0].url, 80)} alt="Img" className="rounded justify-stretch" width={IMG + 50} height={IMG} />
 
     } else if (content.type === "player")
       return <BsPersonFill size={IMG} color="white" />

@@ -48,11 +48,9 @@ const LeagueArticles = ({ news }: Props) => {
 
                         <img
                             src={article.image}
-                            className='bg-cover  rounded w-[60px] h-[50px]' alt='Imagen noticia' width={60} height={50}
+                            className='bg-cover  rounded ' alt='Imagen noticia' width={80} height={50}
                             style={{
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                                backgroundRepeat: "space"
+                                
                             }}
                         />
 

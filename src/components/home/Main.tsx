@@ -9,7 +9,7 @@ import { useDateStore } from '@/stores/dateStore'
 import Sorted from './Sorted'
 import { useStates } from '@/stores/states'
 import { formatDate3, isSameDay } from '@/utils/dates'
-import { delay_sec } from '@/data/constants.json'
+import constants  from '@/data/constants.json'
 // import { fetchTasks } from '@/utils/fetch'
 
 type Props = {
@@ -45,7 +45,7 @@ const Main = ({ leagues, leaguesData }: Props) => {
                 fetchLaegues(date)
                     .then(resp => setLeagues(resp))
 
-            }, delay_sec * 1000);
+            }, constants.delay_sec * 1000);
 
             return () => { clearInterval(interval) }
         }

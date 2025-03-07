@@ -26,7 +26,7 @@ const FixtureGame = ({ event, teamId, num,showLeagueName }: Props) => {
     const leagueName = event.league.shortName.replace("Argentine","")
     const isTournament = event.league.isTournament && leagueName.trim() != "Copa de la Liga Profesional"
     const gameStage = formatTitle(event.seasonType.name).trim()
-    const title =   `${showLeagueName? leagueName :""} ${isTournament ? ` ${gameStage.split("-")[1] || gameStage}` : ""}`
+    const title =   `${showLeagueName? leagueName :""} ${isTournament ? ` - ${gameStage.split("-")[1] || gameStage}` : ""}`
 
 
     
