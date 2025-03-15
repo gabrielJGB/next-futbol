@@ -17,17 +17,17 @@ const HomePage = async ({ params }: Params) => {
     const leagues: any = await fetchLaegues(date)
 
 
-    const res = await fetchLeaguesExtra(date)
+    // const res = await fetchLeaguesExtra(date)
 
-    const leaguesData = res?.map((league:any) => ({
-        id:league.id,
-        events: league.events.map((event:any) => ({
-            id:event.id,
-            headline:"video" in event ? event.video.title:undefined,
-            stage:league.isTournament? event.group.name:undefined,
-            leg:league.isTournament && event.leg?event.leg.text:undefined,
-        }))
-    }))
+    // const leaguesData = res?.map((league:any) => ({
+    //     id:league.id,
+    //     events: league.events.map((event:any) => ({
+    //         id:event.id,
+    //         headline:"video" in event ? event.video.title:undefined,
+    //         stage:league.isTournament? event.group.name:undefined,
+    //         leg:league.isTournament && event.leg?event.leg.text:undefined,
+    //     }))
+    // }))
 
 
 
@@ -35,7 +35,7 @@ const HomePage = async ({ params }: Params) => {
         <div className='flex flex-col gap-0 pb-10'>
 
             <DateSelector date={date} />
-            <Main leagues={leagues} leaguesData={leaguesData} />
+            <Main leagues={leagues} leaguesData={[]} />
 
         </div>
     )

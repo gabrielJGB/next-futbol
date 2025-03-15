@@ -20,7 +20,7 @@ const MenuSection = ({ league }: Props) => {
 
 
     return (
-        <Link href={`/leagues/${league.slug}`} className='hover:bg-[--tw-color-700] py-2 px-1 flex flex-row items-center gap-2 '>
+        <Link href={`/league/${league.slug}`} className='hover:bg-[--tw-color-700] py-2 px-1 flex flex-row items-center gap-2 '>
 
 
             <img src={url} width={20} height={25} />

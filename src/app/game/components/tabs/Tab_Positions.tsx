@@ -8,7 +8,8 @@ type Props = {
 const Positions = ({ game }: Props) => {
 
   const groups = game.standings.groups
-
+  const homeId = game.header.competitions[0].competitors[0].id
+  const awayId = game.header.competitions[0].competitors[1].id
 
 
   return (
@@ -16,10 +17,10 @@ const Positions = ({ game }: Props) => {
       {
         groups.map((group: any, i: number) => (
           <div key={i} className='mb-2'>
-            <h2 className='text-center text-md mb-1 font-semibold'>{group.header}</h2>
+            <h2 className='text-center text-md mb-2'>{group.header}</h2>
             <div>
               {
-                <Table entries={group.standings.entries} />
+                <Table entries={group.standings.entries} homeId={homeId} awayId={awayId} />
               }
             </div>
           </div>

@@ -3,13 +3,21 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 
 type Props = {
-    entries: any
+    entries: any,
+    homeId: string | null,
+    awayId: string | null,
 }
 const IMG_SIZE = 23
 
-const Table = ({ entries }: Props) => {
+const Table = ({ entries, homeId, awayId }: Props) => {
 
-    const {push} = useRouter()
+    const { push } = useRouter()
+
+    const compareStats = (a: any, b: any) => {
+        return a.stats.find((stat: any) => stat.name === "rank").value - b.stats.find((stat: any) => stat.name === "rank").value
+    }
+
+    entries.sort(compareStats)
 
 
     const getLogoTag = (team: any) => {
@@ -24,15 +32,15 @@ const Table = ({ entries }: Props) => {
         <table className='table-element text-sm w-full'>
             <tbody>
 
-                <tr className='bg-[--tw-color-400] text-black'>
+                <tr className='bg-[--tw-color-900] text-white  rounded-lg'>
                     <th className='p-1'>#</th>
                     <th className='text-start pl-2'>Equipo</th>
-                    <th>Pts</th>
-                    <th>PJ</th>
-                    <th>PG</th>
-                    <th>PE</th>
-                    <th>PP</th>
-                    <th>Dif</th>
+                    <th className='px-1'>Pts</th>
+                    <th className='px-1'>PJ</th>
+                    <th className='px-1'>PG</th>
+                    <th className='px-1'>PE</th>
+                    <th className='px-1'>PP</th>
+                    <th className='px-1'>Dif</th>
                 </tr>
 
 
@@ -40,8 +48,8 @@ const Table = ({ entries }: Props) => {
                     entries.map((team: any, i: number) => (
                         <tr
                             key={i}
-                            className={`${i % 2 === 0 ? "bg-[--tw-color-800]" : "bg-[--tw-color-900]"} md:hover:bg-[--tw-color-700] cursor-pointer transition-all border-b-[1px] border-[--tw-color-950] md:text-[14px] text-[12px]`}
-                            onClick={()=> push(`/team/${team.id}`)}
+                            className={`${team.id === homeId || team.id === awayId ? "bg-[--tw-color-700] md:hover:bg-[--tw-color-600]" : "bg-[--tw-color-800]"} md:hover:bg-[--tw-color-700] cursor-pointer transition-all border-b-[1px] border-[--tw-color-950] md:text-[13px] text-[12px]`}
+                            onClick={() => push(`/team/${"team" in team ? team.team.id : team.id}`)}
                         >
 
                             <td className='font-semibold text-center py-2'>{team.stats.find((stat: any) => stat.name === "rank").value}</td>
@@ -52,6 +60,7 @@ const Table = ({ entries }: Props) => {
                                     {getLogoTag(typeof (team.team) === "object" ? team.team : team)}
 
                                     <div className='text-start md:text-[13px] text-[11px]  pl-2'>{typeof (team.team) === "object" ? team.team.shortDisplayName : team.team}</div>
+
                                 </div>
                             </td>
 

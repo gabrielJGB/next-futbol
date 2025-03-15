@@ -236,6 +236,8 @@ export const formatTitle = (title: string | undefined) => {
     title = title.replace("Fifth Round", "Quinta Ronda")
     title = title.replace("Club Friendly", "Amistoso")
     title = title.replace("Finals", "Final")
+    title = title.replace("Semifinals", "Semifinal")
+    title = title.replace("Quarterfinals", "Cuartos de final")
     title = title.replace("Relegation", "Descenso")
     return title
 

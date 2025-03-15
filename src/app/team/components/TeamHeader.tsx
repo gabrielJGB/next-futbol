@@ -1,5 +1,6 @@
-import { getLogo } from '@/utils/game';
 import React from 'react'
+import { getLogo } from '@/utils/game';
+import { MdLocationPin, MdStadium} from 'react-icons/md';
 
 type Props = {
   team: any
@@ -25,18 +26,29 @@ const TeamHeader = ({ team }: Props) => {
       }
 
       <div>
-        <div className='mb-0 md:text-2xl text-lg font-bold '>{team.name}</div>
+        <div className='mb-0 md:text-[26px] text-[22px] font-bold '>{team.name}</div>
         {
           "venue" in team &&
-          <>
-            <div className='mb-0 md:text-sm text-xs text-gray-400'>
-              {team.venue?.address?.city}, {team.venue?.address.country}
+          <div className='flex flex-col gap-1 md:gap-0'>
+
+            <div className='flex flex-row items-center gap-2'>
+              <MdLocationPin size={15} color='white' />
+              <div className='mb-0 md:text-sm text-xs text-gray-400'>
+                {team.venue?.address?.city}, {team.venue?.address.country}
               </div>
-            <div className='mb-0 md:text-sm text-xs text-gray-400'>{team.venue?.fullName}</div>
-          </>
+            </div>
+
+            <div className='flex flex-row items-center gap-2'>
+              <MdStadium size={15} color='white' />
+              <div className='mb-0 md:text-sm text-xs text-gray-400'>
+                {team.venue?.fullName}
+              </div>
+            </div>
+
+          </div>
         }
       </div>
-    </div>
+    </div >
   )
 }
 

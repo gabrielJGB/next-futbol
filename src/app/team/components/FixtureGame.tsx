@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatDate4 } from '@/utils/dates'
+import { formatDate4, formatDateObject } from '@/utils/dates'
 import { formatTitle, getLogo } from '@/utils/game'
 import Link from 'next/link'
 import { BsTrophyFill } from 'react-icons/bs'
@@ -54,15 +54,15 @@ const FixtureGame = ({ event, teamId, num,showLeagueName }: Props) => {
 
             <div className='flex flex-row item-center justify-between md:py-1 py-[1px]  md:text-[11px] text-[10px] text-gray-400'>
                 <div className='flex flex-row items-center gap-2'>
+                <div className='flex items-center justify-center  text-[10px] text-center w-[17px] h-[17px] rounded-[7px] text-white font-bold bg-[--tw-color-900] '>{num + 1}</div>
                     {isTournament && <BsTrophyFill color='white' size={12} />}
-                    <div className='font-semibold'>{title}</div>
+                    <div className=''>{title}</div>
                 </div>
-                <div className=''>{formatDate4(event.date).replaceAll("-", "/")}</div>
+                <div className=''>{formatDateObject(new Date(event.date))}</div>
             </div>
 
-            <div className='flex flex-row items-center justify-between md:py-1 py-2'>
+            <div className='flex flex-row items-center justify-between md:py-1 py-2 pl-1'>
                 <div className='flex flex-row gap-2 items-center'>
-                    <div className='flex items-center justify-center  text-[9px] text-center w-[16px] h-[16px] rounded-[7px] text-white font-bold bg-[--tw-color-950]'>{num + 1}</div>
                     <div className='text-xs font-bold text-gray-400'>{homeAway}</div>
                     <div className='flex flex-row items-center gap-1'>
                         {

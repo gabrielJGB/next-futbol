@@ -23,17 +23,19 @@ const Nav = (props: Props) => {
   };
 
   return (
-    <nav className="flex flex-row items-center justify-between  bg-[--tw-color-800] p-2">
+    <nav className="flex flex-row items-center justify-between  bg-[--tw-color-800]">
       <Link
         href={"/"}
-        className='px-2 py-1 rounded-lg font-bold hover:text-gray-300'
+        className='self-stretch flex items-center pl-2 pr-6 font-bold  active:text-gray-300 md:hover:bg-[--tw-color-600] active:bg-[--tw-color-600] bg-[--tw-color-700] text-white transition-all'
+        style={{ clipPath: "polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%)" }}
       >
         FÚTBOL 1
       </Link>
 
+ 
+ 
 
-
-      <div className={`flex flex-row gap-2 border-[1px]  items-center bg-[--tw-color-900] ${focus ? "border-[--tw-color-600]" : "border-[--tw-color-900]"} rounded-lg p-1 px-2`}>
+      <div className={`flex flex-row gap-2 border-[1px] my-2 items-center bg-[--tw-color-900] ${focus ? "border-[--tw-color-600]" : "border-[--tw-color-900]"} border-[2px] rounded-lg p-1 px-2`}>
         <form onSubmit={handleSearch} className="flex gap-2">
           <input
             type="text"
@@ -42,7 +44,7 @@ const Nav = (props: Props) => {
             placeholder="Buscar"
             onFocus={onFocus}
             onBlur={onBlur}
-            className='outline-none text-xs bg-[--tw-color-900] focus:bg-[--tw-color-900] focus:text-white text-gray-400 p-2 transition-all rounded'
+            className='outline-none text-xs bg-[--tw-color-900] focus:bg-[--tw-color-900] focus:text-white text-gray-400 px-2 py-1 transition-all rounded'
           />
           <button type="submit" >
             <FaMagnifyingGlass

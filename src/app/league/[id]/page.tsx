@@ -1,10 +1,19 @@
 import React from 'react'
+import Main from '../components/Main'
+import { fetchLeague } from '@/utils/fetch'
 
-type Props = {}
+type Params = {
+  params: Promise<{ id: string }>
+}
 
-const League = (props: Props) => {
+const League = async ({ params }: Params) => {
+  const { id } = await params
+  
   return (
-    <div>League</div>
+    
+
+       <Main  id={id}/>
+    
   )
 }
 
