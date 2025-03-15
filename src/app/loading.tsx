@@ -1,11 +1,10 @@
-import Spinner from '@/components/Spinner'
 import React from 'react'
 
 type Props = {}
 
 const Loading = (props: Props) => {
     return (
-        <Spinner />
+        <div className='text-center  m-3'>Cargando...</div>
     )
 }
 

@@ -105,6 +105,7 @@ const Main = ({ leagues, leaguesData }: Props) => {
                                         games={data.events}
                                         flagUrl={getFlag(data.leagues[0].slug, 20)}
                                         leagueName={data.leagues[0].name}
+                                        leagueSlug={data.leagues[0].slug}
                                         leagueHasState={leagueHasState(data, selectedState)}
                                         selectedState={selectedState}
                                         leagueData={leaguesData?.filter((league: any) => league.id === data.leagues[0].id)[0]}

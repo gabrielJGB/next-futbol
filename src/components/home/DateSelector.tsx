@@ -21,7 +21,7 @@ const DateSelector =  ({ date }: Props) => {
 
     return (
         <div className='flex flex-row justify-between items-center  w-full shadow-none  md:shadow  md:shadow-slate-900 bg-[--tw-color-800] text-xs text-center font-bold md:rounded-lg'>
-            <Link href={`/${previousDate.string}`} className='w-full  py-3 text-gray-400 cursor-pointer hover:text-white'>
+            <Link href={`/${previousDate.string}`} className='active:text-white w-full  py-3 text-gray-400 cursor-pointer md:hover:text-white'>
                 {previousDate.formated}
             </Link>
 
@@ -29,7 +29,7 @@ const DateSelector =  ({ date }: Props) => {
                 {selectedDate.formated}
             </div>
 
-            <Link href={`/${nextDate.string}`} className='w-full  py-3 text-gray-400 hover:text-white hover:text--[--tw-primary]'>
+            <Link href={`/${nextDate.string}`} className='active:text-white w-full py-3 text-gray-400 md:hover:text-white hover:text--[--tw-primary]'>
                 {nextDate.formated}
             </Link>
         </div>

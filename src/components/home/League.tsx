@@ -1,6 +1,7 @@
 import React from 'react'
 import Game from './Game'
 import { } from '@/utils/fetch'
+import Link from 'next/link'
 import { formatTitle, getLogo, getStatus, getStatusColor, getTeamObject } from '@/utils/game'
 import GameAlt from './GameAlt'
 import { BiWorld } from 'react-icons/bi'
@@ -15,14 +16,17 @@ type League = {
     games: [],
     leagueHasState: boolean,
     selectedState: string,
-    leagueData: any
+    leagueData: any,
+    leagueSlug: any
 }
 
-const League = ({ games, flagUrl, leagueName, leagueHasState, selectedState, leagueData }: League) => {
+const League = ({ games, flagUrl, leagueName, leagueHasState, selectedState, leagueData,leagueSlug }: League) => {
 
 
     return (
-        <div className={`${leagueHasState || selectedState === "" ? "flex" : "hidden"}  flex-col w-full bg-[--tw-color-800]  shadow shadow-gray-950 rounded-lg transition ease-in-out`}>
+          <Link
+
+            href={`/league/${leagueSlug}`} className={`${leagueHasState || selectedState === "" ? "flex" : "hidden"}  flex-col w-full bg-[--tw-color-800]  shadow shadow-gray-950 rounded-lg transition ease-in-out`}>
 
             <div className='w-full flex flex-row justify-between items-center pt-2 pb-1 md:pt-2  px-2'>
 
@@ -65,7 +69,7 @@ const League = ({ games, flagUrl, leagueName, leagueHasState, selectedState, lea
                 }
             </div>
 
-        </div>
+        </Link>
     )
 }
 
