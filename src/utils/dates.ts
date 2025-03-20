@@ -40,6 +40,8 @@ export const getDates = (date: string) => {
 
 }
 
+
+
 export const formatDateObject = (date: Date) => {
 
     const today = new Date();
@@ -135,13 +137,13 @@ export const timeUntil = (dateString: string) => {
     }
 
     if (!result) {
-        result = "menos de un minuto";
+        result = "Menos de un minuto";
     }
 
     if (isPast) {
-        return `Hace ${result}`;
+        return `${result}`;
     } else {
-        return `Empieza en ${result}`;
+        return `${result}`;
     }
 }
 

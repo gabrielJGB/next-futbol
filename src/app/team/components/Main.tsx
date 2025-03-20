@@ -115,7 +115,7 @@ const Main = ({ id }: Props) => {
 
         <div className='flex flex-col md:m-6'>
 
-            <div className='bg-[--tw-color-800] md:rounded-lg p-2 pb-4 md:border-[1px] border-[--tw-color-700]'>
+            <div className='md:mb-3 bg-[--tw-color-800] md:rounded-lg p-2 pb-4 md:border-[1px] border-[--tw-color-700]'>
                 {
                     headerInfo ?
                         <TeamHeader team={headerInfo} />

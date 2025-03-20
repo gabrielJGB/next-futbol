@@ -12,7 +12,7 @@ const TabBar = ({ selectedTab, setSelectedTab }: Props) => {
   const buttons = ["FIXTURE", "PLANTEL", "NOTICIAS"]
 
   return (
-    <div className='grid  grid-cols-3 gap-1 bg-[--tw-color-800] md:bg-[--tw-color-950] text-xs font-bold '>
+    <div className='md:hidden  grid  grid-cols-3 gap-1 bg-[--tw-color-800] md:bg-[--tw-color-950] text-xs font-bold '>
       {
         buttons.map((button: any, i: number) => (
 

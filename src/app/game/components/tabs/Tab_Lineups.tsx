@@ -18,6 +18,7 @@ const Lineups = ({ game }: Props) => {
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [windowWidth, setWindowWidth] = useState(0)
     const [invertField, setInvertField] = useState(false)
+    const [showStats,setShowStats] = useState(false)
 
     const homeFormation = game.rosters[0].formation
     const awayFormation = game.rosters[1].formation
@@ -34,7 +35,7 @@ const Lineups = ({ game }: Props) => {
 
     return (
         <>
-{/* 
+            {/* 
             {
                 roster && !formation &&
                 <TeamSelector game={game} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
@@ -42,7 +43,7 @@ const Lineups = ({ game }: Props) => {
 
 
             <div className=' overflow-x-auto  px-1 md:px-0'>
-                
+
                 {/* <div className='flex flex-row justify-center items-center w-full'>
                     <button
                         className='p-1 bg-black active:bg-gray-900 md:hover:bg-gray-900 text-white font-bold rounded text-center px-2 mt-1 mb-2 mx-auto border-gray-600 border-[1px]'
@@ -62,6 +63,15 @@ const Lineups = ({ game }: Props) => {
                     />
                 }
 
+
+                <div className='w-full flex flex-rrow justify-center'>
+                    <button
+                        className={`font-semibold text-xs bg-[--tw-color-800]  border-transparent border-[1px] rounded mt-3 p-2 md:hover:border-[--tw-primary] transition-all ${showStats?"bg-[--tw-primary] text-black ":""}`}
+                        onClick={() =>setShowStats(!showStats)}
+                    >Estadísticas del jugador</button>
+                </div>
+
+
                 {
                     roster &&
                     <div
@@ -71,12 +81,13 @@ const Lineups = ({ game }: Props) => {
                         <Roster
                             roster={sortRoster(game.rosters[!invertField ? 0 : 1].roster)}
                             logo={!invertField ? homeLogo : awayLogo}
+                            showStats={showStats}
 
                         />
                         <Roster
                             roster={sortRoster(game.rosters[invertField ? 0 : 1].roster)}
                             logo={!invertField ? awayLogo : homeLogo}
-
+                            showStats={showStats}
                         />
                     </div>
                 }

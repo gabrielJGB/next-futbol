@@ -21,8 +21,6 @@ const Tab_Articles = ({ id }: Props) => {
     fetchLeagueArticles(id)
       .then(res => {
         setArticles(res.articles)
-        console.log(res.articles);
-
       })
       .catch(error => setError(true))
       .finally(() => setLoading(false))

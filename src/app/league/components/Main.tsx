@@ -32,7 +32,7 @@ const Main = ({ id }: Props) => {
                 const data = await fetchLeague(id)
 
                 if (data.hasStandings)
-                    setTabs((prev: any) => ["POSICIONES", ...prev])
+                    setTabs((prev: any) => ["POSICIONES","FIXTURE", "ESTADISTICAS", "NOTICIAS"])
 
                 setLeague({ ...data })
 
@@ -43,6 +43,8 @@ const Main = ({ id }: Props) => {
             }
         }
 
+
+        fetchData()
         fetchData()
 
     }, [])

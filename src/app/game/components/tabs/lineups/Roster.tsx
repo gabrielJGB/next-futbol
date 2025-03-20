@@ -6,10 +6,10 @@ import Image from 'next/image'
 type Props = {
     roster: any,
     logo: any,
-    
+    showStats:boolean,
 }
 
-const Roster = ({ roster, logo }: Props) => {
+const Roster = ({ roster, logo,showStats }: Props) => {
 
     const [windowWidth, setWindowWidth] = useState(0)
 
@@ -18,6 +18,7 @@ const Roster = ({ roster, logo }: Props) => {
         if (window != undefined)
             setWindowWidth(window.innerWidth)
 
+        
     }, [])
 
 
@@ -39,7 +40,7 @@ const Roster = ({ roster, logo }: Props) => {
 
                 {
                     roster.filter((elem: any, j: number) => elem.starter).map((player: any, i: number) => (
-                        <RosterPlayer key={i} player={player} />
+                        <RosterPlayer key={i} player={player} showStats={showStats}/>
                     ))
                 }
             </div>
@@ -55,7 +56,7 @@ const Roster = ({ roster, logo }: Props) => {
                 </div>
                 {
                     roster.filter((elem: any, i: number) => !elem.starter).map((player: any, i: number) => (
-                        <RosterPlayer key={i} player={player} />
+                        <RosterPlayer key={i} player={player} showStats={showStats}/>
                     ))
                 }
 

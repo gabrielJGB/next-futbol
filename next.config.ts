@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true, 
   },
+  transpilePackages:["react-native-paper","react-native-vector-icons"],
+  
 
 };
 

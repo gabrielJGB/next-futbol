@@ -105,8 +105,6 @@ const SearchPage = () => {
 
               <div className={`flex md:flex-row flex-wrap flex-col justify-evenly  md:gap-6 gap-6 md:m-6 m-2`}>
 
-
-
                 {
                   results.results.filter((n: any) => n.totalFound > 0).map((result: any, i: number) => (
 

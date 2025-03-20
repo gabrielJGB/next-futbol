@@ -24,6 +24,8 @@ const TeamRoster = ({ data, selectedTab }: Props) => {
 
   const players = data.team.athletes
 
+  
+  
 
 
   return (

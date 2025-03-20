@@ -1,6 +1,7 @@
-import { convertTimestamp } from '@/utils/dates'
+import { convertTimestamp, timeUntil } from '@/utils/dates'
 import React from 'react'
 import { BiCalendar, BiCrown } from 'react-icons/bi'
+import { CgSandClock } from 'react-icons/cg'
 import { FaCity } from 'react-icons/fa'
 import { GiWhistle } from 'react-icons/gi'
 import { HiInformationCircle } from 'react-icons/hi'
@@ -27,6 +28,8 @@ const getIcon = (icon: string) => {
             return <MdStadium size={CALENDAR} color='white' />
         case "information":
             return <HiInformationCircle size={CALENDAR} color='white' />
+        case "timer":
+            return <CgSandClock size={CALENDAR} color='white' />
     }
 
 }
@@ -64,7 +67,9 @@ const GameInfo = ({ game }: Props) => {
 
     const gameDate = convertTimestamp(game.header.competitions[0].date)
     const dateString = `${gameDate.dayOfWeek} ${gameDate.day} de ${gameDate.month} de ${gameDate.year}, ${gameDate.time} hs`
-    const playing = game.header.competitions[0].status.type.state === "in"
+    const statePre = game.header.competitions[0].status.type.state === "pre"
+
+
 
     return (
 
@@ -72,8 +77,8 @@ const GameInfo = ({ game }: Props) => {
             <h3 className='text-center font-bold pb-2'>DATOS DEL PARTIDO</h3>
 
             <Card title="Fecha" value={dateString} icon={"calendar"} />
-
-            {/* {!playing && <Card title="Contador" value={timeUntil(game.header.competitions[0].date)} icon={"timer-sand"} />} */}
+ 
+            {statePre   && <Card title="Empieza en " value={timeUntil(game.header.competitions[0].date)} icon={"timer"} />}
 
 
             {

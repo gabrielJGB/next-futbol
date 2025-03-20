@@ -91,7 +91,7 @@ export const getLogo = (team_p: any, SIZE: number) => {
     if (team_p) {
 
 
-        let team = "team" in team_p && typeof(team_p.team) != "string" ? team_p.team : team_p
+        let team = "team" in team_p && typeof (team_p.team) != "string" ? team_p.team : team_p
 
         if (typeof (team) === "object" && "logo" in team && Array.isArray(team.logo)) {
 
@@ -404,7 +404,7 @@ export const translateEventText = (text: string) => {
 }
 
 
-export const getEventColor = (id:string) => {
+export const getEventColor = (id: string) => {
 
     switch (id) {
         case '94':
@@ -466,7 +466,7 @@ export const getEventColor = (id:string) => {
 
 
 
-export const translateStatLabel = (label:string) => {
+export const translateStatLabel = (label: string) => {
 
     switch (label) {
         case "Fouls":
@@ -543,17 +543,56 @@ export const translateStatLabel = (label:string) => {
 
 }
 
-export const countStates = (leagues:any) => {
-  return leagues.reduce(
-    (acc:any, league:any) => {
-      league.events.forEach((event:any) => {
-        const state = event.status.type.state;
-        if (state in acc) {
-          acc[state]++;
-        }
-      });
-      return acc;
-    },
-    { pre: 0, in: 0, post: 0 }
-  );
+export const countStates = (leagues: any) => {
+    return leagues.reduce(
+        (acc: any, league: any) => {
+            league.events.forEach((event: any) => {
+                const state = event.status.type.state;
+                if (state in acc) {
+                    acc[state]++;
+                }
+            });
+            return acc;
+        },
+        { pre: 0, in: 0, post: 0 }
+    );
 };
+
+
+
+export const formatStat = (stat: any) => {
+
+    switch (stat.shortDisplayName) {
+        case "FC":
+            return stat.value === 1 ? "Falta cometida" : "Faltas cometidas"
+        case "FS":
+            return stat.value === 1 ? "Falta recibida" : "Faltas recibidas"
+        case "EC":
+            return stat.value === 1 ? "Gol en contra" : "Goles en contra"
+        case "TR":
+            return stat.value === 1 ? "Tarjeta roja" : "Tarjetas rojas"
+        case "TA":
+            return stat.value === 1 ? "Tarjeta amailla" : "Tarjetas amaillas"
+        case "GA":
+            return stat.value === 1 ? "Gol recibido" : "Goles recibidos"
+        case "SHF":
+            return stat.value === 1 ? "Remate recibido" : "Remates recibidos"
+        case "A":
+            return stat.value === 1 ? "Asistencia" : "Asistencias"
+        case "OF":
+            return "Fuera de juego"
+        case "ST":
+            return stat.value === 1 ? "Remate preciso" : "Remates precisos"
+        case "G":
+            return stat.value === 1 ? "Gol" : "Goles"
+        case "SH":
+            return stat.value === 1 ? "Remate en total" : "Remates en total"
+        case "SV":
+            return stat.value === 1 ? "Atajada" : "Atajadas"
+            
+        default:
+            return stat.shortDisplayName
+    }
+
+
+}

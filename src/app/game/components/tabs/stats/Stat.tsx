@@ -52,12 +52,12 @@ const Stat = ({ homeStat, awayStat }: Props) => {
 
           <div className='flex items-center justify-between gap-1 w-full px-0 rounded-md'>
 
-            <div className='flex items-center justify-between w-full bg-[#234321] rounded-md '>
+            <div className='flex items-center justify-between w-full bg-[--tw-color-700] rounded-md '>
               <div></div>
               <div className={`${homeStat.label.toUpperCase() === "POSSESSION" ? "h-[15px]" : "h-[5px]"} bg-[#43e143] rounded-l`} style={{ width: (`${homeWidth.toFixed()}%`) }}></div>
             </div>
 
-            <div className='relative flex items-center justify-between w-full bg-[#23324b] rounded-md'>
+            <div className='relative flex items-center justify-between w-full bg-[--tw-color-700] rounded-md'>
               <div className={`${awayStat.label.toUpperCase() === "POSSESSION" ? "h-[15px]" : "h-[5px]"} bg-[#3787ff] rounded-r`} style={{ width: (`${awayWidth.toFixed()}%`) }}></div>
               <div></div>
             </div>

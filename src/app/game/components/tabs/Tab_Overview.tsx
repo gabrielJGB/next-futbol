@@ -5,6 +5,7 @@ import VideoCard from './overview/VideoCard'
 import LeagueArticles from './overview/LeagueArticles'
 import AttackMomentum from './overview/AttackMomentum'
 import GameArticle from './overview/GameArticle'
+import PossessionCard from './overview/PossessionCard'
 
 
 
@@ -17,7 +18,7 @@ const getVideo = (game: any) => {
 
   const highlight = game.videos.find((video: any) => video.duration > 229)
 
-  
+
   if (highlight != undefined) {
     return highlight
 
@@ -27,6 +28,10 @@ const getVideo = (game: any) => {
 }
 
 const Overview = ({ game, sofaId }: Props) => {
+
+  const state = game.header.competitions[0].status.type.state
+  const statsInGame = "statistics" in game.boxscore.teams[0] && game.boxscore.teams[0].statistics.length > 0
+
 
 
 
@@ -43,13 +48,22 @@ const Overview = ({ game, sofaId }: Props) => {
         <AttackMomentum sofaId={sofaId} />
       }
 
-      
-            {
-                "article" in game &&
-                <GameArticle article={game.article} />
-      
-              }
-      
+      {
+        statsInGame && state === "in" || state === "post" &&
+        <PossessionCard
+          homeTeam={game.header.competitions[0].competitors[0].team}
+          awayTeam={game.header.competitions[0].competitors[1].team}
+          homeStats={game.boxscore.teams[0].statistics}
+          awayStats={game.boxscore.teams[1].statistics}
+        />
+      }
+
+      {
+        "article" in game &&
+        <GameArticle article={game.article} />
+
+      }
+
 
       <GameInfo game={game} />
 

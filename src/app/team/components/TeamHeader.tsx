@@ -1,6 +1,6 @@
 import React from 'react'
 import { getLogo } from '@/utils/game';
-import { MdLocationPin, MdStadium} from 'react-icons/md';
+import { MdLocationPin, MdStadium } from 'react-icons/md';
 
 type Props = {
   team: any
@@ -12,12 +12,16 @@ const TeamHeader = ({ team }: Props) => {
 
   const logo = getLogo(team, IMG_SIZE + 10)
 
+  console.log(team);
+  
+  
 
   if (team === null)
     return <div></div>
 
   return (
     <div className='flex flex-row items-center gap-3  px-3  '>
+
 
 
       {
@@ -33,16 +37,27 @@ const TeamHeader = ({ team }: Props) => {
 
             <div className='flex flex-row items-center gap-2'>
               <MdLocationPin size={15} color='white' />
-              <div className='mb-0 md:text-sm text-xs text-gray-400'>
+
+
+              <a
+                className='mb-0 md:text-sm text-xs text-gray-400 hover:underline'
+                target='__blank'
+                href={`https://www.google.com/search?q=${team.venue?.address?.city}, ${team.venue?.address.country}`}>
                 {team.venue?.address?.city}, {team.venue?.address.country}
-              </div>
+              </a>
+
             </div>
 
             <div className='flex flex-row items-center gap-2'>
               <MdStadium size={15} color='white' />
-              <div className='mb-0 md:text-sm text-xs text-gray-400'>
+
+              <a
+                className='mb-0 md:text-sm text-xs text-gray-400 hover:underline'
+                target='__blank'
+                href={`https://www.google.com/search?q=${team.venue?.fullName}`}>
                 {team.venue?.fullName}
-              </div>
+              </a>
+
             </div>
 
           </div>

@@ -63,7 +63,7 @@ const Fixture = ({ league }: Props) => {
         const obj = league.stages.find((stage: any) => stage.slug === selectedStageId)
         setSelectedStage(obj)
         getCurrentWeek()
-        console.log(obj);
+        
 
 
     }, [selectedStageId])
@@ -98,7 +98,7 @@ const Fixture = ({ league }: Props) => {
                         selectedStage.stageEvents.map((event: any, i: number) => (
                             <div
                                 key={i}
-                                className={`${i == selectedWeek && "bg-[--tw-primary] text-black"} flex items-center justify-center cursor-pointer bg-[--tw-color-800] h-[35] w-[35px] font-semibold rounded text-center border-[1px] border-transparent md:hover:border-[--tw-primary] active:border-[--tw-primary transition-all`}
+                                className={`${i == selectedWeek && "bg-[--tw-primary] text-black"} flex items-center justify-center cursor-pointer bg-[--tw-color-800] md:h-[35] md:w-[35px] h-[42] w-[42px] font-semibold rounded text-center border-[1px] border-transparent md:hover:border-[--tw-primary] active:border-[--tw-primary transition-all`}
                                 onClick={() => { setSelectedWeek(i) }}
                             >
                                 {i + 1}

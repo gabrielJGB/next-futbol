@@ -1,6 +1,8 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import FixtureGame from './FixtureGame'
+import LeagueStats from './LeagueStats'
+import Selector from './Selector'
 
 
 type Props = {
@@ -17,6 +19,7 @@ const TeamFixture = ({ data, selectedTab, teamId, season, setSeason, currentSeas
   const [filterId, setFilterId] = useState("all")
   const [leaguesRepeated] = useState(data.map((x: any) => ({ name: x.league.name, id: x.league.id, fullName: x.season.displayName })))
   const [leagues] = useState(Array.from(new Map(leaguesRepeated.map((obj: any) => [obj.id, obj])).values()))
+  const [showOnly, setShowOnly] = useState("ALL")
 
 
 
@@ -26,7 +29,7 @@ const TeamFixture = ({ data, selectedTab, teamId, season, setSeason, currentSeas
       {
         data.length > 0 ?
 
-          <div className={`max-md:${selectedTab === 0 ? "flex " : "hidden "} rounded-lg text-sm `}>
+          <div className={`flex flex-col max-md:${selectedTab === 0 ? "flex " : "hidden "} rounded-lg text-sm `}>
 
             <select
               className='w-full rounded p-2 mb-4 bg-[--tw-color-900] border-[--tw-color-700] border-[1px] md:hover:border-[--tw-primary] active:border-[--tw-primary] transition-all text-center font-semibold cursor-pointer'
@@ -45,7 +48,7 @@ const TeamFixture = ({ data, selectedTab, teamId, season, setSeason, currentSeas
               className='w-full rounded p-2 mb-4 bg-[--tw-color-900] border-[--tw-color-700] border-[1px] md:hover:border-[--tw-primary] active:border-[--tw-primary] transition-all  text-center font-semibold cursor-pointer'
               onChange={(e) => setFilterId(e.target.value)}
             >
-              <option className='p-2' value="all" >Todos los partidos</option>
+              <option className='p-2' value="all" >Todas las competiciones</option>
               {
                 leagues.map((league: any, i: number) => (
 
@@ -55,13 +58,32 @@ const TeamFixture = ({ data, selectedTab, teamId, season, setSeason, currentSeas
 
             </select>
 
+            <Selector
+              showOnly={showOnly}
+              setShowOnly={setShowOnly}
+            />
+
+            <LeagueStats
+              events={data.filter((elem: any) => filterId != "all" ? filterId === elem.league.id : true)}
+              teamId={teamId}
+              filterId={filterId}
+              showOnly={showOnly}
+            />
+
             <div className='flex flex-col gap-2 w-full'>
               {
-                  data.filter((elem: any) => filterId != "all" ? filterId === elem.league.id : true).map((event: any, i: number) => (
+                data.filter((elem: any) => filterId != "all" ? filterId === elem.league.id : true).map((event: any, i: number) => (
 
-                    <FixtureGame key={i} num={i} event={event} teamId={teamId} showLeagueName={filterId === "all"} />
-                  ))
-               
+                  <FixtureGame
+                    key={i}
+                    num={i}
+                    event={event}
+                    teamId={teamId}
+                    showOnly={showOnly}
+                    showLeagueName={filterId === "all"}
+                  />
+                ))
+
 
               }
             </div>

@@ -1,4 +1,5 @@
 import { getLogo } from '@/utils/game'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -27,6 +28,8 @@ const Table = ({ entries, homeId, awayId }: Props) => {
         return <img src={logo} alt="Logo" width={IMG_SIZE} height={IMG_SIZE} />
 
     }
+    
+
 
     return (
         <table className='table-element text-sm w-full'>
@@ -46,22 +49,24 @@ const Table = ({ entries, homeId, awayId }: Props) => {
 
                 {
                     entries.map((team: any, i: number) => (
+
                         <tr
                             key={i}
-                            className={`${team.id === homeId || team.id === awayId ? "bg-[--tw-color-700] md:hover:bg-[--tw-color-600]" : "bg-[--tw-color-800]"} md:hover:bg-[--tw-color-700] cursor-pointer transition-all border-b-[1px] border-[--tw-color-950] md:text-[13px] text-[12px]`}
-                            onClick={() => push(`/team/${"team" in team ? team.team.id : team.id}`)}
-                        >
+                            className={`${team.id === homeId || team.id === awayId ? "bg-[--tw-color-700] hover:bg-[--tw-color-600]" : "bg-[--tw-color-800]"} hover:bg-[--tw-color-700] cursor-pointer transition-all border-b-[1px] border-[--tw-color-950] md:text-[13px] text-[12px]`}
 
+                        >
                             <td className='font-semibold text-center py-2'>{team.stats.find((stat: any) => stat.name === "rank").value}</td>
 
                             <td>
-                                <div className='flex gap-1 items-center pl-1'>
 
+                                <Link
+                                    className='flex flex-row gap-1 items-center pl-1' href={`/team/${typeof (team.team) === "object" && "team" in team ? (team.team.id) : team.id}`}
+                                >
                                     {getLogoTag(typeof (team.team) === "object" ? team.team : team)}
 
                                     <div className='text-start md:text-[13px] text-[11px]  pl-2'>{typeof (team.team) === "object" ? team.team.shortDisplayName : team.team}</div>
+                                </Link>
 
-                                </div>
                             </td>
 
                             <td className='text-center font-semibold'>{team.stats.find((stat: any) => stat.name === "points").value}</td>
@@ -71,13 +76,14 @@ const Table = ({ entries, homeId, awayId }: Props) => {
                             <td className='text-center'>{team.stats.find((stat: any) => stat.name === "losses").value}</td>
                             <td className='text-center'>{team.stats.find((stat: any) => stat.name === "pointDifferential").value}</td>
                         </tr>
+
                     ))
                 }
 
 
 
             </tbody>
-        </table>
+        </table >
     )
 }
 
