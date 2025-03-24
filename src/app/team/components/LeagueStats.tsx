@@ -90,7 +90,7 @@ const LeagueStats = ({ events, teamId, filterId ,showOnly}: Props) => {
         return 
 
     return (
-        <div className='flex flex-col gap-3 my-4 w-[95%] md:w-[85%] justify-center mx-auto'>
+        <div className='flex flex-col gap-3 mb-4 w-[95%] md:w-[85%] justify-center mx-auto'>
             <div className={`flex flex-row h-[20px]`}>
                 {
                     stats.arr.map((stat: any, i: number) => (

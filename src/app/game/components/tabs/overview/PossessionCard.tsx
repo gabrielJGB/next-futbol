@@ -23,7 +23,7 @@ const PossessionCard = ({ homeStats, awayStats, homeTeam, awayTeam }: Props) => 
             <div className='w-full flex flex-row justify-between'>
                 {
                     homeLogo != "-" ?
-                        <img src={homeLogo} alt="Logo" width={30} height={22} />
+                        <img src={homeLogo} alt="Logo" width={24} height={14} />
                         :
                         <div></div>
 
@@ -31,7 +31,7 @@ const PossessionCard = ({ homeStats, awayStats, homeTeam, awayTeam }: Props) => 
                 <div className='text-lg font-bold text-center'>Posesión</div>
                 {
                     awayLogo != "-" ?
-                        <img src={awayLogo} alt="Logo" width={32} height={22} />
+                        <img src={awayLogo} alt="Logo" width={24} height={14} />
                         :
                         <div></div>
 

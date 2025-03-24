@@ -12,7 +12,7 @@ const TeamHeader = ({ team }: Props) => {
 
   const logo = getLogo(team, IMG_SIZE + 10)
 
-  console.log(team);
+  
   
   
 

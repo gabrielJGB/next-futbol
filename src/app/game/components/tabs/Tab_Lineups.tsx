@@ -1,7 +1,6 @@
 "use client"
 import { getLogo, sortRoster } from '@/utils/game'
-import React, { useActionState, useEffect, useState } from 'react'
-import TeamSelector from './lineups/TeamSelector'
+import React, { useEffect, useState } from 'react'
 import Field from './lineups/Field'
 import Roster from './lineups/Roster'
 
@@ -11,19 +10,19 @@ type Props = {
 
 const Lineups = ({ game }: Props) => {
 
-    const roster = "roster" in game.rosters[0]
+    const roster = "roster" in game.rosters[0] && "roster" in game.rosters[1]
     const formation = "formation" in game.rosters[0] ? game.rosters[0].formation : false
     const homeLogo = getLogo(game.header.competitions[0].competitors[0].team, 25)
     const awayLogo = getLogo(game.header.competitions[0].competitors[1].team, 25)
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [windowWidth, setWindowWidth] = useState(0)
     const [invertField, setInvertField] = useState(false)
-    const [showStats,setShowStats] = useState(false)
+    const [showStats, setShowStats] = useState(false)
 
     const homeFormation = game.rosters[0].formation
     const awayFormation = game.rosters[1].formation
 
-
+    console.log(game.rosters);
 
     useEffect(() => {
 
@@ -63,13 +62,15 @@ const Lineups = ({ game }: Props) => {
                     />
                 }
 
-
-                <div className='w-full flex flex-rrow justify-center'>
-                    <button
-                        className={`font-semibold text-xs bg-[--tw-color-800]  border-transparent border-[1px] rounded mt-3 p-2 md:hover:border-[--tw-primary] transition-all ${showStats?"bg-[--tw-primary] text-black ":""}`}
-                        onClick={() =>setShowStats(!showStats)}
-                    >Estadísticas del jugador</button>
-                </div>
+                {
+                    roster && formation &&
+                    <div className='w-full flex flex-rrow justify-center'>
+                        <button
+                            className={`font-semibold text-xs bg-[--tw-color-800]  border-transparent border-[1px] rounded mt-3 p-2 md:hover:border-[--tw-primary] transition-all ${showStats ? "bg-[--tw-primary] text-black " : ""}`}
+                            onClick={() => setShowStats(!showStats)}
+                        >Estadísticas del jugador</button>
+                    </div>
+                }
 
 
                 {

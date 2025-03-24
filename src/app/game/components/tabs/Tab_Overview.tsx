@@ -33,7 +33,7 @@ const Overview = ({ game, sofaId }: Props) => {
   const statsInGame = "statistics" in game.boxscore.teams[0] && game.boxscore.teams[0].statistics.length > 0
 
 
-
+  
 
   return (
     <div className='flex flex-col gap-4 px-1'>
@@ -48,15 +48,6 @@ const Overview = ({ game, sofaId }: Props) => {
         <AttackMomentum sofaId={sofaId} />
       }
 
-      {
-        statsInGame && state === "in" || state === "post" &&
-        <PossessionCard
-          homeTeam={game.header.competitions[0].competitors[0].team}
-          awayTeam={game.header.competitions[0].competitors[1].team}
-          homeStats={game.boxscore.teams[0].statistics}
-          awayStats={game.boxscore.teams[1].statistics}
-        />
-      }
 
       {
         "article" in game &&
@@ -66,6 +57,15 @@ const Overview = ({ game, sofaId }: Props) => {
 
 
       <GameInfo game={game} />
+      {
+        statsInGame && (state === "in" || state === "post") &&
+        <PossessionCard
+          homeTeam={game.header.competitions[0].competitors[0].team}
+          awayTeam={game.header.competitions[0].competitors[1].team}
+          homeStats={game.boxscore.teams[0].statistics}
+          awayStats={game.boxscore.teams[1].statistics}
+        />
+      }
 
 
       {
